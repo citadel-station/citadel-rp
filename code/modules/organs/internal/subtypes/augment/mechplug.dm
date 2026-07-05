@@ -6,6 +6,25 @@
     organ_tag = O_AUG_MECHPLUG
     parent_organ = BP_HEAD
 
+	var/datum/shieldcall/shieldcall
+
+/obj/item/organ/internal/augment/mechplug/Initialize(mapload)
+	shieldcall = new /datum/shieldcall/mechplug
+	. = ..() // set ., default return value, to parent call
+
+/obj/item/organ/internal/augment/mechplug/Destroy()
+	QDEL_NULL(shieldcall) // destroy and unreference the shieldcall / clear the variable
+	return ..() // do parent call
+
+/obj/item/organ/internal/augment/mechplug/handle_organ_mod_special(removed)
+	if(removed)
+		// being removed
+		owner.unregister_shieldcall(shieldcall)
+	else
+		// being added
+		owner.register_shieldcall(shieldcall)
+	..()
+
 /datum/shieldcall/mechplug
 	low_level_intercept = TRUE
 
@@ -20,12 +39,6 @@
 	if(shieldcall_args[SHIELDCALL_ARG_DAMAGE] < 5)
 		return
 	shieldcall_args[SHIELDCALL_ARG_DAMAGE] *= 1.05
-
-
-
-
-
-
 
 
 
