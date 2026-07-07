@@ -1749,10 +1749,10 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 0.1)
 
 /datum/seed/shimash
-	name = "shimash"
-	seed_name = "shimash"
-	display_name = "shimash"
-	kitchen_tag = "shimash"
+	name = "shismash"
+	seed_name = "shismash"
+	display_name = "shismash"
+	kitchen_tag = "shismash"
 	chems = list("shismashpulp" = list(5,10))
 
 /datum/seed/shimash/New()
