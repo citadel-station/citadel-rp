@@ -338,7 +338,7 @@
 			else if(chamber_cycle_after_fire)
 				cycle_chamber(FALSE, TRUE)
 			if(magazine_auto_eject && magazine && !magazine.get_amount_remaining())
-				remove_magazine(null, null, TRUE)
+				remove_magazine(drop_location(), null, TRUE)
 			if(chamber_spin_after_fire && internal_magazine_revolver_mode && internal_magazine)
 				unsafe_spin_chamber_to_next()
 		if(GUN_FIRED_FAIL_INERT)
@@ -860,7 +860,7 @@
 	load_chamber()
 	if(!silent)
 		if(!from_fire)
-			playsound(src, chamber_manual_cycle_sound, 75, TRUE)
+			playsound(src, chamber_manual_cycle_sound, 25, TRUE)
 
 /**
  * Loads the chamber from magazine immediately, if it is separated

@@ -65,7 +65,7 @@
 	update_strings()
 
 /obj/item/stack/material/get_materials(respect_multiplier)
-	return list(src, null, material.id = (respect_multiplier? material_multiplier : 1) * SHEET_MATERIAL_AMOUNT)
+	return list(material.id = (respect_multiplier? material_multiplier : 1) * SHEET_MATERIAL_AMOUNT)
 
 /obj/item/stack/material/update_icon()
 	if(material.icon_stack_count)
@@ -579,6 +579,18 @@
 	strict_color_stacking = TRUE
 	drop_sound = 'sound/items/drop/leather.ogg'
 	pickup_sound = 'sound/items/pickup/leather.ogg'
+
+/obj/item/stack/material/shell
+	name = "shell shards"
+	desc = "Shards of animal shell."
+	singular_name = "shell shard"
+	icon_state = "chitin"
+	material = /datum/prototype/material/bone
+	no_variants = FALSE
+	pass_color = TRUE
+	strict_color_stacking = TRUE
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/glass
 	name = "glass"

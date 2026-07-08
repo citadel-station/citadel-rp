@@ -24,6 +24,14 @@
 
 /// The proc you should always use to set the light of this atom.
 /atom/proc/set_light(l_range, l_power, l_color = NONSENSICAL_VALUE, angle = NONSENSICAL_VALUE, no_update = FALSE)
+	if (l_range > LIGHTING_HARD_MAXIMUM_RANGE)
+		CRASH("light_range [l_range] > [LIGHTING_HARD_MAXIMUM_RANGE]; ignored")
+	if (l_range > LIGHTING_SOFT_MAXIMUM_RANGE)
+		STACK_TRACE("light_range [l_range] > [LIGHTING_SOFT_MAXIMUM_RANGE]; going to lag")
+
+	if (l_power > LIGHTING_SOFT_MAXIMUM_POWER)
+		STACK_TRACE("light_power [l_power] > [LIGHTING_SOFT_MAXIMUM_POWER] is not useful")
+
 	if(l_range > 0 && l_range < MINIMUM_USEFUL_LIGHT_RANGE)
 		l_range = MINIMUM_USEFUL_LIGHT_RANGE	//Brings the range up to 1.4
 	if (l_power != null)
@@ -51,6 +59,16 @@
 	if (QDELING(src))
 		return
 
+	switch (light_range)
+		if (LIGHTING_SOFT_MAXIMUM_RANGE + 1 to LIGHTING_HARD_MAXIMUM_RANGE)
+			STACK_TRACE("light_range > [LIGHTING_SOFT_MAXIMUM_RANGE]; going to lag")
+		if (LIGHTING_HARD_MAXIMUM_RANGE + 1 to INFINITY)
+			light_range = 0
+			STACK_TRACE("light_range > [LIGHTING_HARD_MAXIMUM_RANGE]; ignored")
+
+	if (light_power > LIGHTING_SOFT_MAXIMUM_RANGE)
+		STACK_TRACE("light_power > [LIGHTING_SOFT_MAXIMUM_POWER]; not useful")
+
 	if (!light_power || !light_range) // We won't emit light anyways, destroy the light source.
 		QDEL_NULL(light)
 	else
@@ -66,7 +84,7 @@
 
 /**
  * Updates the atom's opacity value.
- * 
+ *
  * Should always be used to change the opacity of an atom.
  * This exists to act as a hook for associated behavior.
  * It notifies (potentially) affected light sources so they can update (if needed).
@@ -77,7 +95,7 @@
 	. = TRUE
 	SEND_SIGNAL(src, COMSIG_ATOM_SET_OPACITY, new_opacity)
 	opacity = new_opacity
-	
+
 	var/turf/T = loc
 	if (!isturf(T))
 		return

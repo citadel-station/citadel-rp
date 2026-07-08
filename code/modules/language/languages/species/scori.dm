@@ -8,8 +8,7 @@
 	ask_verb = "asks"
 	exclaim_verb = "shouts"
 	colour = "warning"
-	key = null
-	syllables = list("chak","har","dao","wu", "ven", "no", "lal", "pra", "dar", "chu", "tri",
-		"chi", "fus", "har", "zea", "tel", "redo", "hla", "luu", "ur"
+	key = "#"
+	syllables = list("𐎢𐎧𐎠𐎪","𐎧𐎠𐎱","𐎣𐎠𐎮","𐎼𐎸", "𐎵𐎤𐎭", "𐎭𐎮", "𐎫𐎠𐎫", "𐎯𐎱𐎠", "𐎣𐎠𐎱", "𐎢𐎧𐎸", "𐏂𐎱𐎨","𐎢𐎧𐎨", "𐎥𐎸𐎽", "𐎧𐎠𐎱", "𐎻𐎤𐎠", "𐏂𐎤𐎫", "𐎱𐎤𐎣𐎮", "𐎧𐎫𐎠", "𐎫𐎸𐎸", "𐎸𐎱"
 		)
 	shorthand = "SCOR"

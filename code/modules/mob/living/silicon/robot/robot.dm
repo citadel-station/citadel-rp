@@ -69,6 +69,10 @@
 
 	can_be_antagged = TRUE
 
+	//* Actions *//
+	/// Only made if we need it.
+	var/datum/action/robot_pick_resting_variation/action_pick_resting_variation
+
 	//* Composition *//
 
 	/// set to instance to init as that instance
@@ -957,7 +961,7 @@
 						cleaned_human.clean_blood(1)
 						to_chat(cleaned_human, "<font color='red'>[src] cleans your face!</font>")
 
-	for(var/obj/item/storage/bag/ore/ore_bag in inventory.get_held_items())
+	for(var/obj/item/storage/bag/ore/ore_bag in inventory?.get_held_items())
 		if(ore_bag)
 			if(isturf(loc))
 				var/turf/tile = loc
@@ -997,6 +1001,11 @@
 		state = 1
 	lockdown = state
 	lockcharge = state
+	if(lockdown)
+		// we still need a better way of prying shit out of these guys
+		// but for now this is fine
+		for(var/obj/item/gripper/gripper in get_equipped_items())
+			gripper.drop_item()
 	update_mobility()
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
