@@ -53,7 +53,7 @@
 
 /obj/item/gun/projectile/ballistic/nt_expedition/shotgun/pump/short
 	name = "pump shotgun"
-	desc = "The XNS Mk.3 Mod I \"Standby\" pump-action shotgun; Designed by the Nanotrasen Research Division in conjunction with Hephaestus Industries."
+	desc = "The XNS Mk.3 Mod I \"Halligan\" pump-action shotgun; Designed by the Nanotrasen Research Division in conjunction with Hephaestus Industries."
 	description_fluff = {"
 		A specialized variant of the Mk.3 \"Standby\", the Mod I has been reduced to the mechanical limits of the action, featuring a
 		significantly shortened barrel, half the shell capacity, and no stock, it's intended for breaching or other applications where

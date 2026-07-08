@@ -4,37 +4,13 @@
 //* Magazines *//
 
 /obj/item/ammo_magazine/nt_expedition/heavy_rifle
-	name = "ammo magazine (7.5mm ares)"
+	name = "ammo magazine (6.5mm ares)"
 	icon = 'icons/content/factions/corporations/nanotrasen/items/guns/expeditionary/rifle-heavy.dmi'
 	ammo_caliber = /datum/ammo_caliber/hephaestus/heavy_rifle
 	ammo_preload = /obj/item/ammo_casing/hephaestus/heavy_rifle
 
-// todo: needs sprites
-///obj/item/ammo_magazine/nt_expedition/heavy_rifle/stripper_clip
-//	name = "stripper clip (7.5mm Ares)"
-//	icon_state = "stripper"
-//	base_icon_state = "stripper"
-//	ammo_max = 6
-//	weight_volume = ITEM_VOLUME_PISTOL_MAG
-//	magazine_type = MAGAZINE_TYPE_CLIP
-
-///obj/item/ammo_magazine/nt_expedition/heavy_rifle/stripper_clip/update_icon(updates)
-//	cut_overlays()
-//	. = ..()
-//	var/list/overlays_to_add = list()
-//	for(var/i in 1 to min(5, get_amount_remaining()))
-//		var/obj/item/ammo_casing/hephaestus/heavy_rifle/casted_path_of_potential = peek_path_of_position(i)
-//		var/append = "basic"
-//		if(ispath(casted_path_of_potential, /obj/item/ammo_casing/hephaestus/heavy_rifle))
-//			append = initial(casted_path_of_potential.stripper_state)
-//		var/image/overlay = image(icon, "stripper-[append]")
-//		overlay.pixel_x = (i - 1) * -2 - 8
-//		overlay.pixel_y = (i - 1) * 2 - 8
-//		overlays_to_add += overlay
-//	add_overlay(overlays_to_add)
-
 /obj/item/ammo_magazine/nt_expedition/heavy_rifle/doublestack
-	name = "ammo magazine (7.5mm ares)"
+	name = "ammo magazine (6.5mm ares)"
 	icon_state = "mag-basic-1"
 	base_icon_state = "mag-basic"
 	weight_volume = ITEM_VOLUME_RIFLE_MAG
@@ -44,13 +20,13 @@
 	ammo_max = 16
 
 /obj/item/ammo_magazine/nt_expedition/heavy_rifle/doublestack/extended
-	name = "extended magazine (7.5mm ares)"
+	name = "extended magazine (6.5mm ares)"
 	icon_state = "mag-ext-basic-1"
 	base_icon_state = "mag-ext-basic"
 	ammo_max = 24
 
 /obj/item/ammo_magazine/nt_expedition/heavy_rifle/doublestack/drum
-	name = "drum magazine (7.5mm ares)"
+	name = "drum magazine (6.5mm ares)"
 	icon_state = "mag-drum-basic-1"
 	base_icon_state = "mag-drum-basic"
 	ammo_max = 40
@@ -66,7 +42,7 @@
 	name = "break-action rifle"
 	desc = "The XNR Mk.3 \"Huntsman\" break-action rifle; Designed by the Nanotrasen Research Division in conjunction with Hephaestus Industries."
 	description_fluff = {"
-		A single shot rifle chambered in 7.5mm Ares, this is a light, uncomplicated design for low-stakes applications
+		A single shot rifle chambered in 6.5mm Ares, this is a light, uncomplicated design for low-stakes applications
 		where rapid follow-up shots are not needed.
 		It's greatest strength is the sheer reliability of the action: There is very little there that can go wrong.
 	"} + "<br>"
@@ -87,12 +63,12 @@
 
 /obj/item/gun/projectile/ballistic/nt_expedition/heavy_rifle/semirifle
 	name = "heavy rifle"
-	desc = "The NT-D9 \"Sentinel\" heavy rifle; Designed by the Nanotrasen Defense Division in conjunction with Hephaestus Industries."
+	desc = "The NT-D9 \"Sentry\" heavy rifle; Designed by the Nanotrasen Defense Division in conjunction with Hephaestus Industries."
 	description_fluff = {"
-		Utilizing the NT-D3 \"Scout\" as a baseline, this semi-automatic rifle is chambered in the full-powered 7.5mm Ares cartridge and
+		Utilizing the NT-D3 \"Scout\" as a baseline, this semi-automatic rifle is chambered in the full-powered 6.5mm Ares cartridge and
 		comes equipped with an enclosed 1x red dot sight.
 		Introduced late into the Phoron Wars as a streamlined, improved version of the Scout, it was Nanotrasen's latest attempt at
-		leveraging the power 7.5mm Ares, as it was capable of taking down most of the Syndicate's armored hardsuits with enough volume of fire.
+		leveraging the power 6.5mm Ares, as it was capable of taking down most of the Syndicate's armored hardsuits with enough volume of fire.
 	"} + "<br>"
 	icon_state = "semi"
 	base_icon_state = "semi"
@@ -128,10 +104,10 @@
 	name = "heavy automatic rifle"
 	desc = "The NT-D9 Mod I \"Sentinel\" heavy rifle; Designed by the Nanotrasen Defense Division in conjunction with Hephaestus Industries."
 	description_fluff = {"
-		Building upon the D9's strengths, this automatic rifle is chambered in the full-powered 7.5mm Ares cartridge and
+		Building upon the D9's strengths, this automatic rifle is chambered in the full-powered 6.5mm Ares cartridge and
 		comes equipped with a wide-FOV 1x reflex sight, heavy muzzle break, vertical grip and lightweight stock.
 		Introduced in the final years of the Phoron Wars as an update to the Mk.9 pattern, this was Nanotrasen's finest attempt at
-		leveraging the power 7.5mm Ares, as it was capable of taking down most of the Syndicate's armored hardsuits with enough volume of fire.
+		leveraging the power 6.5mm Ares, as it was capable of taking down most of the Syndicate's armored hardsuits with enough volume of fire.
 		Although the fully automatic setting was still useful in some situations, the Mod I's three-round burst proved to be the most effective
 		way to deliver shots at range.
 	"} + "<br>"

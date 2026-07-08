@@ -16,9 +16,9 @@
 /datum/ammo_caliber/hephaestus/heavy_rifle
 
 	id = "hephaestus-heavy-rifle"
-	caliber = "7.5mm ares"
-	diameter = 7.5
-	length = 54
+	caliber = "6.5mm ares"
+	diameter = 6.5
+	length = 52
 
 /datum/ammo_caliber/hephaestus/heavy_sidearm
 
@@ -71,8 +71,8 @@
 	// todo: implement casing + magazine
 
 /obj/item/ammo_casing/hephaestus/heavy_rifle
-	name = "ammo casing (7.5mm ares)"
-	desc = "A standardized 7.5x54mm cartridge produced by Hephaestus Industries."
+	name = "ammo casing (6.5mm ares)"
+	desc = "A standardized 6.5x52mm cartridge produced by Hephaestus Industries."
 	description_fluff = "Hephaestus Industries' standard-issue full-powered rifle cartridge, utilized by a tremendous catalog of weaponry where heavy stopping power is required, from general purpose machineguns to bolt-action sniper rifles."
 	icon_state = "heavyrifle_cartridge"
 	casing_caliber = /datum/ammo_caliber/hephaestus/heavy_rifle
