@@ -862,7 +862,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/vehicle_module/weapon/energy/laser/heavy
 		)
 
-	/obj/structure/loot_pile/mecha/durand/redstar
+/obj/structure/loot_pile/mecha/durand/redstar
 	name = "redstar wreckage"
 	desc = "The ruins of some unfortunate durand. Perhaps something is salvageable."
 	icon_state = "redstar-broken"
