@@ -30,7 +30,7 @@ var/list/floating_chat_colors = list()
 
 	if(!floating_chat_colors[src])
 		floating_chat_colors[src] = get_random_colour(0,160,230)
-	style += "color: [floating_chat_colors[src]];"
+	style += "color:#[floating_chat_colors[src]];"
 
 	// create 2 messages, one that appears if you know the language, and one that appears when you don't know the language
 	var/image/understood = generate_floating_text(src, capitalize(message), style, fontsize, duration, show_to)
