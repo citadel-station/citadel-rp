@@ -1,0 +1,13 @@
+2026-08-18:
+  Shadowtail117:
+  - rscadd: Using the obstruction removal ballista will now prompt the local ATC to
+      issue a travel advisory about it.
+  timothyteakettle:
+  - bugfix: fix ghost roles not getting holosphere gear
+  - bugfix: 'fixes dead holospheres showing as alive in the orbit UI
+
+      :cl:'
+  - bugfix: 'fixes holosphere shells not getting real_name set resulting in quirky
+      behaviour
+
+      :cl:'
