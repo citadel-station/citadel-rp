@@ -91,4 +91,4 @@
 	wreckage = /obj/structure/loot_pile/mecha/durand/redstar
 
 	base_attack_cooldown = 0.5 SECONDS
-	projectiletype = /obj/projectile/beam/heavylaser
+	projectiletype = /obj/projectile/bullet/rifle/a762/ap
