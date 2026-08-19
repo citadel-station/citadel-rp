@@ -28,7 +28,7 @@
 		message = "[copytext_char(message, 1, limit)]..."
 
 	if(!floating_chat_color)
-		floating_chat_color = "#[get_random_colour(0,160,230)]"
+		floating_chat_color = get_random_colour(0,160,230)
 	style += "color:[floating_chat_color];"
 
 	// create 2 messages, one that appears if you know the language, and one that appears when you don't know the language
