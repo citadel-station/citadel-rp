@@ -446,10 +446,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<b>Allow Synth markings:</b> <a href='?src=\ref[src];synth_markings=1'><b>[pref.synth_markings ? "Yes" : "No"]</b></a><br>"
 	. += "<b>Allow Synth color:</b> <a href='?src=\ref[src];synth_color=1'><b>[pref.synth_color ? "Yes" : "No"]</b></a><br>"
 	if(pref.synth_color)
-		. += "<a href='?src=\ref[src];synth2_color=1'>Change Color</a> [color_square(pref.r_synth, pref.g_synth, pref.b_synth)]"
+		. += "<a href='?src=\ref[src];synth2_color=1'>Change Color</a> [color_square(pref.r_synth, pref.g_synth, pref.b_synth)]<br>"
 	. += "<b>Use Custom Runechat Color:</b> <a href='?src=\ref[src];runechat_color=1'>[pref.custom_floating_chat_color ? "Yes" : "No"]</b></a><br>"
 	if(pref.custom_floating_chat_color)
-		. += "<a href='?src=\ref[src];runechat_color_select=1'>Change Color</a> [color_square(pref.r_floating_chat, pref.g_floating_chat, pref.b_floating_chat)]"
+		. += "<a href='?src=\ref[src];runechat_color_select=1'>Change Color</a> [color_square(pref.r_floating_chat, pref.g_floating_chat, pref.b_floating_chat)]<br>"
 
 	. = jointext(.,null)
 
