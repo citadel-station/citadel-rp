@@ -3817,7 +3817,6 @@
 #include "code\modules\materials\definitions\organic\flesh.dm"
 #include "code\modules\materials\definitions\organic\leather.dm"
 #include "code\modules\materials\definitions\organic\resin.dm"
-#include "code\modules\materials\definitions\organic\shell.dm"
 #include "code\modules\materials\definitions\organic\wood\log.dm"
 #include "code\modules\materials\definitions\organic\wood\plank.dm"
 #include "code\modules\materials\definitions\special\clown_planet.dm"
