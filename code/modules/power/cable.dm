@@ -43,7 +43,6 @@ GLOBAL_LIST_INIT(possible_cable_coil_colours, list(
 		"Brown" = COLOR_BROWN
 	))
 
-#warn grid hooks
 /obj/structure/cable
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer."

@@ -211,6 +211,9 @@
  */
 #warn consider using /datum/bounds2
 /obj/shuttle_dock/Initialize(mapload, with_id, with_dir, list/sx_sy_ox_oy, list/lx_ly_hx_hy)
+	if(!starting_shuttle_template)
+		#warn preload with dock preload object as needed
+
 	if(!isnull(with_dir))
 		src.dir = with_dir
 	. = ..()

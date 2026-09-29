@@ -14,10 +14,16 @@
 	/// are we obfuscated (they get told something's blocking them, but not what)
 	var/obfuscated = FALSE
 
+	/**
+	 * Shuttles we're registered on.
+	 */
+	var/list/datum/shuttle/shuttles
 	/// we're currently with these active blockers
 	var/list/datum/shuttle_operation_blocker/blocking
 
 /datum/shuttle_hook/Destroy()
+	for(var/datum/shuttle/shuttle in shuttles)
+		shuttle.unregister_hook(src)
 	release_all()
 	return ..()
 

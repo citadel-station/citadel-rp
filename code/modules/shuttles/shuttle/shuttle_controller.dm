@@ -89,14 +89,6 @@
 	src.shuttle = shuttle
 	return TRUE
 
-//* Blocking API *//
-
-/datum/shuttle_controller/proc/register_movement_block(datum/source, reason)
-	LAZYSET(blocked_from_moving, source, reason)
-
-/datum/shuttle_controller/proc/unregister_movement_block(datum/source)
-	LAZYREMOVE(blocked_from_moving, source)
-
 //* Docking - Control *//
 
 /datum/shuttle_controller/proc/has_codes_for(obj/shuttle_dock/dock)

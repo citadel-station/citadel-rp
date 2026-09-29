@@ -47,21 +47,35 @@ GLOBAL_LIST_EMPTY(uninitialized_shuttle_dock_preloads)
 /obj/shuttle_dock_preload/Initialize(mapload)
 	SHOULD_CALL_PARENT(FALSE)
 	preload_dock_if_possible()
-	qdel(src)
 
-/obj/shuttle_dock_preload/Destroy()
-	GLOB.uninitialized_shuttle_dock_preloads -= src
-	return ..()
+	// if we initialize before dock, dock should init us
+	// if we initialize after dock, we should init dock
+	if(!(datum_flags & DF_VAR_EDITED) && !loaded_into_dock)
+		STACK_TRACE("Shuttle dock preload not loaded into dock after initialization at [AREACOORD(src)].")
 
 #ifndef CF_SHUTTLE_VISUALIZE_BOUNDING_BOXES
 	return INITIALIZE_HINT_QDEL
+#else
+	return ..()
 #endif
 
+/obj/shuttle_dock_preload/Destroy()
+	if(!loaded_into_dock)
+		GLOB.uninitialized_shuttle_dock_preloads -= src
+	return ..()
+
 /obj/shuttle_dock_preload/proc/preload_dock_if_possible()
+	var/turf/our_turf = get_turf(src)
+	if(!our_turf)
+		return
+	var/our_z = our_turf.z
+	for(var/obj/shuttle_dock/dock as anything in SSshuttle.docks_by_level[our_z])
+		if(dock.is_in_bounds(our_turf))
+			preload_dock(dock)
+			return TRUE
+	return FALSE
 
 /obj/shuttle_dock_preload/proc/preload_dock(obj/shuttle_dock/dock)
 	loaded_into_dock = TRUE
 	GLOB.uninitialized_shuttle_dock_preloads -= src
-
-#warn impl all
-#warn make sure to preload into zones AND if directly on a dock.
+	#warn impl
