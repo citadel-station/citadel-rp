@@ -310,8 +310,14 @@
 			inbound.controller.terminate_transit()
 	// alright bye
 	inbound = null
+
+	// obliterate hooks
+	for(var/datum/shuttle_hook/hook in dock_hooks)
+		unregister_hook(hook)
+
 	// unregister from SSshuttles
 	unregister_dock()
+
 	if(create_bounding_box_area)
 		// cleanup our area if it's unique; otherwise, we just orphan it
 		// as otherwise we might blow up apcs or something that rely on the area
@@ -328,6 +334,7 @@
 		// allow deletion as otherwise moveToNullspace() will fail
 		// as doMove() hook prevents movement if we're making areas.
 		create_bounding_box_area = FALSE
+
 	return ..()
 
 /obj/shuttle_dock/proc/register_dock()
@@ -375,13 +382,31 @@
 /obj/shuttle_dock/proc/on_shuttle_undocked(datum/shuttle/shuttle, datum/event_args/shuttle/dock/undocked/e_args)
 	return
 
+/obj/shuttle_dock/proc/register_hook(datum/shuttle_hook/hook)
+	if(hook in dock_hooks)
+		. = FALSE
+		CRASH("attempted to re-register a registered hook")
+
+	dock_hooks += hook
+	hook.registered_docks += src
+	. = TRUE
+
+/obj/shuttle_dock/proc/unregister_hook(datum/shuttle_hook/hook)
+	if(!(hook in dock_hooks))
+		. = FALSE
+		CRASH("attempted to unregister a hook that wasn't registered")
+
+	dock_hooks -= hook
+	hook.registered_docks -= src
+	. = TRUE
+
 /**
  * Fire an event off to all hooks
  */
 /obj/shuttle_dock/proc/dispatch_event_to_dock_hooks(datum/event_args/shuttle/event)
 	SHOULD_NOT_SLEEP(TRUE)
 	for(var/datum/shuttle_hook/hook as anything in dock_hooks)
-		hook.on_event(event)
+		hook.on_dock_event(event, src)
 
 #warn hook above 4
 

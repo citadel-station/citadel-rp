@@ -803,10 +803,34 @@
 	. = ..()
 	port_id = SSmapping.mangled_persistent_id(port_id, with_id)
 
+/obj/shuttle_aligner/port/Destroy()
+	// unregister all hooks
+	for(var/datum/shuttle_hook/hook in port_hooks)
+		unregister_hook(hook)
+	return ..()
+
+/obj/shuttle_aligner/port/proc/register_hook(datum/shuttle_hook/hook)
+	if(hook in port_hooks)
+		. = FALSE
+		CRASH("attempted to re-register a registered hook")
+
+	port_hooks += hook
+	hook.registered_ports += src
+	. = TRUE
+
+/obj/shuttle_aligner/port/proc/unregister_hook(datum/shuttle_hook/hook)
+	if(!(hook in port_hooks))
+		. = FALSE
+		CRASH("attempted to unregister a hook that wasn't registered")
+
+	port_hooks -= hook
+	hook.registered_ports -= src
+	. = TRUE
+
 /obj/shuttle_aligner/port/proc/dispatch_event_to_port_hooks(datum/event_args/shuttle/event)
 	SHOULD_NOT_SLEEP(TRUE)
 	for(var/datum/shuttle_hook/hook as anything in port_hooks)
-		hook.on_event(event)
+		hook.on_port_event(event, src)
 
 /obj/shuttle_aligner/port/overall_width(direction)
 	var/turn_angle = dir2angle(src.dir) - dir2angle(direction)

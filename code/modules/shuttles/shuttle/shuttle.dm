@@ -163,7 +163,8 @@
 	#warn areas
 
 	// de-link all registered hooks
-	#warn hooks
+	for(var/datum/shuttle_hook/hook in registered_hooks)
+		unregister_hook(hook)
 
 	preview_overlay = null
 	preview_width = null
@@ -547,7 +548,7 @@
 		. = FALSE
 		CRASH("attempted to re-register a registered hook")
 
-	hook.shuttles += src
+	hook.registered_shuttles += src
 	hooks += hook
 	. = TRUE
 
@@ -560,7 +561,7 @@
 	// multiple shuttles with a hook and keep the current blockers around
 	//
 	// it's YOUR job to figure out how to unblock on unregister.
-	hook.shuttles -= src
+	hook.registered_shuttles -= src
 	hooks -= hook
 	. = TRUE
 
@@ -572,7 +573,7 @@
 /datum/shuttle/proc/dispatch_event_to_hooks(datum/event_args/shuttle/event)
 	SHOULD_NOT_SLEEP(TRUE)
 	for(var/datum/shuttle_hook/hook as anything in hooks)
-		hook.on_event(event)
+		hook.on_shuttle_event(event, src)
 
 #warn call this
 /datum/shuttle/proc/dispatch_event_to_port_hooks(datum/event_args/shuttle/event, obj/shuttle_aligner/port/port)
