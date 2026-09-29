@@ -249,8 +249,6 @@ SUBSYSTEM_DEF(overmaps)
  * * freeflight --> visiting (planet): skyfall on outdoors
  * * freeflight --> visiting (non-planet): put on nearby turf to shuttle as debris cloud
  */
-#warn /datum/component/recursive_freeflight_permeance
-
 /datum/controller/subsystem/overmaps/proc/assign_flight_level(obj/overmap/entity/visitable/ship/landable/leader)
 	// make sure they don't already have one
 	ASSERT(!leader.flight_level)

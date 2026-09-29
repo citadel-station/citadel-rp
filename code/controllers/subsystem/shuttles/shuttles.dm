@@ -148,7 +148,9 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/fetch_template(datum/shuttle_template/template_like)
 	if(ispath(template_like, /datum/shuttle_template))
 		if(isnull(templates_by_path[template_like]))
-			templates_by_path[template_like] = register_shuttle_template(new template_like)
+			var/datum/shuttle_template/creating = new template_like
+			creating.hardcoded = TRUE
+			templates_by_path[template_like] = register_shuttle_template(creating)
 		return templates_by_path[template_like]
 	else if(istext(template_like))
 		return templates_by_id[template_like]
@@ -161,6 +163,11 @@ SUBSYSTEM_DEF(shuttle)
  */
 /datum/controller/subsystem/shuttle/proc/register_shuttle_template(datum/shuttle_template/template) as /datum/shuttle_template
 	#warn dupe check
+
+	// check if preview exists
+	// TODO: this unfortunately does eagerly md5.
+	template.preview_generated = has_generated_preview_for_template(template)
+
 	templates_by_id[template.id] = template
 	return template
 

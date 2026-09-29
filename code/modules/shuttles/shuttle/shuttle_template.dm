@@ -13,6 +13,8 @@
 	/// unique ID - use snake_case, must be unique & stable, including across rounds.
 	/// this means hardcoded ones shouldn't be changed willy-nilly.
 	var/id
+	/// was hardcoded?
+	var/tmp/hardcoded = FALSE
 
 	//* Identity *//
 	/// Full name
@@ -89,6 +91,14 @@
 
 /datum/shuttle_template/proc/get_file()
 	return isfile(path)? path : file(path)
+
+/datum/shuttle_template/proc/get_path_md5()
+	if(path_md5)
+		return path_md5
+	var/file = get_file()
+	if(!file)
+		return null
+	return md5(file)
 
 /**
  * Serializes to a standard format in TGUI.
