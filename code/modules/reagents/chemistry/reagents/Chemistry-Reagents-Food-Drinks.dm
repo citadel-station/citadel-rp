@@ -2600,16 +2600,6 @@
 
 #define SCHNAPPS 60
 
-/datum/reagent/ethanol/peppermintschnapps
-	name = "Peppermint Schnapps"
-	id = "schnapps_pep"
-	description = "A flavoured grain liqueur with a fresh, minty taste."
-	taste_description = "minty"
-	proof = SCHNAPPS
-
-	glass_name = "Peppermint Schnapps"
-	glass_desc = "A flavoured grain liqueur with a fresh, minty taste."
-
 /datum/reagent/ethanol/peachschnapps
 	name = "Peach Schnapps"
 	id = "schnapps_pea"
@@ -3124,14 +3114,14 @@
 /datum/reagent/ethanol/goldschlager
 	name = "Goldschlager"
 	id = "goldschlager"
-	description = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
+	description = "100 proof cinnamon schnapps, made for alcoholic college girls on spring break."
 	taste_description = "burning cinnamon"
 	taste_mult = 1.3
 	color = "#F4E46D"
 	proof = VODKA
 
 	glass_name = "Goldschlager"
-	glass_desc = "100 proof that teen girls will drink anything with gold in it."
+	glass_desc = "100 proof that college girls will drink anything with gold in it."
 
 /datum/reagent/ethanol/hippies_delight
 	name = "Hippies' Delight"
@@ -4797,17 +4787,6 @@
 	glass_name = "Negroni Sbagliato"
 	glass_desc = "Bubbles constantly pop up to the surface with a quiet fizz."
 
-/datum/reagent/ethanol/fusionnaire
-	name = "Fusionnaire"
-	id = "fusionnaire"
-	description = "The one true elusive, some even consider it never existed!"
-	taste_description = "strong currents of fresh zesty winds"
-	color = "#E6E2AA"
-	proof = (VODKA*2+SCHNAPPS*2+RUM)/9
-
-	glass_name = "Fusionnaire"
-	glass_desc = "The one true elusive, lighter than air, harder than the mountains!"
-
 /datum/reagent/ethanol/originalsin
 	name = "Original Sin"
 	id = "originalsin"
@@ -5297,6 +5276,43 @@
 	taste_mult = 8
 	taste_description = "sweetness"
 
+/datum/reagent/ethanol/bentarwine
+	name = "Sirim-Bentar"
+	id = "bentarwine"
+	description = "A type of wine made of fermented bentar juice."
+	reagent_state = REAGENT_LIQUID
+	proof = WINE
+	color = "#9d23aa"
+	taste_description = "slightly medicinal wine"
+
+/datum/reagent/ethanol/bentarwine/legacy_affect_blood(mob/living/carbon/M, alien, removed, datum/reagent_metabolism/metabolism)
+	var/chem_effective = 1
+	if(alien == IS_SLIME)
+		chem_effective = 0.75
+	if(alien != IS_DIONA)
+		M.adjustToxLoss(-1 * removed * chem_effective)//Keeps some of the medicinal properties, but reduced.
+
+/datum/reagent/cersutsauce
+	name = "Siishma-Cersut"
+	id = "cersutsauce"
+	description = "Acidic cersut paste tempered by some other medium to create a sauce."
+	reagent_state = REAGENT_LIQUID
+	color = "#e0f569"
+	taste_description = "your tongue tingling"
+
+/datum/reagent/cersutsauce/legacy_affect_blood(mob/living/carbon/M, alien, removed, datum/reagent_metabolism/metabolism)
+	var/potency = 2
+	if(alien == IS_XENOHYBRID)
+		return
+	if(alien != IS_SCORI)
+		potency = 4
+	if(metabolism.total_processed_dose < 5 && (metabolism.cycles_so_far == 1 || prob(5)))
+		to_chat(M,"<span class='danger'>You feel like your insides are going numb!</span>")
+	if(metabolism.total_processed_dose >= 5)
+		M.apply_effect(potency, AGONY, 0)
+	if(prob(5))
+		M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")
+
 // Seasonals - Xmas
 
 /datum/reagent/drink/soda/cinnamon
@@ -5341,6 +5357,17 @@
 	glass_name = "Caramel Whiskey"
 	glass_desc = "A cloyingly sweet mixture of whiskey and salted caramel."
 
+/datum/reagent/ethanol/peppermintschnapps
+	name = "Peppermint Schnapps"
+	id = "peppermintschnapps"
+	description = "A mint-flavored drink bottled at much higher proof than usual liqueurs."
+	taste_description = "concentrated mint"
+	color = "#dddddd"
+	proof = 100 // Yes, this is a 50% ABV liqueur
+
+	glass_name = "Peppermint Schnapps"
+	glass_desc = "A surprisingly potent liqueur with a bracing, icy flavor."
+
 /datum/reagent/ethanol/caramel_russian
 	name = "Caramel White Russian"
 	id = "caramelrussian"
@@ -5363,6 +5390,50 @@
 	glass_name = "Salted Caramel Cider"
 	glass_desc = "The sweet union of crisp apple and smooth caramel. And alcohol, obviously."
 
+/datum/reagent/ethanol/peppermintmartini
+	name = "Peppermint Martini"
+	id = "peppermintmartini"
+	description = "A simple holiday cocktail that essentially dilutes high-proof peppermint schnapps to a drinkable level."
+	taste_description = "minty alcohol"
+	color = "#dddddd"
+	proof = (100+VODKA)/3
+
+	glass_name = "Peppermint Martini"
+	glass_desc = "If it goes in the V-shaped glass, it's a Martini. This one even has a colored sugar rim."
+
+/datum/reagent/ethanol/stinger
+	name = "Stinger"
+	id = "stinger"
+	description = "A classic cocktail which became associated with high society during the early 1900s"
+	taste_description = "smooth alcohol with an icy finish"
+	color = "#683913"
+	proof = (100+COGNAC*3)/4
+
+	glass_name = "Stinger"
+	glass_desc = "You feel like some kind of 1920s tycoon just by holding this."
+
+/datum/reagent/ethanol/naughtygirlscout
+	name = "Naughty Girl Scout"
+	id = "naughtygirlscout"
+	description = "A cocktail leveraging peppermint's interplay with coffee and chocolate flavors."
+	taste_description = "boozy thin mint cookies"
+	color = "#35210b"
+	proof = (100+KAHLUA+IRISH_CREAM)/3
+
+	glass_name = "Naughty Girl Scout"
+	glass_desc = "The classic mint and chocolate pairing, but now in alcoholic form."
+
+/datum/reagent/ethanol/timberwolf
+	name = "Timberwolf"
+	id = "timberwolf"
+	description = "The predictable end result of providing goldschlager-drinking college girls with another, even stronger liqueur."
+	taste_description = "searing peppermint and cinnamon"
+	color = "#fff8c4"
+	proof = (100+VODKA)/2
+
+	glass_name = "Timberwolf"
+	glass_desc = "A shot glass should be enough to make you reconsider your life choices."
+
 // Seasonals - Halloween
 
 /datum/reagent/drink/soda/licorice
@@ -5383,6 +5454,18 @@
 	glass_name = "Dr. Gibb Mystery"
 	glass_desc = "A glass of limited-edition Dr. Gibb Mystery."
 	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/coffee/pumpkin_latte
+	name = "Pumpkin Spice Latte"
+	id = "pumpkin_latte"
+	description = "A nice, tasty beverage for the halloween season."
+	taste_description = "cinnamon, cloves and nutmeg"
+	color = "#ad6322"
+	adj_temp = 5
+	nutrition = 1
+
+	glass_name = "Pumpkin Spice Latte"
+	glass_desc = "A nice, tasty beverage for the halloween season."
 
 /datum/reagent/ethanol/sourappleschnapps
 	name = "Sour Apple Schnapps"
@@ -5460,40 +5543,3 @@
 
 	glass_name = "Halloween Punch"
 	glass_desc = "It's staring at you!"
-
-/datum/reagent/ethanol/bentarwine
-	name = "Sirim-Bentar"
-	id = "bentarwine"
-	description = "A type of wine made of fermented bentar juice."
-	reagent_state = REAGENT_LIQUID
-	proof = WINE
-	color = "#9d23aa"
-	taste_description = "slightly medicinal wine"
-
-/datum/reagent/ethanol/bentarwine/legacy_affect_blood(mob/living/carbon/M, alien, removed, datum/reagent_metabolism/metabolism)
-	var/chem_effective = 1
-	if(alien == IS_SLIME)
-		chem_effective = 0.75
-	if(alien != IS_DIONA)
-		M.adjustToxLoss(-1 * removed * chem_effective)//Keeps some of the medicinal properties, but reduced.
-
-/datum/reagent/cersutsauce
-	name = "Siishma-Cersut"
-	id = "cersutsauce"
-	description = "Acidic cersut paste tempered by some other medium to create a sauce."
-	reagent_state = REAGENT_LIQUID
-	color = "#e0f569"
-	taste_description = "your tongue tingling"
-
-/datum/reagent/cersutsauce/legacy_affect_blood(mob/living/carbon/M, alien, removed, datum/reagent_metabolism/metabolism)
-	var/potency = 2
-	if(alien == IS_XENOHYBRID)
-		return
-	if(alien != IS_SCORI)
-		potency = 4
-	if(metabolism.total_processed_dose < 5 && (metabolism.cycles_so_far == 1 || prob(5)))
-		to_chat(M,"<span class='danger'>You feel like your insides are going numb!</span>")
-	if(metabolism.total_processed_dose >= 5)
-		M.apply_effect(potency, AGONY, 0)
-	if(prob(5))
-		M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")

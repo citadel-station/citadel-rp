@@ -1,0 +1,34 @@
+2026-09-04:
+  CharlesWedge:
+  - rscadd: A Durand Variant.
+  GySgtMurphy:
+  - rscadd: Added sifters, forageables, etc.
+  - rscdel: old sifter shells, no longer used or needed.
+  - tweak: Made scori immune to chlorine
+  - bugfix: fixed a few things related to scori hotsauce.
+  - imageadd: added some icons and images for sprites involved in sifters and forageables.
+  - code_imp: changed some code about stuff listed above.
+  its-helvi:
+  - rscadd: You can now select custom runechat colors for your blorbos.
+  - bugfix: Runechat colors no longer randomize.
+  timothyteakettle:
+  - rscadd: adds new bunny ears "bunny tall ears (alt)"
+2026-09-08:
+  GySgtMurphy:
+  - bugfix: fixed circuit messaging types so they work exonet nodes and NIF's.
+2026-09-14:
+  AlphaM01:
+  - rscadd: Added a second variety of Christmas alcohol and four new seasonal cocktails
+      which require it.
+  - rscadd: Added various sweets which can only be obtained from the Halloween cauldron.
+  - rscadd: Added seasonal pumpkin spiced latte.
+  - rscdel: Removed generic Peppermint Schnapps from Booze-O-Mat stock.
+  - rscdel: Removed Fusionnaire cocktail recipe.
+  - tweak: Christmas and Halloween items have been added to the holiday vending machine
+      rotations.
+  - tweak: Booze-O-Mat now stocks one bottle of Patron and Goldschlager each.
+2026-09-29:
+  timothyteakettle:
+  - bugfix: exclude specific clothing from the loot pack that picks from all clothing
+  - tweak: modify bunny tall alt sprite so that the back colour and inner colour are
+      separate

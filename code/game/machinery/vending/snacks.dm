@@ -23,6 +23,12 @@
 		/obj/item/reagent_containers/food/snacks/wrapped/glad2nut = 6,
 		/obj/item/reagent_containers/food/snacks/wrapped/natkat = 6
 	)
+	holiday_products = list(
+	  	HOLIDAY_CHRISTMAS = list(
+	   		/obj/item/storage/box/gingerbreadcookie = 3,
+			/obj/item/storage/box/stroopwafel = 3
+	  	)
+	)
 	contraband = list(
 		/obj/item/reagent_containers/food/snacks/syndicake = 6,
 		/obj/item/reagent_containers/food/snacks/boxed/unajerky = 6,
@@ -46,6 +52,8 @@
 		/obj/item/reagent_containers/food/snacks/wrapped/natkat = 4,
 		/obj/item/reagent_containers/food/snacks/syndicake = 7,
 		/obj/item/reagent_containers/food/snacks/boxed/unajerky = 6,
+		 /obj/item/storage/box/gingerbreadcookie = 6,
+		/obj/item/storage/box/stroopwafel = 8
 	)
 
 /obj/machinery/vending/fitness // Added Liquid Protein and slightly adjusted price of liquid food items due to buff.

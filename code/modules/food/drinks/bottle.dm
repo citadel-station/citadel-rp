@@ -265,16 +265,6 @@
 	. = ..()
 	reagents.add_reagent("champagne", 100)
 
-/obj/item/reagent_containers/food/drinks/bottle/peppermintschnapps
-	name = "Dr. Bone's Peppermint Schnapps"
-	desc = "A flavoured grain liqueur with a fresh, minty taste."
-	icon_state = "schnapps_pep"
-	center_of_mass = list("x"=16, "y"=3)
-
-/obj/item/reagent_containers/food/drinks/bottle/peppermintschnapps/Initialize(mapload)
-	. = ..()
-	reagents.add_reagent("schnapps_pep", 100)
-
 /obj/item/reagent_containers/food/drinks/bottle/peachschnapps
 	name = "Dr. Bone's Peach Schnapps"
 	desc = "A flavoured grain liqueur with a fruity peach taste."

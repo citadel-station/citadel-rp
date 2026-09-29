@@ -1287,13 +1287,6 @@
 	required_reagents = list("cornoil" = 4, "sodawater" = 1, MAT_CARBON = 1, "tricordrazine" = 1)
 	result_amount = 6
 
-/datum/chemical_reaction/drinks/fusionnaire
-	name = "Fusionnaire"
-	id = "fusionnaire"
-	result = "fusionnaire"
-	required_reagents = list("lemonjuice" = 3, "vodka" = 2, "schnapps_pep" = 1, "schnapps_lem" = 1, "rum" = 1, "ice" = 1)
-	result_amount = 9
-
 /datum/chemical_reaction/drinks/gibbfloat
 	name = "Gibbfloat"
 	id = "gibbfloat"
@@ -1950,6 +1943,34 @@
 	result = "caramelcider"
 	required_reagents = list("caramelwhiskey" = 1, "cider" = 2)
 	result_amount = 3
+
+/datum/chemical_reaction/drinks/peppermintmartini
+	name = "Peppermint Martini"
+	id = "peppermintmartini"
+	result = "peppermintmartini"
+	required_reagents = list("peppermintschnapps" = 1, "vodka" = 1, "cream" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/stinger
+	name = "Stinger"
+	id = "stinger"
+	result = "stinger"
+	required_reagents = list("peppermintschnapps" = 1, "cognac" = 3)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/naughtygirlscout
+	name = "Naughty Girl Scout"
+	id = "naughtygirlscout"
+	result = "naughtygirlscout"
+	required_reagents = list("peppermintschnapps" = 1, "kahlua" = 1, "irishcream" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/timberwolf
+	name = "Timberwolf"
+	id = "timberwolf"
+	result = "timberwolf"
+	required_reagents = list("peppermintschnapps" = 1, "goldschlager" = 1)
+	result_amount = 2
 
 //Seasonals - Halloween
 
