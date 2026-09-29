@@ -296,7 +296,7 @@ SUBSYSTEM_DEF(overmaps)
 		clear_flight_level(
 			level,
 			CALLBACK(src, PROC_REF(release_flight_level__default_live_handler), moving_into, moving_to_level),
-			CALLBACK(src, PROC_REF(release_flight_level__default_dead_handler)),
+			CALLBACK(src, PROC_REF(release_flight_level__default_dead_handler), moving_into, moving_to_level),
 		)
 		#warn obliterate
 
@@ -313,11 +313,37 @@ SUBSYSTEM_DEF(overmaps)
 	else
 		stack_trace("Unhandled case in release_flight_level: leaving shuttle is neither the leader nor a visitor.")
 
-/datum/controller/subsystem/overmaps/proc/release_flight_level__default_dead_handler(list/atom/movable/movables)
+/**
+ * If flight level, returns /datum/map_level/freeflight
+ */
+/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_flight_level(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
+	#warn impl
+
+/**
+ * If planet, returns a list of exposed zlevels
+ */
+/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_planet_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
+	#warn impl
+
+/datum/controller/subsystem/overmaps/proc/release_flight_level__default_dead_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
+	var/datum/map_level/freeflight/flight_level = release_flight_level__resolve_potential_flight_level(maybe_moving_into, maybe_moving_to_level)
+	if(flight_level)
+		merge_flight_level_contents(flight_level, movables)
+		return
+
 	for(var/atom/movable/AM as anything in movables)
 		qdel(AM)
 
 /datum/controller/subsystem/overmaps/proc/release_flight_level__default_live_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
+	var/datum/map_level/freeflight/flight_level = release_flight_level__resolve_potential_flight_level(maybe_moving_into, maybe_moving_to_level)
+	if(flight_level)
+		merge_flight_level_contents(flight_level, movables)
+		return
+
+	var/list/planet_levels = release_flight_level__resolve_potential_planet_levels(maybe_moving_into, maybe_moving_to_level)
+	if(planet_levels)
+		#warn impl
+
 	#warn this
 
 /**
@@ -335,7 +361,7 @@ SUBSYSTEM_DEF(overmaps)
  * * we don't move turfs or anything; non shuttle turfs are just left behind.
  * * this doesn't blow anything up, it just moves stuff over.
  */
-/datum/controller/subsystem/overmaps/proc/merge_flight_level_contents(datum/map_level/freeflight/disposing, datum/map_level/freeflight/merging_into, list/atom/movable/movables)
+/datum/controller/subsystem/overmaps/proc/merge_flight_level_contents(datum/map_level/freeflight/merging_into, list/atom/movable/movables)
 	// algorithm is kinda inefficient.
 	var/candidates_to_pick = min(1000, length(movables))
 
@@ -419,6 +445,7 @@ SUBSYSTEM_DEF(overmaps)
 				if(AM.atom_flags & (ATOM_ABSTRACT))
 					continue
 				clearing_movables += AM
+			CHECK_TICK
 
 		clean = !length(clearing_turfs)
 		if(clean)
@@ -444,6 +471,16 @@ SUBSYSTEM_DEF(overmaps)
 				dead_movables += AM
 			else
 				live_movables += AM
+
+		if(cycles_so_far > 1)
+			// log paths, this means stuff stuck around
+			var/list/remaining_by_path = list()
+			for(var/atom/movable/AM as anything in live_movables)
+				remaining_by_path[AM.path] += 1
+			for(var/atom/movable/AM as anything in dead_movables)
+				remaining_by_path[AM.path] += 1
+			subsystem_log("clear_flight_level remaining by path on iteration [cycles_so_far]: [json_encode(remaining_by_path)]")
+
 
 		live_handler.Invoke(live_movables, cycles_so_far)
 		dead_handler.Invoke(dead_movables, cycles_so_far)
