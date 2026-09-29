@@ -281,7 +281,7 @@ SUBSYSTEM_DEF(overmaps)
  * * level - the level now orphaned
  * * leaving - the shuttle who left
  * * moving_into - (optional) the overmap entity the leader is going into
- * * moving_to_level - (optional) the zlevel index the leader is goign to
+ * * moving_to_level - (optional) the zlevel index the leader is going to
  * * hand_off_to - (optional) forcefully set which entity to hand this off to. this doesn't need to be set, we can autodetect
  */
 /datum/controller/subsystem/overmaps/proc/release_flight_level(
@@ -291,7 +291,22 @@ SUBSYSTEM_DEF(overmaps)
 	moving_to_level,
 	obj/overmap/entity/visitable/ship/hand_off_to,
 )
-	#warn stuff
+	if(!length(level.visiting) && leaving == level.leader)
+		// last ship is leaving, time to destroy level
+		#warn obliterate
+
+		return
+
+	// else,
+	if(leaving == level.leader)
+		// handoff
+		level.leader = null
+		level.auto_hand_off_to(hand_off_to)
+	else if(leaving in level.visiting)
+		// just leave
+		level.visiting -= leaving
+	else
+		stack_trace("Unhandled case in release_flight_level: leaving shuttle is neither the leader nor a visitor.")
 
 /**
  * called when the last shuttle leaves a flight level
@@ -305,9 +320,62 @@ SUBSYSTEM_DEF(overmaps)
  *
  * called by clear_flight_level
  *
- * * we don't move turfs or anything; non shuttle turfs are just left behind
+ * * we don't move turfs or anything; non shuttle turfs are just left behind.
+ * * this doesn't blow anything up, it just moves stuff over.
  */
 /datum/controller/subsystem/overmaps/proc/merge_flight_level_contents(datum/map_level/freeflight/disposing, datum/map_level/freeflight/merging_into, list/atom/movable/movables)
+	// algorithm is kinda inefficient.
+	var/candidates_to_pick = min(1000, length(movables))
+
+	var/list/turf/candidates = list()
+
+	var/x_low = 1 + LEVEL_TRANSITION_CLEARANCE
+	var/x_high = world.maxx - LEVEL_TRANSITION_CLEARANCE
+	var/y_low = 1 + LEVEL_TRANSITION_CLEARANCE
+	var/y_high = world.maxy - LEVEL_TRANSITION_CLEARANCE
+	var/z = merging_into.z_index
+
+	var/base_turf = SSmapping.level_get_baseturf(merging_into.z_index) || BLANK_TURF_TYPE
+	var/base_area = SSmapping.level_get_basearea(merging_into.z_index) || BLANK_AREA_TYPE
+
+	for(var/pass in 1 to 2)
+		for(var/i in 1 to candidates_to_pick - length(candidates))
+			var/turf/found = locate(
+				rand(x_low, x_high),
+				rand(y_low, y_high),
+				z,
+			)
+			if(!found)
+				continue
+			if(found.type != base_turf)
+				continue
+			if(found.loc.type != base_area)
+				continue
+			candidates += found
+
+		// incase we failed miserably, do again
+		if(length(candidates) >= candidates_to_pick * 0.5)
+			break
+
+	if(!length(candidates))
+		stack_trace("No candidates found to merge flight level contents. Picking random")
+
+		// pick true random
+		for(var/i in 1 to candidates_to_pick)
+			var/turf/found = locate(
+				rand(x_low, x_high),
+				rand(y_low, y_high),
+				z,
+			)
+			if(!found)
+				continue
+			candidates += found
+
+	if(!length(candidates))
+		CRASH("Second fault in candidates picking. Aborting.")
+
+	for(var/atom/movable/AM as anything in movables)
+		AM.forceMove(pick(candidates))
 
 // todo: SSzclear when?
 /**

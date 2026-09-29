@@ -61,7 +61,8 @@
 	if(move_queued)
 		return
 	move_queued = TRUE
-	addtimer(CALLBACK(src, PROC_REF(update_queued)))
+	// TODO: maybe subsystem?
+	addtimer(CALLBACK(src, PROC_REF(update_queued)), 0)
 
 /datum/secondary_map/follow_entity_with_radius/proc/update_queued()
 	move_queued = FALSE

@@ -22,6 +22,23 @@
 	..()
 	dangerously_make_selflooping()
 
+/datum/map_level/freeflight/proc/auto_hand_off_to(obj/overmap/entity/visitable/ship/landable/entity)
+	if(!length(visiting))
+		CRASH("Attempted to auto hand off to an entity, but there are no visiting entities.")
+	if(entity && (entity in visiting))
+		hand_off_to(entity)
+
+	// TODO: weighted pick based on potential engine powers / maneuverability?
+	hand_off_to(pick(visiting))
+
+/datum/map_level/freeflight/proc/hand_off_to(obj/overmap/entity/visitable/ship/landable/entity)
+	if(leader)
+		CRASH("Attempted to hand off to an entity while there is still a leader.")
+	if(!(entity in visiting))
+		CRASH("Attempted to hand off to an entity that is not visiting this flight level.")
+	visiting -= entity
+	leader = entity
+
 /**
  * makes an anchor-aligned dock for a shuttle to land at the center of the sector.
  *
