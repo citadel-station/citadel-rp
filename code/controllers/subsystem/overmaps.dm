@@ -293,6 +293,11 @@ SUBSYSTEM_DEF(overmaps)
 )
 	if(!length(level.visiting) && leaving == level.leader)
 		// last ship is leaving, time to destroy level
+		clear_flight_level(
+			level,
+			CALLBACK(src, PROC_REF(release_flight_level__default_live_handler), moving_into, moving_to_level),
+			CALLBACK(src, PROC_REF(release_flight_level__default_dead_handler)),
+		)
 		#warn obliterate
 
 		return
@@ -307,6 +312,13 @@ SUBSYSTEM_DEF(overmaps)
 		level.visiting -= leaving
 	else
 		stack_trace("Unhandled case in release_flight_level: leaving shuttle is neither the leader nor a visitor.")
+
+/datum/controller/subsystem/overmaps/proc/release_flight_level__default_dead_handler(list/atom/movable/movables)
+	for(var/atom/movable/AM as anything in movables)
+		qdel(AM)
+
+/datum/controller/subsystem/overmaps/proc/release_flight_level__default_live_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
+	#warn this
 
 /**
  * called when the last shuttle leaves a flight level
@@ -377,15 +389,15 @@ SUBSYSTEM_DEF(overmaps)
 	for(var/atom/movable/AM as anything in movables)
 		AM.forceMove(pick(candidates))
 
-// todo: SSzclear when?
 /**
  * internal proc: clears a flight level
+ * * live_handler and dead_handler may be called multiple times.
+ *   they will not have turfs in them.
  *
  * @params
  * * level - the level to clear
- * * handler - what to do with atoms
- * * live_handler - what to do with atoms to not destroy; called with (list/atom/movable/movables)
- * * dead_handler - what to do with atoms to destroy; called with (list/atom/movable/movables)
+ * * live_handler - what to do with atoms to not destroy; called with (list/atom/movable/movables, iteration)
+ * * dead_handler - what to do with atoms to destroy; called with (list/atom/movable/movables, iteration)
  */
 /datum/controller/subsystem/overmaps/proc/clear_flight_level(datum/map_level/freeflight/level, datum/callback/live_handler, datum/callback/dead_handler)
 	PRIVATE_PROC(TRUE)
@@ -412,6 +424,9 @@ SUBSYSTEM_DEF(overmaps)
 		if(clean)
 			continue
 
+		var/list/atom/movable/live_movables = list()
+		var/list/atom/movable/dead_movables = list()
+
 		// yes check tick on this one
 		for(var/atom/movable/AM as anything in clearing_movables)
 			// WELCOME TO HELL: this is how we handle atoms
@@ -426,11 +441,12 @@ SUBSYSTEM_DEF(overmaps)
 						stack_trace("victim [victim] with ckey [victim.ckey] but no mind ([victim.type])")
 						yeet_them_out_of_the_sky  = TRUE
 			if(!yeet_them_out_of_the_sky)
-				// Bye Bye!
-				qdel(AM)
-				continue
-			#warn yuh YEET
-			#warn deal with shuttle interdiction
+				dead_movables += AM
+			else
+				live_movables += AM
+
+		live_handler.Invoke(live_movables, cycles_so_far)
+		dead_handler.Invoke(dead_movables, cycles_so_far)
 
 	while(!clean && cycles_so_far <= 5)
 
