@@ -37,6 +37,9 @@
 	if(src.material == REPOSITORY_FETCH_DEFER)
 		stack_trace("material deferred on a material stack. this isn't supported.")
 
+	if(!src.material)
+		stack_trace("Material not set on a material stack, this shouldnt happen")
+
 	// ensure our icon is set properly
 	if(src.material.icon && icon != src.material.icon)
 		icon = src.material.icon
