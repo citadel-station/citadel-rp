@@ -29,6 +29,8 @@
 
 	virus_immune = TRUE
 
+	vision_innate = /datum/vision/baseline/species_tier_3 //
+
 	brute_mod     = 1
 	burn_mod      = 0
 	oxy_mod       = 0
