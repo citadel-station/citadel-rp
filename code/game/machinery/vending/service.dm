@@ -21,7 +21,6 @@
 		/obj/item/reagent_containers/food/drinks/bottle/grenadine = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/kahlua = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/melonliquor = 5,
-		/obj/item/reagent_containers/food/drinks/bottle/peppermintschnapps = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/peachschnapps = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/lemonadeschnapps = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/rum = 5,
@@ -35,6 +34,8 @@
 		/obj/item/reagent_containers/food/drinks/bottle/wine = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/whitewine = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/bitters = 5,
+		/obj/item/reagent_containers/food/drinks/bottle/goldschlager = 1,
+		/obj/item/reagent_containers/food/drinks/bottle/patron = 1,
 		/obj/item/reagent_containers/food/drinks/bottle/victory_gin = 3,
 		/obj/item/reagent_containers/food/drinks/bottle/messa_mead = 3,
 		/obj/item/reagent_containers/food/drinks/bottle/small/ale = 15,
@@ -68,6 +69,16 @@
 		/obj/item/glass_extra/stick = 30,
 		/obj/item/glass_extra/straw = 30,
 		/obj/item/storage/single_use/med_pouch/overdose = 2,
+	)
+	holiday_products = list(
+	  	HOLIDAY_CHRISTMAS = list(
+	    	/obj/item/reagent_containers/food/drinks/bottle/caramelwhiskey = 5,
+	    	/obj/item/reagent_containers/food/drinks/bottle/peppermintschnapps = 5
+	  	),
+		HOLIDAY_HALLOWEEN = list(
+	    	/obj/item/reagent_containers/food/drinks/bottle/sourappleschnapps = 5,
+			/obj/item/reagent_containers/food/drinks/bottle/candycornvodka = 5
+	  	)
 	)
 	contraband = list()
 	vend_delay = 15

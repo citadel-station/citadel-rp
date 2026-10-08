@@ -53,6 +53,14 @@
 		/obj/item/storage/box/matches = 10,
 		/obj/item/flame/lighter/random = 4,
 	)
+	holiday_products = list(
+	  HOLIDAY_CHRISTMAS = list(
+	    /obj/item/storage/fancy/cigarettes/vanillas = 5
+	  	),
+	HOLIDAY_HALLOWEEN = list(
+	    /obj/item/storage/fancy/cigarettes/kaijus = 5
+	  	)
+	)
 	contraband = list(
 		/obj/item/flame/lighter/zippo = 4,
 	)
@@ -71,6 +79,8 @@
 		/obj/item/storage/fancy/cigarettes/menthols = 18,
 		/obj/item/storage/fancy/cigarettes/kingsilvers = 27,
 		/obj/item/storage/fancy/cigarettes/subrosas = 22,
+		/obj/item/storage/fancy/cigarettes/vanillas = 20,
+		/obj/item/storage/fancy/cigarettes/kaijus = 25,
 		/obj/item/storage/rollingpapers = 15,
 		/obj/item/storage/rollingblunts = 25,
 		/obj/item/storage/box/matches = 3,

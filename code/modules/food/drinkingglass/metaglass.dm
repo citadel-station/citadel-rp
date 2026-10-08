@@ -405,9 +405,6 @@ Drinks Data
 	glass_icon_state = "sbagliatoglass"
 	glass_center_of_mass = list("x"=16, "y"=8)
 
-/datum/reagent/ethanol/fusionnaire
-	glass_icon_state = "fusionnair3"
-
 /datum/reagent/ethanol/xanaducannon
 	glass_icon_state = "xanaducannon"
 	glass_center_of_mass = list("x"=16, "y"=8)
@@ -1035,12 +1032,30 @@ Drinks Data
 	glass_icon_state = "caramelwhiskeyglass"
 	glass_center_of_mass = list("x"=16, "y"=12)
 
+/datum/reagent/ethanol/peppermintschnapps
+	glass_icon_state = "glass_clear"
+
 /datum/reagent/ethanol/caramel_russian
 	glass_icon_state = "caramelrussianglass"
 	glass_center_of_mass = list("x"=16, "y"=9)
 
 /datum/reagent/ethanol/caramel_cider
 	glass_icon_state = "caramelciderglass"
+
+/datum/reagent/ethanol/peppermintmartini
+	glass_icon_state = "peppermintmartini"
+
+/datum/reagent/ethanol/stinger
+	glass_icon_state = "stinger"
+	glass_center_of_mass = list("x"=16, "y"=8)
+
+/datum/reagent/ethanol/naughtygirlscout
+	glass_icon_state = "naughtygirlscout"
+	glass_center_of_mass = list("x"=16, "y"=7)
+
+/datum/reagent/ethanol/timberwolf
+	glass_icon_state = "timberwolf"
+	glass_center_of_mass = list("x"=16, "y"=8)
 
 //Seasonals - Halloween
 

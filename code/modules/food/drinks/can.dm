@@ -445,3 +445,13 @@
 /obj/item/reagent_containers/food/drinks/cans/dr_gibb_mystery/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent("dr_gibbmystery", 30)
+
+/obj/item/reagent_containers/food/drinks/cans/robustexpresspumpkin
+	name = "\improper Robust Express Pumpkin Latte"
+	desc = "Delicious caffeine infused with pumpkin pie flavor and autumnal spices. It's pleasantly warm to the touch."
+	icon_state = "robustexpresspumpkin"
+	center_of_mass = list("x"=16, "y"=10)
+
+/obj/item/reagent_containers/food/drinks/cans/robustexpresspumpkin/Initialize(mapload)
+	. = ..()
+	reagents.add_reagent("pumpkin_latte", 30)
