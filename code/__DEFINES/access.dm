@@ -411,6 +411,19 @@ STANDARD_ACCESS_DATUM(ACCESS_FACTION_SDF, faction/sdf, "SDF")
 #define ACCESS_FACTION_PIRATE 168//Pirate Crew Access (Blackbeard was born in 1680.)
 STANDARD_ACCESS_DATUM(ACCESS_FACTION_PIRATE, faction/pirate, "Pirate")
 
+//? Maquis
+
+#define ACCESS_FACTION_MAQUIS 311
+STANDARD_ACCESS_DATUM(ACCESS_FACTION_MAQUIS, faction/maquis, "Maquis")
+
+//? Mitilia
+
+#define ACCESS_FACTION_MILITIA 310
+STANDARD_ACCESS_DATUM(ACCESS_FACTION_MILITIA, faction/militia, "Militia")
+
+#define ACCESS_FACTION_SMUGGLER 312
+STANDARD_ACCESS_DATUM(ACCESS_FACTION_SMUGGLER, faction/smuggler, "Smuggler")
+
 //? Trader
 
 #define ACCESS_FACTION_TRADER 160//General Beruang Trader Access
