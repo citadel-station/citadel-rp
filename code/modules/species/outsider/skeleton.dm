@@ -29,6 +29,8 @@
 
 	virus_immune = TRUE
 
+	vision_innate = /datum/vision/baseline/species_tier_3 //
+
 	brute_mod     = 1
 	burn_mod      = 0
 	oxy_mod       = 0
@@ -44,7 +46,7 @@
 	death_message    = "falls over and stops moving!"
 	knockout_message = "falls over and stops moving!"
 
-	has_organ = list()
+	has_organ = list(O_EYES      = /obj/item/organ/internal/eyes) //Turns out it needs eyes to see.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
