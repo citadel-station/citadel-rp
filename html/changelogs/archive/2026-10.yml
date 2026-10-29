@@ -49,3 +49,12 @@
   Shadowtail117:
   - bugfix: The Atlas' supermatter chamber is now surrounded on all sides by reinforced
       borosilicate glass.
+2026-10-29:
+  CharlesWedge:
+  - rscadd: The Tajaran double barrel for some over-under flavor.
+  - rscadd: Two new variants of Tajaran Insurgent.
+  - rscadd: Two new Miaphus POIs
+  - rscdel: The Miaphus Research Station POI
+  - tweak: Miaphus can now only spawn one sniper nest/
+  - tweak: All of Sky Planet AKA Lythios 43A now Motov'maal
+  - balance: The Icelance pump laser rifle now only shoots 3 shots.
