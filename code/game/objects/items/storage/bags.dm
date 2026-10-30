@@ -258,6 +258,12 @@
 	w_class = WEIGHT_CLASS_SMALL
 	insertion_whitelist = list(/obj/item/reagent_containers/food/snacks,/obj/item/reagent_containers/food/condiment)
 
+/obj/item/storage/bag/food/ashlander
+	name = "shimash weave food basket"
+	desc = "A loop of bone with a netting of plant fiber woven over it. Handy for carrying forage or other edible things!"
+	icon = 'icons/obj/lavaland.dmi'
+	icon_state = "scorisatchel_food"
+
 	// -----------------------------
 	//           Evidence Bag
 	// -----------------------------
