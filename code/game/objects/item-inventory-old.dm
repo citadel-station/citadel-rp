@@ -169,8 +169,7 @@
  */
 /obj/item/proc/get_worn_mob() as /mob
 	RETURN_TYPE(/mob)
-	return worn_inside?.get_worn_mob() || (worn_slot? loc : null)
-
+	return inv_inside?.owner
 
 //* Stripping *//
 
