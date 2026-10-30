@@ -162,6 +162,9 @@
 		if(!isturf(target.loc))
 			return
 
+		if(!in_range(user, target))
+			return
+
 		var/obj/item/I = target
 
 		if(I.anchored)
