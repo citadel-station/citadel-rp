@@ -1,0 +1,4 @@
+author: "its-helvi"
+delete-after: True
+changes:
+  - rscadd: "Added a reskinned food bag for Scorians and a related crafting recipe for it."
