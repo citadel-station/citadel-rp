@@ -44,7 +44,6 @@ GENERATE_ROBOT_MODULE_PRESET(/nanotrasen/medical)
 	..()
 	if(normal_out)
 		normal_out |=  list(
-			/obj/item/borg/sight/hud/med,
 			/obj/item/healthanalyzer/advanced,
 			/obj/item/reagent_containers/borghypo/surgeon,
 			/obj/item/reagent_containers/glass/beaker/large,

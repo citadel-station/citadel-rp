@@ -163,7 +163,6 @@
 	/// * units: watts
 	var/avg_power = 0
 
-	var/sight_mode = 0
 	var/custom_name = ""
 	/// The name of the borg, for the purposes of custom icon sprite indexing.
 	var/sprite_name = null
