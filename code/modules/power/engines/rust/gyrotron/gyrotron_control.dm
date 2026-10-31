@@ -9,13 +9,6 @@
 	var/id_tag
 	var/scan_range = 25
 
-/obj/machinery/computer/gyrotron_control/attack_ai(var/mob/user)
-	attack_hand(user)
-
-/obj/machinery/computer/gyrotron_control/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	interact(user)
-
 /obj/machinery/computer/gyrotron_control/interact(var/mob/user)
 
 	if(machine_stat & (BROKEN|NOPOWER))

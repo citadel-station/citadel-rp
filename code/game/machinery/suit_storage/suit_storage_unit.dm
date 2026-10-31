@@ -79,15 +79,6 @@
 				dump_everything()
 				qdel(src)
 
-/obj/machinery/suit_storage_unit/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	if(machine_stat & NOPOWER)
-		return
-	if(!user.IsAdvancedToolUser())
-		return 0
-	ui_interact(user)
-
 /obj/machinery/suit_storage_unit/ui_state()
 	return GLOB.notcontained_state
 

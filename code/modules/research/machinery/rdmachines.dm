@@ -18,11 +18,6 @@
 	linked_console = null
 	return ..()
 
-/obj/machinery/r_n_d/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(user.a_intent == INTENT_HARM)
-		return ..()
-	return
-
 /obj/machinery/r_n_d/proc/getMaterialType(var/name)
 	var/datum/prototype/material/M = get_material_by_name(name)
 	if(M && M.stack_type)

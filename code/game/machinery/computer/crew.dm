@@ -20,17 +20,5 @@
 	crew_monitor = null
 	return ..()
 
-/obj/machinery/computer/crew/attack_ai(mob/user)
-	attack_hand(user)
-
-/obj/machinery/computer/crew/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	..()
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/crew/ui_interact(mob/user, datum/tgui/ui = null)
 	crew_monitor.ui_interact(user, ui)
-
-/obj/machinery/computer/crew/interact(mob/user)
-	crew_monitor.ui_interact(user)

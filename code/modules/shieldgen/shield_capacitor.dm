@@ -67,11 +67,6 @@
 	else
 		..()
 
-/obj/machinery/shield_capacitor/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (BROKEN))
-		return
-	interact(user)
-
 /obj/machinery/shield_capacitor/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (machine_stat & (BROKEN)) )
 		if (!istype(user, /mob/living/silicon))

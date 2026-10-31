@@ -11,12 +11,6 @@
 	var/p_layer = PIPING_LAYER_REGULAR
 	var/disposals = FALSE
 
-
-/obj/machinery/pipedispenser/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if((. = ..()))
-		return
-	ui_interact(user)
-
 /obj/machinery/pipedispenser/ui_asset_injection(datum/tgui/ui, list/immediate, list/deferred)
 	immediate += /datum/asset_pack/spritesheet/pipes
 	return ..()

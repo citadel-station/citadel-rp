@@ -33,11 +33,10 @@
 	old_turf = isturf(loc)? loc : null
 
 /obj/machinery/floorlayer/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	on=!on
+	on = !on
 	user.visible_message( \
 		SPAN_NOTICE("[user] has [!on?"de":""]activated \the [src]."), \
 		SPAN_NOTICE("You [!on?"de":""]activate \the [src]."))
-	return
 
 /obj/machinery/floorlayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(W.is_wrench())

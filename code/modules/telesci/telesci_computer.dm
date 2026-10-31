@@ -74,14 +74,6 @@
 /obj/machinery/computer/telescience/proc/get_max_allowed_distance()
 	return FLOOR((crystals.len * telepad.efficiency * powerCoefficient), 1)
 
-/obj/machinery/computer/telescience/attack_ai(mob/user)
-	src.attack_hand(user)
-
-/obj/machinery/computer/telescience/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	nano_ui_interact(user)
-
 /obj/machinery/computer/telescience/nano_ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 

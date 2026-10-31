@@ -363,9 +363,6 @@
 			return UI_CLOSE
 	. = ..()
 
-/obj/machinery/telecomms/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 /obj/machinery/telecomms/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

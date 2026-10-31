@@ -36,11 +36,6 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	allfaxes -= src
 	return ..()
 
-/obj/machinery/photocopier/faxmachine/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	user.set_machine(src)
-
-	nano_ui_interact(user)
-
 /**
  *  Display the NanoUI window for the fax machine.
  *

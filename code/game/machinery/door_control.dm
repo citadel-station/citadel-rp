@@ -34,8 +34,9 @@
 		playsound(src.loc, /datum/soundbyte/sparks, 100, TRUE)
 		return 1
 
-/obj/machinery/button/remote/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
+/obj/machinery/button/remote/interact(mob/user)
+	. = ..()
+	if(.)
 		return
 
 	if(machine_stat & (NOPOWER|BROKEN))

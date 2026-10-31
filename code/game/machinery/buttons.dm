@@ -12,15 +12,13 @@
 	// todo: remove when this is constructible (and all its subtypes are)
 	integrity_flags = INTEGRITY_INDESTRUCTIBLE
 
-/obj/machinery/button/attack_ai(mob/user)
-	return attack_hand(user)
+/obj/machinery/button/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+	on_activation(new /datum/event_args/actor(user))
 
-/obj/machinery/button/attackby(obj/item/W, mob/user)
-	return attack_hand(user)
-
-/obj/machinery/button/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return TRUE
+/obj/machinery/button/proc/on_activation(datum/event_args/actor/actor)
 	playsound(src, 'sound/machines/button.ogg', 100, TRUE)
 
 /obj/machinery/button/windowtint
@@ -30,11 +28,9 @@
 	desc = "A remote control switch for polarized windows."
 	var/range = 7
 
-/obj/machinery/button/windowtint/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if (..())
-		return TRUE
-	else
-		toggle_tint()
+/obj/machinery/button/windowtint/on_activation(datum/event_args/actor/actor)
+	..()
+	toggle_tint()
 
 /obj/machinery/button/windowtint/proc/toggle_tint()
 	use_power(5)

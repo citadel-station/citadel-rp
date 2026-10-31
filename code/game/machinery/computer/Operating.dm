@@ -43,17 +43,6 @@
 		victim = null
 	return ..()
 
-/obj/machinery/computer/operating/attack_ai(mob/user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-
-/obj/machinery/computer/operating/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-	..()
-
 /obj/machinery/computer/operating/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

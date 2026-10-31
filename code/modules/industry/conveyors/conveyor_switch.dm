@@ -51,7 +51,11 @@
 		C.setmove()
 
 // attack with hand, switch position
-/obj/machinery/conveyor_switch/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/conveyor_switch/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return

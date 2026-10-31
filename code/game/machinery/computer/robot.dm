@@ -8,16 +8,6 @@
 	circuit = /obj/item/circuitboard/robotics
 	var/safety = TRUE
 
-/obj/machinery/computer/robotics/attack_ai(var/mob/user as mob)
-	ui_interact(user)
-
-/obj/machinery/computer/robotics/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	if(machine_stat & (NOPOWER|BROKEN))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/robotics/proc/is_authenticated(mob/user)
 	if(!istype(user))
 		return FALSE

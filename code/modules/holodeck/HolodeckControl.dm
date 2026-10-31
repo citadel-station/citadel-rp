@@ -72,16 +72,6 @@
 	"Wildlife Simulation" 		= new/datum/holodeck_program(/area/holodeck/source_wildlife, list())
 	)
 
-/obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/HolodeckControl/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	user.set_machine(src)
-
-	nano_ui_interact(user)
-
 /**
  *  Display the NanoUI window for the Holodeck Computer.
  *

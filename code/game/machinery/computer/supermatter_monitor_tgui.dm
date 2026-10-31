@@ -14,14 +14,6 @@
 	req_access = list()
 	var/datum/tgui_module_old/supermatter_monitor/sm_monitor
 
-/obj/machinery/computer/sm_monitor/attack_ai(mob/user)
-	ui_interact(user)
-
-/obj/machinery/computer/sm_monitor/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return TRUE
-	ui_interact(user)
-
 /obj/machinery/computer/sm_monitor/ui_interact(mob/user)
 	if(!sm_monitor)
 		sm_monitor = new(src)

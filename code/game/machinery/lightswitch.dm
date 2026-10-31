@@ -48,7 +48,10 @@
 /obj/machinery/light_switch/examine(mob/user, dist)
 	. += SPAN_NOTICE("A light switch. It is [on? "on" : "off"].")
 
-/obj/machinery/light_switch/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/light_switch/interact(mob/user)
+	. = ..()
+	if(.)
+		return
 
 	on = !on
 

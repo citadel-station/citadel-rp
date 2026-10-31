@@ -19,12 +19,6 @@
 		return UI_CLOSE
 	return ..()
 
-/obj/machinery/computer/drone_control/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-
-	ui_interact(user)
-
 /obj/machinery/computer/drone_control/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

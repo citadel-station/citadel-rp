@@ -201,11 +201,6 @@ GLOBAL_LIST_BOILERPLATE(rdconsoles, /obj/machinery/computer/rdconsole)
 	dat += "</UL>"
 	return dat.Join()
 
-/obj/machinery/computer/rdconsole/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/rdconsole/robotics
 	name = "Robotics R&D Console"
 	id = 2

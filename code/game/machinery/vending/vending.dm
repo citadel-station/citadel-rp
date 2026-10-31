@@ -299,10 +299,7 @@
 	T.time = stationtime2text()
 	GLOB.vendor_account.transaction_log.Add(T)
 
-/obj/machinery/vending/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/vending/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/vending/interact(mob/user)
 	if(machine_stat & (BROKEN|NOPOWER))
 		return
 
@@ -311,7 +308,7 @@
 			return
 
 	wires.Interact(user)
-	nano_ui_interact(user)
+	return ..()
 
 /**
  *  Display the NanoUI window for the vending machine.

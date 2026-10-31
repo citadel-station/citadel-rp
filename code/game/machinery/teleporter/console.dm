@@ -84,11 +84,6 @@
 	else
 		..()
 
-	return
-
-/obj/machinery/computer/teleporter/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 /obj/machinery/computer/teleporter/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

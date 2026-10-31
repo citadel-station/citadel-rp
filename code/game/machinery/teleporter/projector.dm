@@ -179,10 +179,8 @@
 		return FALSE
 	return TRUE
 
-/obj/machinery/tele_projector/attack_ai()
-	attack_hand()
-
-/obj/machinery/tele_projector/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/tele_projector/interact(mob/user)
+	. = ..()
 	if(engaged)
 		disengage()
 	else

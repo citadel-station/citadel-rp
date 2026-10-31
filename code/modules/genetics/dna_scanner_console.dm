@@ -101,14 +101,6 @@
 	return
 */
 
-/obj/machinery/computer/scan_consolenew/attack_ai(mob/user)
-	src.add_hiddenprint(user)
-	nano_ui_interact(user)
-
-/obj/machinery/computer/scan_consolenew/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(!..())
-		nano_ui_interact(user)
-
  /**
   * The nano_ui_interact proc is used to open and update Nano UIs
   * If nano_ui_interact is not used then the UI will not update correctly

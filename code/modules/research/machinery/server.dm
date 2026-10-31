@@ -259,11 +259,6 @@
 			target.files.known_tech |= from.files.known_tech
 			return TRUE
 
-/obj/machinery/computer/rdservercontrol/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/rdservercontrol/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, /datum/soundbyte/sparks, 75, TRUE)

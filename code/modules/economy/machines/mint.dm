@@ -460,14 +460,9 @@
 	I.get_product(get_turf(src))
 	SSnanoui.update_uis(src)
 
-/obj/machinery/coinbank/attack_ai(mob/user as mob)
-	attack_hand(user)
-
 /obj/machinery/coinbank/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (NOPOWER|BROKEN))
-		return
 	wires.Interact(user)
-	nano_ui_interact(user)
+	return ..()
 
 /*******************
 *   SmartFridge Menu

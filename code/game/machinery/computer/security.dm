@@ -84,22 +84,12 @@
 	else
 		..()
 
-/obj/machinery/computer/secure_data/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/secure_data/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	add_fingerprint(user)
-	ui_interact(user)
-
 /obj/machinery/computer/secure_data/ui_interact(mob/user, datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "SecurityRecords", "Security Records") // 800, 380
 		ui.open()
 		ui.set_autoupdate(FALSE)
-
 
 /obj/machinery/computer/secure_data/ui_data(mob/user, datum/tgui/ui)
 	var/data[0]

@@ -290,17 +290,10 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/porta_turret/attack_ai(mob/user)
+/obj/machinery/porta_turret/interact(mob/user)
 	if(isLocked(user))
-		return
-
-	nano_ui_interact(user)
-
-/obj/machinery/porta_turret/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(isLocked(user))
-		return
-
-	nano_ui_interact(user)
+		return TRUE
+	return ..()
 
 /obj/machinery/porta_turret/nano_ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	var/data[0]

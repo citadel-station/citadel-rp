@@ -13,16 +13,6 @@
 	. = ..()
 	logged_in = "Cargo Department"
 
-/obj/machinery/computer/stockexchange/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..(user))
-		return
-
-	//if(!ai_control && issilicon(user))
-	//	to_chat(user, SPAN_WARNING("Access Denied."))
-	//	return TRUE
-
-	ui_interact(user)
-
 /obj/machinery/computer/stockexchange/proc/balance()
 	if(!logged_in)
 		return FALSE

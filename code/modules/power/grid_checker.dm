@@ -51,12 +51,6 @@
 	else if(istype(W, /obj/item/multitool) || W.is_wirecutter())
 		attack_hand(user)
 
-/obj/machinery/power/grid_checker/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(!user)
-		return
-	add_fingerprint(user)
-	interact(user)
-
 /obj/machinery/power/grid_checker/interact(mob/user)
 	if(!user)
 		return

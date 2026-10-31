@@ -36,7 +36,11 @@ obj/machinery/scanner
 	else
 		icon_state = "scanner_idle"
 
-obj/machinery/scanner/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+obj/machinery/scanner/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	if(stat & NOPOWER)
 		return
 	if(!ishuman(user) || lastuser == user.real_name)
