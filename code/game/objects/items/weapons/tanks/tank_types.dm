@@ -294,3 +294,9 @@
 	if(air_contents.gas[GAS_ID_CARBON_DIOXIDE] < 0.2 && loc==user)
 		. += "<span class='danger'>The meter on the [src.name] indicates you are almost out of air!</span>"
 	//	user.playsound('sound/effects/alert.ogg')
+
+/obj/item/tank/emergency/carbon_dioxide/double
+	name = "double emergency CO2 tank"
+	icon_state = "emergency_double_co2"
+	gauge_icon = "indicator_emergency_double"
+	volume = 10
