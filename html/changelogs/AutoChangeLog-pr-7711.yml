@@ -1,0 +1,4 @@
+author: "TheLordME"
+delete-after: True
+changes:
+  - server: "Update tgui dependencies to latest minor versions available"
