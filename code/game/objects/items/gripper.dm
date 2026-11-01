@@ -48,12 +48,14 @@
 //! This exact combination of hooks will make it work as expected. !//
 //! It's realistically still pretty shitty.                        !//
 
-/obj/item/gripper/pickup(...)
+/obj/item/gripper/pickup(mob/user, flags, atom/oldLoc)
 	. = ..()
+	flags |= INV_OP_SUPPRESS_SOUND
 	wrapped?.pickup(arglist(args))
 
-/obj/item/gripper/dropped(...)
+/obj/item/gripper/dropped(mob/user, flags, atom/newLoc)
 	. = ..()
+	flags |= INV_OP_SUPPRESS_SOUND
 	wrapped?.dropped(arglist(args))
 
 /obj/item/gripper/equipped(...)
@@ -103,6 +105,10 @@
 	var/obj/item/old = wrapped
 	UnregisterSignal(wrapped, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
 	wrapped = null
+	// TODO: this doesn't play dropsound. fix it. probably with a
+	//       bespoke proc on item because calling 'dropped' here is messy
+	//       as we have inventory hooks for a reason (and they're clean).
+
 	// in theory the below should pull it out of inventory properly
 	// as worn_slot is set, which allows inventory hooks to fire.
 	switch(newloc)
@@ -160,6 +166,9 @@
 	if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
 		//...and that the item is not in a container.
 		if(!isturf(target.loc))
+			return
+
+		if(!in_range(user, target))
 			return
 
 		var/obj/item/I = target

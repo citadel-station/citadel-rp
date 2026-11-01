@@ -647,6 +647,16 @@
 	always_available = FALSE
 	tools = list(TOOL_WIRECUTTER)
 
+/datum/crafting_recipe/shimash_food_basket
+	name = "Shimash Weave Food Basket"
+	result = /obj/item/storage/bag/food/ashlander
+	time = 20
+	reqs = list(/datum/reagent/shimashpulp = 30,
+				/obj/item/stack/material/bone = 4
+				)
+	category = CAT_PRIMAL
+	always_available = FALSE
+
 /datum/crafting_recipe/goliath_halfcloak
 	name = "Goliath Hide Half Cloak"
 	result = /obj/item/clothing/accessory/poncho/rough_cloak/ashlander

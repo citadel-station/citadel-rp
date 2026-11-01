@@ -75,6 +75,22 @@
 	M.client?.action_drawer.register_holder(actions)
 
 /datum/inventory/Destroy()
+	// deleting an inventory obliterates everything inside it
+	// mean? yes
+	// deserved? also yes. don't delete inventory without unequipping items, people.
+	//
+	// this can technically miss things - WHICH IS REALLY BAD, ACTUALLY.
+	// references won't be cleared properly if it does.
+	var/list/obj/item/deleting = list()
+	for(var/obj/item/item in owner.get_equipped_items(TRUE, TRUE))
+		if(item.inv_inside == src)
+			deleting += item
+
+	// why the double-buffer? because stuff can be taken off you when, say,
+	// jumpsuits are removed. no escaping, now >:)
+	for(var/obj/item/item in deleting)
+		qdel(item)
+
 	QDEL_NULL(actions)
 	owner = null
 	for(var/datum/actor_hud/inventory/hud in huds_using)

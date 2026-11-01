@@ -21,7 +21,6 @@ GENERATE_ROBOT_MODULE_PRESET(/cybersun/triage)
 	..()
 	if(normal_out)
 		normal_out |= list(
-			/obj/item/borg/sight/hud/med,
 			/obj/item/healthanalyzer/advanced,
 			/obj/item/reagent_containers/borghypo/merc,
 			/obj/item/reagent_containers/glass/beaker/large,
