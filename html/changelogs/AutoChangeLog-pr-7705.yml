@@ -1,0 +1,4 @@
+author: "TheLordME"
+delete-after: True
+changes:
+  - bugfix: "fixed space vines death stacking on top of stairs"
