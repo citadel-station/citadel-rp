@@ -86,3 +86,10 @@
 	icon_state = "gnoll"
 	pokephrase = "Yahahahaha!"
 	player_name = "Almerai"
+
+/obj/item/toy/plushie/snowflake/shelby
+	name = "Lab Mouse Plushie"
+	desc = "A plushie depicting an albino mousegirl. She's dressed like a researcher, no doubt some kind of pun on the term 'lab rat.'"
+	icon_state = "shelby"
+	pokephrase = "Squeak!"
+	player_name = "Shelby"
