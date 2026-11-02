@@ -1,0 +1,5 @@
+2026-11-02:
+  Shadowtail117:
+  - bugfix: Fixed duplicate departmental relays in PDA messages
+  TheLordME:
+  - server: Update tgui dependencies to latest minor versions available
