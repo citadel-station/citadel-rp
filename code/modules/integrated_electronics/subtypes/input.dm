@@ -1323,7 +1323,7 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 	power_draw_per_use = 1
 
 /obj/item/integrated_circuit/input/internalbm/do_work(ord)
-	var/obj/item/cell/battery = get_cell()
+	var/obj/item/cell/battery = assembly?.get_cell()
 	if(ord == 1)
 		set_pin_data(IC_OUTPUT, 1, null)
 		set_pin_data(IC_OUTPUT, 2, null)
