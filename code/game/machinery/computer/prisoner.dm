@@ -13,14 +13,6 @@
 	var/stop = 0
 	var/screen = 0 // 0 - No Access Denied, 1 - Access allowed
 
-/obj/machinery/computer/prisoner/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/prisoner/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/prisoner/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

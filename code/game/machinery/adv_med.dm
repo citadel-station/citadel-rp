@@ -249,7 +249,11 @@
 	. = ..()
 	return attack_hand(user)
 
-/obj/machinery/body_scanconsole/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/body_scanconsole/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	if(machine_stat & (NOPOWER|BROKEN))
 		return
 

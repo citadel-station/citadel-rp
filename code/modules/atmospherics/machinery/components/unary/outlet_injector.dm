@@ -194,9 +194,6 @@
 		broadcast_status()
 	update_icon()
 
-/obj/machinery/atmospherics/component/unary/outlet_injector/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 /obj/machinery/atmospherics/component/unary/outlet_injector/proc/toggle_injecting()
 	injecting = !injecting
 	update_use_power(injecting ? USE_POWER_IDLE : USE_POWER_OFF)

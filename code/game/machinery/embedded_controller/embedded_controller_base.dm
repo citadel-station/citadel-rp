@@ -44,15 +44,6 @@
 
 	update_icon()
 
-/obj/machinery/embedded_controller/attack_ai(mob/user as mob)
-	ui_interact(user)
-
-/obj/machinery/embedded_controller/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(!user.IsAdvancedToolUser())
-		return 0
-
-	ui_interact(user)
-
 /obj/machinery/embedded_controller/ui_interact(mob/user, datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

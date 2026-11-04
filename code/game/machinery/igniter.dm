@@ -121,10 +121,8 @@
 	name = "ignition switch"
 	desc = "A remote control switch for a mounted igniter."
 
-/obj/machinery/button/ignition/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-
-	if(..())
-		return
+/obj/machinery/button/ignition/on_activation(datum/event_args/actor/actor)
+	..()
 
 	use_power(5)
 

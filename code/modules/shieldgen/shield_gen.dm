@@ -91,14 +91,6 @@
 	else
 		..()
 
-/obj/machinery/shield_gen/attack_ai(user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/shield_gen/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (BROKEN))
-		return
-	interact(user)
-
 /obj/machinery/shield_gen/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (machine_stat & (BROKEN)) )
 		if (!istype(user, /mob/living/silicon))

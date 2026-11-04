@@ -141,11 +141,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			icon_state = "req_comp[newmessagepriority]"
 	return ..()
 
-/obj/machinery/requests_console/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..(user))
-		return
-	nano_ui_interact(user)
-
 /obj/machinery/requests_console/nano_ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 

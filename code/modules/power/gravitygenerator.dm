@@ -239,12 +239,6 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 				return
 	return ..()
 
-/obj/machinery/gravity_generator/main/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if((. = ..()))
-		return
-	ui_interact(user)
-	return TRUE
-
 /obj/machinery/gravity_generator/main/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

@@ -148,12 +148,6 @@
 		pill_bottle = null
 	return ..()
 
-/obj/machinery/chem_master/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & BROKEN)
-		return
-	user.set_machine(src)
-	ui_interact(user)
-
 /**
  * Handles process of moving input reagents containers in/from machine
  *

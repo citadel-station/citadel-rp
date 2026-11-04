@@ -23,13 +23,6 @@
 	QDEL_NULL(rcon)
 	return ..()
 
-// Proc: attack_hand()
-// Parameters: 1 (user - Person which clicked this computer)
-// Description: Opens UI of this machine.
-/obj/machinery/computer/rcon/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	..()
-	ui_interact(user)
-
 //Proc: ui_interact()
 //Parameters: 2 (usual tgUI parameters)
 //Description: Opens the UI for the RCON console, found in rcon.dm

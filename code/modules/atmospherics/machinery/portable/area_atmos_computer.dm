@@ -20,14 +20,6 @@
 	. = ..()
 	scanscrubbers()
 
-/obj/machinery/computer/area_atmos/attack_ai(mob/user)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/area_atmos/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..(user))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/area_atmos/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

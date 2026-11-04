@@ -178,7 +178,7 @@
 		icon_state = "airlock_sensor_off"
 	return ..()
 
-/obj/machinery/airlock_sensor/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/airlock_sensor/interact(mob/user)
 	var/datum/signal/signal = new
 	signal.transmission_method = TRANSMISSION_RADIO //radio signal
 	signal.data["tag"] = master_tag
@@ -186,6 +186,7 @@
 
 	radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
 	flick("airlock_sensor_cycle", src)
+	return TRUE
 
 // Checks the change of the values, if the change is sufficently large on any of them, send a new signal
 /obj/machinery/airlock_sensor/proc/delta_check(var/new_pressure, var/new_phoron, var/new_temperature)

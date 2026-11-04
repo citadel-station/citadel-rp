@@ -29,16 +29,6 @@
 	if(!rm_controller)
 		rm_controller = new /datum/controller/rogue()
 
-/obj/machinery/computer/roguezones/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/roguezones/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	user.set_machine(src)
-	nano_ui_interact(user)
-
 /obj/machinery/computer/roguezones/nano_ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 

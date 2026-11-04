@@ -113,10 +113,8 @@
 		icon_state = "doorbell-standby"
 	return ..()
 
-/obj/machinery/button/doorbell/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	user.setClickCooldownLegacy(DEFAULT_ATTACK_COOLDOWN)
-	if(..())
-		return
+/obj/machinery/button/doorbell/on_activation(datum/event_args/actor/actor)
+	..()
 	use_power(5)
 	flick("doorbell-active", src)
 

@@ -140,9 +140,6 @@
 
 	last_process_time = world.time
 
-/obj/machinery/replicator/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 /obj/machinery/replicator/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

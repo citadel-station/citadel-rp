@@ -35,12 +35,6 @@
 	else
 		return..()
 
-/obj/machinery/artifact_harvester/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	if(machine_stat & (NOPOWER|BROKEN))
-		return
-	ui_interact(user)
-
 /obj/machinery/artifact_harvester/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

@@ -14,8 +14,11 @@
 GLOBAL_DATUM_INIT(default_state, /datum/ui_state/default, new)
 
 /datum/ui_state/default/can_use_topic(src_object, mob/user)
-	return user.default_can_use_topic(src_object) // Call the individual mob-overridden procs.
+	// Call the individual mob-overridden procs.
+	return min(user.default_can_use_topic(src_object), default_ui_status(user))
 
+// TODO: rename this to 'default_ui_status_for' this isn't a 'topic' check anymore.
+//       Also heavily consider moving overrides to the respective mobs.
 /mob/proc/default_can_use_topic(src_object)
 	return UI_CLOSE // Don't allow interaction by default.
 
@@ -71,3 +74,20 @@ GLOBAL_DATUM_INIT(default_state, /datum/ui_state/default, new)
 		return UI_INTERACTIVE
 	else
 		return min(..(), UI_UPDATE)
+
+/**
+ * Like the mob side 'can_use_topic', checks, by default,
+ * whether or not a user can see / interact with this.
+ *
+ * * This is min()'d with the result of the mob's default check,
+ *   meaning this can only be used to *deny*, not *allow*. This is because
+ *   if you want to make a datum always accept interaction, it's complicated enough
+ *   that you shuold be making your own ui_state.
+ */
+/datum/proc/default_ui_status(mob/user)
+	return UI_INTERACTIVE
+
+/atom/default_ui_status(mob/user)
+	. = ..()
+	if(!can_interact(user) && !isAdminGhostAI(user))
+		. = min(., UI_UPDATE)

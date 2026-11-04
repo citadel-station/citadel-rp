@@ -143,14 +143,12 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 						Console.radio.autosay("Message received from [sender].", Console, "department")
 			Console.set_light(2)
 
-
-/obj/machinery/message_server/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-//	to_chat(user, "<font color=#4F49AF>There seem to be some parts missing from this server. They should arrive on the station in a few days, give or take a few CentCom delays.</font>")
+/obj/machinery/message_server/interact(mob/user)
 	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
 	active = !active
 	update_icon()
-
-	return
+	log_game("[key_name(user)] toggled PDA message passing to [active ? "On" : "Off"]")
+	return TRUE
 
 /obj/machinery/message_server/attackby(obj/item/O as obj, mob/living/user as mob)
 	if (active && !(machine_stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \

@@ -160,9 +160,6 @@
 	if(AM in holdingitems)
 		holdingitems -= AM
 
-/obj/machinery/reagentgrinder/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	interact(user)
-
 /obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu //I am reasonably certain that this is not a microwave
 	if(inuse || user.incapacitated())
 		return

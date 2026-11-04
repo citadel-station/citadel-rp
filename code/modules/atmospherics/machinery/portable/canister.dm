@@ -153,12 +153,6 @@
 	. = ..()
 	update_ui_data()
 
-/obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/canister/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	return src.ui_interact(user)
-
 /obj/machinery/portable_atmospherics/canister/ui_state()
 	return GLOB.physical_state
 
