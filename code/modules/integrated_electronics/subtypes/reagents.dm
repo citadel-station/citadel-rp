@@ -297,7 +297,7 @@
 	activators = list(
 		"on insert" = IC_PINTYPE_PULSE_OUT,
 		"on remove" = IC_PINTYPE_PULSE_OUT,
-		"push ref" = IC_PINTYPE_PULSE_OUT
+		"ref updated" = IC_PINTYPE_PULSE_OUT
 		)
 
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH

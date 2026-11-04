@@ -1314,8 +1314,8 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 		"cell charge" = IC_PINTYPE_NUMBER,
 		"max charge" = IC_PINTYPE_NUMBER,
 		"percentage" = IC_PINTYPE_NUMBER,
-		"refference to assembly" = IC_PINTYPE_REF,
-		"refference to cell" = IC_PINTYPE_REF
+		"reference to assembly" = IC_PINTYPE_REF,
+		"reference to cell" = IC_PINTYPE_REF
 		)
 	activators = list("read" = IC_PINTYPE_PULSE_IN, "on read" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH

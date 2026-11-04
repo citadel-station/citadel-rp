@@ -306,13 +306,11 @@
 		//work out data
 		var/data = " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
 		switch(scanned_item.type)
-
 			if(/obj/item/archaeological_find)
 				data = " - Mundane object (archaic xenos origins)<br>"
 
-				var/obj/item/archaeological_find/A = scanned_item
-				if(A.talking_atom)
-					data = " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
+		if(scanned_item.talking_atom)
+			data = " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
 
 		var/anom_found = 0
 
