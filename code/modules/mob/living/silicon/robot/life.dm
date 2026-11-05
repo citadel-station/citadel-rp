@@ -108,6 +108,12 @@
 	. = ..()
 	var/fullbright = FALSE
 
+	// TODO: event driven, this is slow.
+	//       hooks / traits?
+	var/sight_mode = NONE
+	for(var/obj/item/borg/sight/sight in get_equipped_items())
+		sight_mode |= sight.sight_mode
+
 	if(stat == 2)
 		AddSightSelf(SEE_TURFS | SEE_MOBS | SEE_OBJS)
 		RemoveSightSelf(SEE_BLACKNESS)
