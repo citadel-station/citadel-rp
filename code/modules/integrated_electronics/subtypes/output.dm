@@ -29,7 +29,7 @@
 		if(d)
 			stuff_to_display = "[d]"
 	else
-		stuff_to_display = I.data
+		stuff_to_display = circuit_output(I.data)
 
 /obj/item/integrated_circuit/output/screen/medium
 	name = "medium screen"
@@ -371,17 +371,28 @@
 /obj/item/integrated_circuit/output/video_camera
 	name = "video camera circuit"
 	desc = "This small camera allows a remote viewer to see what it sees."
-	extended_desc = "The camera is linked to the Research camera network."
+	extended_desc = "Visual emotes will be passed to the actor and emote pins.  \
+	Visible messages (anything visible that is not an emote) will be passed to the visible message pin.  \
+	The camera is linked to the general camera network, or the research network if camera network is true."
 	icon_state = "video_camera"
 	w_class = WEIGHT_CLASS_SMALL
+	atom_flags = ATOM_HEAR
 	complexity = 10
 	inputs = list(
 		"camera name" = IC_PINTYPE_STRING,
-		"camera active" = IC_PINTYPE_BOOLEAN
+		"camera active" = IC_PINTYPE_BOOLEAN,
+		"camera broadcast" = IC_PINTYPE_BOOLEAN,
+		"camera network" = IC_PINTYPE_BOOLEAN
 		)
 	inputs_default = list("1" = "video camera circuit")
-	outputs = list()
-	activators = list()
+	outputs = list(
+		"actor" = IC_PINTYPE_STRING,
+		"visible message" = IC_PINTYPE_STRING,
+		)
+	activators = list(
+		"on emote seen" = IC_PINTYPE_PULSE_OUT,
+		"on visible message seen" = IC_PINTYPE_PULSE_OUT
+		)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_idle = 5 // Raises to 80 when on.
 	var/obj/machinery/camera/network/circuits/camera
@@ -389,16 +400,19 @@
 /obj/item/integrated_circuit/output/video_camera/Initialize(mapload)
 	. = ..()
 	camera = new(src)
+	listening_objects |= src
 	on_data_written()
 
 /obj/item/integrated_circuit/output/video_camera/Destroy()
 	QDEL_NULL(camera)
+	listening_objects -= src
 	return ..()
 
-/obj/item/integrated_circuit/output/video_camera/proc/set_camera_status(var/status)
-	if(camera)
-		camera.set_status(status)
-		power_draw_idle = camera.status ? 80 : 5
+/obj/item/integrated_circuit/output/video_camera/proc/set_camera_status(var/cam_broadcast, var/cam_active)
+	power_draw_idle = cam_active ? 70 : 0
+	if(camera && cam_active)
+		camera.set_status(cam_broadcast)
+		power_draw_idle += camera.status ? 10 : 0
 		if(camera.status) // Ensure that there's actually power.
 			if(!draw_idle_power())
 				power_fail()
@@ -407,9 +421,32 @@
 	if(camera)
 		var/cam_name = get_pin_data(IC_INPUT, 1)
 		var/cam_active = get_pin_data(IC_INPUT, 2)
+		var/cam_broadcast = get_pin_data(IC_INPUT, 3)
+		var/network = get_pin_data(IC_INPUT, 4)
 		if(!isnull(cam_name))
 			camera.c_tag = cam_name
-		set_camera_status(cam_active)
+		camera.replace_networks(network ? NETWORK_THUNDER:NETWORK_CIRCUITS)
+		set_camera_status(cam_broadcast, cam_active)
+
+/obj/item/integrated_circuit/output/video_camera/see_emote(mob/living/M, text, type)
+	var/cam_active = get_pin_data(IC_INPUT, 2)
+	if(cam_active == 0) //camera off? quit
+		return
+	set_pin_data(IC_OUTPUT, 1, M.GetVoice())
+	set_pin_data(IC_OUTPUT, 2, STRIP_HTML_FULL(text,MAX_MESSAGE_LEN))
+	push_data()
+	activate_pin(1)
+
+/obj/item/integrated_circuit/output/video_camera/show_message(msg, type)
+	var/cam_active = get_pin_data(IC_INPUT, 2)
+	var/text
+	if (msg && cam_active == 1)
+		text = STRIP_HTML_FULL(msg,MAX_MESSAGE_LEN)
+	else return
+	set_pin_data(IC_OUTPUT, 1, null)
+	set_pin_data(IC_OUTPUT, 2, text)
+	push_data()
+	activate_pin(2)
 
 /obj/item/integrated_circuit/output/video_camera/power_fail()
 	if(camera)
@@ -496,7 +533,7 @@
 	The rotation pin uses degrees.<br>\
 	Imitated object cannot be changed while projecting.  Position, \
 	scale, and rotation can be updated without restarting by pulsing the update hologram pin."
-	complexity = 40
+	complexity = 20
 	icon_state = "holo_projector"
 	inputs = list(
 		"project hologram" = IC_PINTYPE_BOOLEAN,
