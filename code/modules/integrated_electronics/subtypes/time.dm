@@ -153,18 +153,19 @@
 		"hours" = IC_PINTYPE_NUMBER,
 		"minutes" = IC_PINTYPE_NUMBER,
 		"seconds" = IC_PINTYPE_NUMBER,
-		"date" = IC_PINTYPE_NUMBER
+		"date" = IC_PINTYPE_STRING
 		)
 	activators = list("get time" = IC_PINTYPE_PULSE_IN, "on time got" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 2
 
 /obj/item/integrated_circuit/time/clock/do_work()
-	if(get_pin_data(IC_INPUT, 1 == 0))
-		set_pin_data(IC_OUTPUT, 1, time2text(station_time_in_ds, "hh:mm:ss", NO_TIMEZONE) )
-		set_pin_data(IC_OUTPUT, 2, text2num(time2text(station_time_in_ds, "hh", NO_TIMEZONE) ) )
-		set_pin_data(IC_OUTPUT, 3, text2num(time2text(station_time_in_ds, "mm", NO_TIMEZONE) ) )
-		set_pin_data(IC_OUTPUT, 4, text2num(time2text(station_time_in_ds, "ss", NO_TIMEZONE) ) )
+	var/list/A = splittext(stationtime2text(), ":")
+	if(!get_pin_data(IC_INPUT, 1))
+		set_pin_data(IC_OUTPUT, 1, stationtime2text())
+		set_pin_data(IC_OUTPUT, 2, text2num(A[1]))
+		set_pin_data(IC_OUTPUT, 3, text2num(A[2]))
+		set_pin_data(IC_OUTPUT, 4, text2num(A[3]))
 		set_pin_data(IC_OUTPUT, 5, stationdate2text())
 	else
 		set_pin_data(IC_OUTPUT, 1, time2text(STATION_TIME_PASSED(), "hh:mm:ss", NO_TIMEZONE) )
