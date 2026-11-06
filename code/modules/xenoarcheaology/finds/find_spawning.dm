@@ -575,6 +575,7 @@
 	if(new_item)
 		new_item.name = name
 		new_item.desc = src.desc
+		new_item.xenoarch_spawned = TRUE
 
 		if(talkative && istype(new_item, /obj/item))
 			new_item.talking_atom = new(new_item)
