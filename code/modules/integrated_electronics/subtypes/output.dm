@@ -70,7 +70,7 @@
 	var/light_toggled = 0
 	var/light_brightness = 5
 	var/light_strength = 2
-	var/light_rgb = "#FFFFFF"
+	var/light_rgb = COLOR_WHITE
 	power_draw_idle = 0 // Adjusted based on brightness.
 
 /obj/item/integrated_circuit/output/light/do_work()
@@ -116,10 +116,9 @@
 	var/new_color = get_pin_data(IC_INPUT, 1)
 	var/brightness = get_pin_data(IC_INPUT, 2)
 
-	if(new_color && isnum(brightness))
-		brightness = clamp(brightness, 0, 8)
-		light_rgb = new_color
-		light_brightness = brightness
+	brightness = clamp(brightness, 0, 8)
+	light_rgb = new_color ||= COLOR_WHITE
+	light_brightness = brightness
 
 	..()
 

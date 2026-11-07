@@ -166,13 +166,49 @@
 		set_pin_data(IC_OUTPUT, 2, text2num(A[1]))
 		set_pin_data(IC_OUTPUT, 3, text2num(A[2]))
 		set_pin_data(IC_OUTPUT, 4, text2num(A[3]))
-		set_pin_data(IC_OUTPUT, 5, stationdate2text())
 	else
 		set_pin_data(IC_OUTPUT, 1, time2text(STATION_TIME_PASSED(), "hh:mm:ss", NO_TIMEZONE) )
 		set_pin_data(IC_OUTPUT, 2, text2num(time2text(STATION_TIME_PASSED(), "hh", NO_TIMEZONE) ) )
 		set_pin_data(IC_OUTPUT, 3, text2num(time2text(STATION_TIME_PASSED(), "mm", NO_TIMEZONE) ) )
 		set_pin_data(IC_OUTPUT, 4, text2num(time2text(STATION_TIME_PASSED(), "ss", NO_TIMEZONE) ) )
-		set_pin_data(IC_OUTPUT, 5, stationdate2text())
-
+	set_pin_data(IC_OUTPUT, 5, stationdate2text())
 	push_data()
 	activate_pin(2)
+
+/obj/item/integrated_circuit/time/timer
+	name = "timer"
+	desc = "This simple circuit counts the time between activations."
+	extended_desc ="Computation is based on deciseconds started pin and is measured in ticks since start of round."
+	icon_state = "clock"
+	complexity = 1
+	inputs = list(
+		"deciseconds started" = IC_PINTYPE_NUMBER
+		)
+	outputs = list(
+		"time started" = IC_PINTYPE_STRING,
+		"time stopped" = IC_PINTYPE_STRING,
+		"deciseconds passed" = IC_PINTYPE_NUMBER,
+		"time passed" = IC_PINTYPE_STRING)
+
+	activators = list(
+		"start" = IC_PINTYPE_PULSE_IN,
+		"stop" = IC_PINTYPE_PULSE_IN,
+		"pulse out" = IC_PINTYPE_PULSE_OUT
+		)
+	spawn_flags = IC_SPAWN_RESEARCH
+	power_draw_per_use = 8
+
+/obj/item/integrated_circuit/time/timer/do_work(ord)
+	var/time_start = get_pin_data(IC_INPUT, 1)
+	switch(ord)
+		if(1)
+			set_pin_data(IC_INPUT, 1, world.time)
+			set_pin_data(IC_OUTPUT, 1, stationtime2text())
+		if(2)
+			if(!time_start)
+				return
+			set_pin_data(IC_OUTPUT, 2, stationtime2text())
+			set_pin_data(IC_OUTPUT, 3, world.time - time_start)
+			set_pin_data(IC_OUTPUT, 4, time2text(world.time - time_start, "hh:mm:ss"))
+	push_data()
+	activate_pin(3)
