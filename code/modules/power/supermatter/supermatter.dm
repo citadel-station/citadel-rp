@@ -503,7 +503,7 @@
 	// so we add a sanity check here
 	if(QDELETED(nom))
 		return
-	if(nom & (ATOM_ABSTRACT | ATOM_NONWORLD))
+	if(nom.atom_flags & (ATOM_ABSTRACT | ATOM_NONWORLD))
 		return
 	investigate_log("Consumed [nom] ([ref(nom)]) potentially last touched by [nom.fingerprintslast], adding [istype(nom)? 400 : 200] energy.", INVESTIGATE_SUPERMATTER)
 	if(ismob(nom))
