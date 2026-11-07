@@ -424,7 +424,7 @@
 		var/network = get_pin_data(IC_INPUT, 4)
 		if(!isnull(cam_name))
 			camera.c_tag = cam_name
-		camera.replace_networks(network ? NETWORK_THUNDER:NETWORK_CIRCUITS)
+		camera.replace_networks(network ? list(NETWORK_THUNDER):list(NETWORK_THUNDER,NETWORK_CIRCUITS))
 		set_camera_status(cam_broadcast, cam_active)
 
 /obj/item/integrated_circuit/output/video_camera/see_emote(mob/living/M, text, type)
