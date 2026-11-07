@@ -17,6 +17,7 @@
 	name = "type-b electronic device"
 	icon_state = "setup_device_cylinder"
 	desc = "It's a case, for building tiny-sized electronics with.  This one has a cylindrical design."
+	slot_flags = SLOT_EARS
 
 /obj/item/electronic_assembly/tiny/scanner
 	name = "type-c electronic device"
@@ -26,7 +27,8 @@
 /obj/item/electronic_assembly/tiny/hook
 	name = "type-d electronic device"
 	icon_state = "setup_device_hook"
-	desc = "It's a case, for building tiny-sized electronics with.  This one looks like it has a belt clip, but it's purely decorative."
+	desc = "It's a case, for building tiny-sized electronics with.  This one looks like it has a belt clip."
+	slot_flags = SLOT_BELT
 
 /obj/item/electronic_assembly/tiny/box
 	name = "type-e electronic device"

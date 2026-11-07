@@ -5,6 +5,7 @@
 	icon_state = "detailer"
 	item_flags = ITEM_NO_BLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
 	w_class = WEIGHT_CLASS_SMALL
+	belt_storage_class = BELT_CLASS_SMALL
 	var/detail_color = COLOR_ASSEMBLY_WHITE
 	var/list/color_list = list(
 		"dark gray" = COLOR_ASSEMBLY_BLACK,
@@ -61,6 +62,27 @@
 			detail_color = color_list[params["color"]]
 			update_icon()
 			return TRUE
+		if("color_wheel")
+			var/new_color = input(usr, "Pick a color", "Color Selection", detail_color) as color|null
+			if(!new_color)
+				return
+			detail_color = new_color
+			update_icon()
+			return TRUE
+
+/obj/item/integrated_electronics/detailer/verb/color_wheel()
+	set name = "Set Colour"
+	set category = VERB_CATEGORY_OBJECT
+
+	if(usr.incapacitated())
+		return
+
+	var/new_color = input(usr, "Pick a color", "Color Selection", detail_color) as color|null
+
+	if(!new_color)
+		return
+	detail_color = new_color
+	update_icon()
 
 /obj/item/integrated_electronics/detailer/attack_self(mob/user, datum/event_args/actor/actor)
 	. = ..()
