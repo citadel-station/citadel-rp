@@ -480,21 +480,23 @@ SUBSYSTEM_DEF(overmaps)
  * internal proc: skyfall movables into a level.
  */
 /datum/controller/subsystem/overmaps/proc/skyfall_flight_level_contents(datum/map_level/skyfall_into, list/atom/movable/movables)
-	if(!skyfall_into || !skyfall_into.z_index)
-		return FALSE
+	var/target_z = skyfall_into.z_index
 
-	#warn impl
-	var/z = skyfall_into.z_index
 	for(var/atom/movable/AM as anything in movables)
-		var/turf/found
-		for(var/i in 1 to 10)
-			found = locate(rand(1, world.maxx), rand(1, world.maxy), z)
-			if(found)
-				break
-		if(!found)
-			found = locate(rand(1, world.maxx), rand(1, world.maxy), z)
-		if(found)
-			AM.forceMove(found)
+		var/turf/target = locate(
+			rand(
+				LEVEL_TRANSITION_CLEARANCE,
+				world.maxx - LEVEL_TRANSITION_CLEARANCE,
+			),
+			rand(
+				LEVEL_TRANSITION_CLEARANCE,
+				world.maxy - LEVEL_TRANSITION_CLEARANCE,
+			),
+			target_z,
+		)
+		AM.forceMove(target)
+		// bro you fell out of orbit :sob:
+		AM.fall_impact(target, 100, 260, FALSE, TRUE)
 
 	return TRUE
 
@@ -505,10 +507,7 @@ SUBSYSTEM_DEF(overmaps)
  * depending on level conditions (e.g. gravity).
  */
 /datum/controller/subsystem/overmaps/proc/drop_flight_level_contents(datum/map_level/drop_into, list/atom/movable/movables)
-	if(!drop_into)
-		return FALSE
-	merge_flight_level_contents(drop_into, movables)
-	return TRUE
+	return merge_flight_level_contents(drop_into, movables)
 
 /**
  * internal proc: merges a flight level into another
