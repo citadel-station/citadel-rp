@@ -3,28 +3,84 @@
 
 /**
  * Used to render a specific thing, and everything around it, in a secondary view.
+ * * This binds to *clients*, not *perspectives.* This binds to
+ *   the real client of a using-mob.
  */
 /datum/secondary_map
 	var/map_id
 
+	#warn impl both
+	/**
+	 * From map_popups.dm in rendering/legacy.
+	 */
+	var/atom/movable/screen/map_view/map_holder
+	/**
+	 * From map_popups.dm in rendering/legacy.
+	 */
+	var/atom/movable/screen/background/map_background
+	/**
+	 * List of users.
+	 */
+	var/list/client/clients
+	/**
+	 * Our planes.
+	 */
+	var/datum/plane_holder/tgui_camera/planes
+
 /datum/secondary_map/New(map_id)
 	src.map_id = map_id
+	src.map_holder = new
+	src.map_background = new
+	src.planes = new(src.map_id)
 
 /datum/secondary_map/Destroy()
-	#warn impl
+	for(var/client/C in clients)
+		revoke_from_client(C)
+
+	QDEL_NULL(map_holder)
+	QDEL_NULL(map_background)
+	QDEL_NULL(planes)
 	return ..()
 
 /datum/secondary_map/proc/update_view()
+	var/list/data = get_relevant_turfs()
+	var/width = data[1]
+	var/height = data[2]
+	var/align_x = data[3]
+	var/align_y = data[4]
+	var/list/turf/turfs = data[5]
 
+	map_background.screen_loc = "[map_id]:1,1 to [width],[height]"
+	map_holder.screen_loc = "[map_id]:[1 + align_x],[1 + align_y]"
+
+	#warn impl
+
+/**
+ * * Must return a strucutred list for perf reasons.
+ * @return list(width, height, align x, align y, list(turfs...))
+ */
 /datum/secondary_map/proc/get_relevant_turfs() as /list
-	return list()
+	return list(0, 0, 0, 0, list())
 
-/datum/secondary_map/proc/grant_to_user(mob/user)
+/datum/secondary_map/proc/grant_to_client(client/granting)
+	if(granting in clients)
+		CRASH("Client already has this secondary map.")
+	LAZYADD(clients, granting)
+	LAZYADD(granting.secondary_maps, src)
 
-/datum/secondary_map/proc/revoke_from_user(mob/user)
+	granting.screen += map_holder
+	granting.screen += map_background
 
+	planes.apply(granting)
 
-#warn impl
+/datum/secondary_map/proc/revoke_from_client(client/revoking)
+	LAZYREMOVE(clients, revoking)
+	LAZYREMOVE(revoking.secondary_maps, src)
+
+	granting.screen -= map_holder
+	granting.screen -= map_background
+
+	planes.remove(revoking)
 
 /**
  * A secondary map that follows an atom around, showing everything around it in a radius.
@@ -50,7 +106,9 @@
 	if(!entity_turf)
 		return list()
 	var/use_radius = radius
-	return RANGE_TURFS(use_radius, entity_turf)
+
+	. =  RANGE_TURFS(use_radius, entity_turf)
+	. = list(use_radius, use_radius, 0, 0 relevant_turfs)
 
 /datum/secondary_map/follow_entity_with_radius/proc/on_entity_moved()
 	if(move_queued)
@@ -114,7 +172,8 @@
 
 /datum/secondary_map/render_entire_shuttle/get_relevant_turfs()
 	if(!target)
-		return list()
+		return list(0, 0, 0, 0, list())
+	#warn impl
 
 /datum/secondary_map/render_entire_shuttle/proc/on_target_anchor_moved()
 	queue_update()

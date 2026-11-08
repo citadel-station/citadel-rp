@@ -64,6 +64,14 @@
 	/// active atom HUD providers associated to a list of ids or paths of atom huds that's providing it.
 	var/list/datum/atom_hud_provider/atom_hud_providers
 
+	//* Secondary Maps *//
+	/**
+	 * Bound secondary maps.
+	 * * Two way variable referencing between the client and the secondary maps
+	 *   is done to make sure we always get it removed during Destroy().
+	 */
+	var/list/datum/secondary_map/secondary_maps
+
 	//? Rendering
 	/// Click catcher
 	var/atom/movable/screen/click_catcher/click_catcher
