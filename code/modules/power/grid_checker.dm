@@ -26,6 +26,9 @@
 	component_parts += new /obj/item/stock_parts/capacitor(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 10)
 	RefreshParts()
+	// puts the powernet in a consistent state, if the grid checker was deconstructed mid check and apcs are waiting
+	if(!mapload)
+		power_failure(FALSE)
 
 /obj/machinery/power/grid_checker/Destroy()
 	qdel(wires)
