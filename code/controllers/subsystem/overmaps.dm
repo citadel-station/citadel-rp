@@ -298,8 +298,15 @@ SUBSYSTEM_DEF(overmaps)
 			CALLBACK(src, PROC_REF(release_flight_level__default_live_handler), moving_into, moving_to_level),
 			CALLBACK(src, PROC_REF(release_flight_level__default_dead_handler), moving_into, moving_to_level),
 		)
-		#warn obliterate
 
+		// free the level
+		if(!(level in src.used_flight_levels))
+			STACK_TRACE("Level not found in used_flight_levels: " + level)
+		else
+			src.used_flight_levels -= level
+		src.free_flight_levels += level
+
+		// done
 		return
 
 	// else,
@@ -313,45 +320,74 @@ SUBSYSTEM_DEF(overmaps)
 	else
 		stack_trace("Unhandled case in release_flight_level: leaving shuttle is neither the leader nor a visitor.")
 
-/**
- * If flight level, returns /datum/map_level/freeflight
- */
-/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_flight_level(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
-	#warn impl
+/datum/controller/subsystem/overmaps/proc/is_map_level_probably_safe_for_merge(datum/map_level/level)
+	// frankly overly generous but works for now (?)
+	if(ispath(level.base_turf, /turf/space) || isnull(level.base_turf))
+		return TRUE
+	if(ispath(level.base_area, /area/space) || isnull(level.base_area))
+		return TRUE
+	return FALSE
 
 /**
- * If planet, returns a list of exposed zlevels
+ * Returns a list of potential levels to merge atoms into.
+ * * This is called 'merge levels' because 'dead' (unimportant) atoms can also be merged
+ *   into them. You should only return true flight levels and stuff like station / space levels.
+ */
+/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_merge_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
+	. = list()
+	if(maybe_moving_into)
+		var/datum/overmap_location/location = maybe_moving_into.location
+		var/list/z_indices = location.get_z_indices()
+		for(var/z in z_indices)
+			var/datum/map_level/level = SSmapping.ordered_levels[z]
+			if(is_map_level_probably_safe_for_merge(level))
+				. += level
+		// attempt to resolve from location
+	else if(maybe_moving_to_level)
+		// attempt to resolve from zlevel index
+		var/datum/map_level/level = SSmapping.ordered_levels[maybe_moving_to_level.z]
+		var/datum/map/map = level.parent_map
+		if(map)
+			for(var/datum/map_level/other_level in map.levels)
+				if(is_map_level_probably_safe_for_merge(other_level))
+					. += other_level
+		else if(is_map_level_probably_safe_for_merge(level))
+			. += level
+
+/**
+ * Returns a list of potential planet levels to .. pretty much have things
+ * fall out of the sky from.
+ * * This is called 'planet levels' but in reality the difference is merge levels
+ *   allow merging anything, whereas planet levels are for if a 'live' object
+ *   needs to land on a planet level.
  */
 /datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_planet_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
+	. = list()
 	#warn impl
 
 /datum/controller/subsystem/overmaps/proc/release_flight_level__default_dead_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
-	var/datum/map_level/freeflight/flight_level = release_flight_level__resolve_potential_flight_level(maybe_moving_into, maybe_moving_to_level)
-	if(flight_level)
-		merge_flight_level_contents(flight_level, movables)
+	var/list/datum/map_level/merge_levels = release_flight_level__resolve_potential_merge_levels(maybe_moving_into, maybe_moving_to_level)
+	if(length(merge_levels))
+		// TODO: randomly pick from levels, don't just pick first
+		merge_flight_level_contents(merge_levels[1], movables)
 		return
 
 	for(var/atom/movable/AM as anything in movables)
 		qdel(AM)
 
 /datum/controller/subsystem/overmaps/proc/release_flight_level__default_live_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
-	var/datum/map_level/freeflight/flight_level = release_flight_level__resolve_potential_flight_level(maybe_moving_into, maybe_moving_to_level)
-	if(flight_level)
-		merge_flight_level_contents(flight_level, movables)
+	var/list/datum/map_level/merge_levels = release_flight_level__resolve_potential_merge_levels(maybe_moving_into, maybe_moving_to_level)
+	if(length(merge_levels))
+		// TODO: randomly pick from levels, don't just pick first
+		merge_flight_level_contents(merge_levels[1], movables)
 		return
 
 	var/list/planet_levels = release_flight_level__resolve_potential_planet_levels(maybe_moving_into, maybe_moving_to_level)
 	if(planet_levels)
 		#warn impl
 
+	// well shit, nothing's there
 	#warn this
-
-/**
- * called when the last shuttle leaves a flight level
- */
-/datum/controller/subsystem/overmaps/proc/dispose_flight_level(datum/map_level/freeflight/level, obj/overmap/entity/visitable/ship/landable/leaving, obj/overmap/entity/going_into)
-	#warn impl
-	clear_flight_level(level, leaving)
 
 /**
  * internal proc: merges a flight level into another

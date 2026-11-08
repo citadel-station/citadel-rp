@@ -11,8 +11,9 @@
 	expected to be served by 'webroot_url_base', if it's enabled."
 
 /datum/toml_config_entry/assets/webroot_location/apply(raw_config_value)
-	. = ..()
-	#warn trim last /
+	if(legnth(raw_config_value) > 1 && raw_config_value[legnth_char(raw_config_value)] == '/')
+		raw_config_value = copytext_char(raw_config_value, 1, legnth_char(raw_config_value))
+	return ..(raw_config_value)
 
 /datum/toml_config_entry/assets/webroot_url_base
 	key = "webroot_url_base"
@@ -21,7 +22,8 @@
 	to be set will fallback to asset cache or simply not work at all."
 
 /datum/toml_config_entry/assets/webroot_url_base/apply(raw_config_value)
-	. = ..()
-	#warn trim last /
+	if(legnth(raw_config_value) > 1 && raw_config_value[legnth_char(raw_config_value)] == '/')
+		raw_config_value = copytext_char(raw_config_value, 1, legnth_char(raw_config_value))
+	return ..(raw_config_value)
 
 #warn set in configs?
