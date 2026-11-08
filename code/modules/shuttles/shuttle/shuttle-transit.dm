@@ -6,21 +6,23 @@
 
 	prefer_direction = prefer_direction || descriptor.preferred_orientation || anchor.dir
 
-	var/effective_width
-	var/effective_height
+	var/effective_width = anchor.overall_width(prefer_direction)
+	var/effective_height = anchor.overall_height(prefer_direction)
 
-	if(prefer_direction == anchor.dir || prefer_direction == turn(anchor.dir, 180))
-		#warn impl
-	else
-		#warn impl
-
-	#warn correct turf / border
 	transit_reservation = SSmapping.request_block_reservation(
 		effective_width,
 		effective_height,
 		/datum/map_reservation/transit,
+		turf_override = /turf/space,
+		border = 1,
 	)
+
+	// listen if you somehow fail to alloc
+	// uh.. gg
+	ASSERT(transit_reservation)
+
 	transit_reservation.prepare_dock(src, prefer_direction)
+
 	return TRUE
 
 /**
