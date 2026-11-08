@@ -97,8 +97,8 @@ var/list/marker_beacon_colors = list(
 /obj/structure/marker_beacon/Initialize(mapload, set_color)
 	. = ..()
 	picked_color = set_color
-	while(!picked_color || !marker_beacon_colors[picked_color])
-		picked_color = pick(marker_beacon_colors)
+	if(!picked_color || !marker_beacon_colors[picked_color])
+		picked_color = pick(marker_beacon_colors - "Random")
 	update_icon()
 
 /obj/structure/marker_beacon/examine(mob/user, dist)
