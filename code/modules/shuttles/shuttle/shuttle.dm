@@ -107,6 +107,8 @@
 	var/preview_height
 	/// generated preview width (X axis) in tiles
 	var/preview_width
+	/// generated preview dir
+	var/preview_dir
 	/// last time preview was regenerated
 	var/preview_generated_at
 
@@ -603,12 +605,12 @@
  * * The returned object will be valid in overlays and vis contents.
  * * The returned object shall not be modified.
  * * The returned object is centered on the shuttle anchor.
+ * * The returned object should have setDir called to .. well, set direction.
  * * The returned object has INHERIT LAYER / PLANE / DIR for vis flags.
  *
  * @return an object that may be used in overlays or vis contents, and should not be modified.
  */
 /datum/shuttle/proc/get_preview(regenerate)
-	#warn center properly
 	if(!isnull(preview_overlay) && !regenerate)
 		return preview_overlay
 
@@ -618,9 +620,10 @@
 	preview_overlay.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	preview_overlay.icon = 'icons/system/blank_32x32.dmi'
 	preview_overlay.icon_state = ""
+	preview_overlay.generated_dir = src.preview_dir = anchor.dir
 
-	preview_width = anchor.overall_width(NORTH)
-	preview_height = anchor.overall_height(NORTH)
+	preview_width = anchor.overall_width(anchor.dir)
+	preview_height = anchor.overall_height(anchor.dir)
 
 	// get topleft to bottomright (left to right, then go downwards) list of turfs
 	var/list/turf/turfs = SSgrids.null_filter_ordered_turfs_in_place_via_area(
@@ -630,25 +633,24 @@
 
 	// go through and add overlays as necessary
 	var/mutable_appearance/stamp = new /mutable_appearance
-	var/current_y = preview_height
-	var/current_x = 1
+
+	var/a_x = anchor.x
+	var/a_y = anchor.y
+
 	for(var/i in 1 to length(turfs))
 		var/turf/turf = turfs[i]
+
+		var/t_x = turf.x
+		var/t_y = turf.y
 
 		if(!isnull(turf))
 			// clone turf appearance
 			stamp.appearance = turf
 			// generate pixel values
-			stamp.pixel_x = (current_x - 1) * WORLD_ICON_SIZE
-			stamp.pixel_y = (current_y - 1) * WORLD_ICON_SIZE
+			stamp.pixel_x = (t_x - a_x) * WORLD_ICON_SIZE
+			stamp.pixel_y = (t_y - a_y) * WORLD_ICON_SIZE
 			// imprint the stamp
 			preview_overlay.overlays += stamp
-
-		// we move our stamp position regardless of if there's a turf
-		++current_x
-		if(current_x > preview_width)
-			--current_y
-			current_x = 1
 
 	return preview_overlay
 
