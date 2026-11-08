@@ -140,12 +140,10 @@
 	 * * May be a string or list of strings.
 	 */
 	var/docking_restrict_ids
-	#warn hook
 	/**
 	 * Automatically set [docking_hard_restrict_shuttle_id] to the starting shuttle.
 	 */
 	var/docking_restrict_to_starting = FALSE
-	#warn hook
 
 	//* Identity *//
 	/// display name - visible to everyone at all times; if null, we use name.
@@ -412,6 +410,7 @@
 
 //* docking - authorization *//
 
+#warn hook
 /obj/shuttle_dock/proc/shuttle_docking_authorization(datum/shuttle/shuttle)
 	if(docking_restrict_ids)
 		if(islist(docking_restrict_ids) && !(shuttle.id in docking_restrict_ids))
@@ -472,7 +471,26 @@
  */
 /obj/shuttle_dock/proc/load_starting_shuttle(datum/shuttle_template/force_template)
 	RETURN_TYPE(/datum/shuttle)
-	#warn impl
+
+	var/datum/shuttle_template/resolved_template
+	#warn resolve
+
+
+
+	var/datum/shuttle/loaded = SSshuttle.create_shuttle(resolved_template)
+
+	if(docking_restrict_to_starting)
+		if(docking_restrict_ids)
+			if(islist(docking_restrict_ids))
+				docking_restrict_ids += loaded.id
+			else
+				docking_restrict_ids = list(docking_restrict_ids, loaded.id)
+		else
+			docking_restrict_ids = loaded.id
+
+	#warn impl - dock it here
+
+	return loaded
 
 /**
  * initializes our roundstart shuttle (usually by giving it a controller)
