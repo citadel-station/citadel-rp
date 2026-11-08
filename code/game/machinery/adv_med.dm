@@ -280,7 +280,7 @@
 			update_icon() // Update health display for consoles with light and such.
 			var/mob/living/carbon/human/H = scanner.occupant
 			occupantData["name"] = H.name
-			occupantData["stbat"] = H.stat
+			occupantData["stat"] = H.stat
 			occupantData["health"] = H.health
 			occupantData["maxHealth"] = H.getMaxHealth()
 
