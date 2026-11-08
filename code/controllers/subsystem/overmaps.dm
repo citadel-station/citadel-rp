@@ -333,19 +333,22 @@ SUBSYSTEM_DEF(overmaps)
  * * This is called 'merge levels' because 'dead' (unimportant) atoms can also be merged
  *   into them. You should only return true flight levels and stuff like station / space levels.
  */
-/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_merge_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
+/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_merge_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_z)
 	. = list()
 	if(maybe_moving_into)
 		var/datum/overmap_location/location = maybe_moving_into.location
-		var/list/z_indices = location.get_z_indices()
-		for(var/z in z_indices)
-			var/datum/map_level/level = SSmapping.ordered_levels[z]
-			if(is_map_level_probably_safe_for_merge(level))
-				. += level
-		// attempt to resolve from location
-	else if(maybe_moving_to_level)
-		// attempt to resolve from zlevel index
-		var/datum/map_level/level = SSmapping.ordered_levels[maybe_moving_to_level.z]
+		if(location)
+			var/list/z_indices = location.get_z_indices()
+			for(var/z in z_indices)
+				var/datum/map_level/level = SSmapping.ordered_levels[z]
+				if(is_map_level_probably_safe_for_merge(level))
+					. += level
+
+			// resolved from location
+			return
+
+	else if(maybe_moving_to_z)
+		var/datum/map_level/level = SSmapping.ordered_levels[maybe_moving_to_z.z]
 		var/datum/map/map = level.parent_map
 		if(map)
 			for(var/datum/map_level/other_level in map.levels)
@@ -354,6 +357,9 @@ SUBSYSTEM_DEF(overmaps)
 		else if(is_map_level_probably_safe_for_merge(level))
 			. += level
 
+		// resolved from zlevel index
+		return
+
 /**
  * Returns a list of potential planet levels to .. pretty much have things
  * fall out of the sky from.
@@ -361,12 +367,65 @@ SUBSYSTEM_DEF(overmaps)
  *   allow merging anything, whereas planet levels are for if a 'live' object
  *   needs to land on a planet level.
  */
-/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_planet_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level)
+/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_potential_planet_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_z)
 	. = list()
-	#warn impl
 
-/datum/controller/subsystem/overmaps/proc/release_flight_level__default_dead_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
-	var/list/datum/map_level/merge_levels = release_flight_level__resolve_potential_merge_levels(maybe_moving_into, maybe_moving_to_level)
+	if(maybe_moving_into)
+		var/datum/overmap_location/location = maybe_moving_into.location
+		if(location)
+			var/list/z_indices = location.get_z_indices()
+			for(var/z in z_indices)
+				var/datum/map_level/level = SSmapping.ordered_levels[z]
+				if(!level.get_level_in_dir(UP))
+					. += level
+
+			// resolved from location
+			return
+
+	if(maybe_moving_to_z)
+		var/datum/map_level/resolved_level = SSmapping.ordered_levels[maybe_moving_to_z]
+		var/datum/map/resolved_map = resolved_level.parent_map
+		if(resolved_map)
+			for(var/datum/map_level/other_level in resolved_map.levels)
+				if(!other_level.get_level_in_dir(UP))
+					. += other_level
+		else if(!resolved_level.get_level_in_dir(UP))
+			. += resolved_level
+
+		// resolved from zlevel index
+		return
+
+/**
+ * Returns fallback levels nearby the relevant entity/location.
+ */
+/datum/controller/subsystem/overmaps/proc/release_flight_level__resolve_nearby_levels(obj/overmap/entity/maybe_moving_into, maybe_moving_to_z)
+	// we require this
+	if(!maybe_moving_into)
+		return
+
+	var/obj/overmap/entity/closest_entity
+	var/closest_dist_px = INFINITY
+	var/list/closest_z_indices
+
+	for(var/datum/overmap_location/location as anything in active_overmap_locations)
+		var/list/z_indices = location.get_owned_z_indices()
+		if(!length(z_indices))
+			continue
+
+		// TODO: filter levels by accessibility
+
+		var/obj/overmap/entity/entity = location.entity
+		var/dist_px = entity.get_edge_px_dist(maybe_moving_into)
+
+		if(dist_px < closest_dist_px)
+			closest_entity = entity
+			closest_dist_px = dist_px
+			closest_z_indices = z_indices
+
+	return closest_z_indices
+
+/datum/controller/subsystem/overmaps/proc/release_flight_level__default_dead_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_z, list/atom/movable/movables)
+	var/list/datum/map_level/merge_levels = release_flight_level__resolve_potential_merge_levels(maybe_moving_into, maybe_moving_to_z)
 	if(length(merge_levels))
 		// TODO: randomly pick from levels, don't just pick first
 		merge_flight_level_contents(merge_levels[1], movables)
@@ -375,19 +434,81 @@ SUBSYSTEM_DEF(overmaps)
 	for(var/atom/movable/AM as anything in movables)
 		qdel(AM)
 
-/datum/controller/subsystem/overmaps/proc/release_flight_level__default_live_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_level, list/atom/movable/movables)
-	var/list/datum/map_level/merge_levels = release_flight_level__resolve_potential_merge_levels(maybe_moving_into, maybe_moving_to_level)
+/datum/controller/subsystem/overmaps/proc/release_flight_level__default_live_handler(obj/overmap/entity/maybe_moving_into, maybe_moving_to_z, list/atom/movable/movables)
+	var/list/datum/map_level/merge_levels = release_flight_level__resolve_potential_merge_levels(maybe_moving_into, maybe_moving_to_z)
 	if(length(merge_levels))
 		// TODO: randomly pick from levels, don't just pick first
 		merge_flight_level_contents(merge_levels[1], movables)
 		return
 
-	var/list/planet_levels = release_flight_level__resolve_potential_planet_levels(maybe_moving_into, maybe_moving_to_level)
-	if(planet_levels)
-		#warn impl
+	var/list/datum/map_level/skyfall_levels = release_flight_level__resolve_potential_planet_levels(maybe_moving_into, maybe_moving_to_z)
+	if(length(skyfall_levels))
+		// TODO: randomly pick from levels, don't just pick first
+		skyfall_flight_level_contents(skyfall_levels[1], movables)
+		return TRUE
 
-	// well shit, nothing's there
-	#warn this
+	var/list/datum/map_level/nearby_levels = release_flight_level__resolve_nearby_levels(maybe_moving_into, maybe_moving_to_z)
+	if(length(nearby_levels))
+		// TODO: randomly pick from levels, don't just pick first
+		drop_flight_level_contents(nearby_levels[1], movables)
+		return TRUE
+
+	STACK_TRACE("release_flight_level__default_live_handler() could not resolve any map levels with parent_map to place live movables in a shuttle or nearby. \
+	This is a bug, as if an admin wipes out a shuttle it should still use nearby levels unless for whatever reason you're \
+	on a overmap-less map using .. overmaps, for some reason.")
+
+	var/list/datum/map_level/drop_levels = list()
+	for(var/datum/map_level/level as anything in SSmapping.ordered_levels)
+		// dumb heuristic but whatever
+		if(level?.parent_map)
+			drop_levels += level
+
+	if(length(drop_levels))
+		// TODO: randomly pick from levels, don't just pick first
+		drop_flight_level_contents(drop_levels[1], movables)
+		return TRUE
+
+	// at this point we still can't find anything so goodbye
+	STACK_TRACE("release_flight_level__default_live_handler() could not find any suitable map levels to place live movables. Deleting.")
+
+	// this might break the game but idgaf, just delete the movables
+	for(var/atom/movable/AM as anything in movables)
+		qdel(AM)
+	return TRUE
+
+/**
+ * internal proc: skyfall movables into a level.
+ */
+/datum/controller/subsystem/overmaps/proc/skyfall_flight_level_contents(datum/map_level/skyfall_into, list/atom/movable/movables)
+	if(!skyfall_into || !skyfall_into.z_index)
+		return FALSE
+
+	#warn impl
+	var/z = skyfall_into.z_index
+	for(var/atom/movable/AM as anything in movables)
+		var/turf/found
+		for(var/i in 1 to 10)
+			found = locate(rand(1, world.maxx), rand(1, world.maxy), z)
+			if(found)
+				break
+		if(!found)
+			found = locate(rand(1, world.maxx), rand(1, world.maxy), z)
+		if(found)
+			AM.forceMove(found)
+
+	return TRUE
+
+/**
+ * internal proc: drops movables into a level.
+ *
+ * for now this just merges; later this should dynamically choose merge vs skyfall
+ * depending on level conditions (e.g. gravity).
+ */
+/datum/controller/subsystem/overmaps/proc/drop_flight_level_contents(datum/map_level/drop_into, list/atom/movable/movables)
+	if(!drop_into)
+		return FALSE
+	merge_flight_level_contents(drop_into, movables)
+	return TRUE
 
 /**
  * internal proc: merges a flight level into another
@@ -397,7 +518,9 @@ SUBSYSTEM_DEF(overmaps)
  * * we don't move turfs or anything; non shuttle turfs are just left behind.
  * * this doesn't blow anything up, it just moves stuff over.
  */
-/datum/controller/subsystem/overmaps/proc/merge_flight_level_contents(datum/map_level/freeflight/merging_into, list/atom/movable/movables)
+/datum/controller/subsystem/overmaps/proc/merge_flight_level_contents(datum/map_level/merging_into, list/atom/movable/movables)
+	. = FALSE
+
 	// algorithm is kinda inefficient.
 	var/candidates_to_pick = min(1000, length(movables))
 
@@ -450,6 +573,8 @@ SUBSYSTEM_DEF(overmaps)
 
 	for(var/atom/movable/AM as anything in movables)
 		AM.forceMove(pick(candidates))
+
+	return TRUE
 
 /**
  * internal proc: clears a flight level
