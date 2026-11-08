@@ -3280,7 +3280,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals6,
 /obj/machinery/airlock_component/controller/dock_hatch/hardmapped,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "escape_pod_large_dock"
 	},
 /turf/simulated/floor/tiled,
@@ -19052,7 +19052,7 @@
 	},
 /obj/machinery/airlock_peripheral/panel/hardmapped/south_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "escape_pod_large_dock"
 	},
 /turf/simulated/floor/tiled,

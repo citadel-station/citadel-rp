@@ -4499,7 +4499,7 @@
 /obj/machinery/airlock_component/door_linker/outdoors/hardmapped,
 /obj/machinery/airlock_peripheral/sensor/button/exterior/hardmapped/east_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "udang_dock"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -4560,7 +4560,7 @@
 /obj/machinery/airlock_component/controller/vacuum_cycle/hardmapped,
 /obj/machinery/airlock_peripheral/panel/hardmapped/south_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "salvager_dock"
 	},
 /turf/simulated/floor/plating,
@@ -5556,7 +5556,7 @@
 /obj/machinery/airlock_component/door_linker/indoors/hardmapped,
 /obj/machinery/airlock_peripheral/sensor/button/interior/hardmapped/west_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "udang_dock"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -6234,7 +6234,7 @@
 /obj/machinery/airlock_component/door_linker/outdoors/hardmapped,
 /obj/machinery/airlock_peripheral/sensor/button/exterior/hardmapped/south_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "salvager_dock"
 	},
 /turf/simulated/floor/plating,
@@ -7072,7 +7072,7 @@
 	},
 /obj/structure/airlock_interconnect/hardmapped,
 /obj/machinery/airlock_component/controller/vacuum_cycle/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "scoophead_dock"
 	},
 /turf/simulated/floor/tiled/neutral,
@@ -9809,7 +9809,7 @@
 /obj/machinery/airlock_component/interface/shuttle/dock/hardmapped,
 /obj/machinery/airlock_peripheral/panel/hardmapped/east_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "udang_dock"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -13698,7 +13698,7 @@
 	},
 /obj/machinery/airlock_component/controller/vacuum_cycle/hardmapped,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "udang_dock"
 	},
 /turf/simulated/floor/plating,
@@ -17025,7 +17025,7 @@
 /obj/machinery/airlock_peripheral/sensor/button/exterior/hardmapped/west_mount,
 /obj/structure/airlock_interconnect/hardmapped,
 /obj/machinery/airlock_component/door_linker/outdoors/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "scoophead_dock"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -17881,7 +17881,7 @@
 /obj/machinery/airlock_peripheral/panel/hardmapped/east_mount,
 /obj/structure/airlock_interconnect/hardmapped,
 /obj/machinery/airlock_component/cycler/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "scoophead_dock"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -18183,7 +18183,7 @@
 /obj/machinery/airlock_peripheral/sensor/button/interior/hardmapped/east_mount,
 /obj/structure/airlock_interconnect/hardmapped,
 /obj/machinery/airlock_component/door_linker/indoors/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "scoophead_dock"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -19292,7 +19292,7 @@
 /obj/machinery/airlock_component/door_linker/indoors/hardmapped,
 /obj/machinery/airlock_peripheral/sensor/button/interior/hardmapped/south_mount,
 /obj/structure/airlock_interconnect/hardmapped,
-/obj/map_helper/airlock_linker/preset{
+/obj/map_helper/airlock_linker{
 	set_id = "salvager_dock"
 	},
 /turf/simulated/floor/plating,

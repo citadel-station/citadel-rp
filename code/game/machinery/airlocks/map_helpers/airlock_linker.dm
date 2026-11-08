@@ -32,21 +32,20 @@
 /obj/map_helper/airlock_linker/preset/shuttle_main
 	set_id = "shuttle_main"
 
-/obj/map_helper/airlock_linker/proximity
-	var/const/link_range = 15
-	var/link_key
+// TODO: prox linkers; put one on controller, put some on peripherals
 
-/obj/map_helper/airlock_linker/proximity/red
-	icon_state = "linker-red"
-	link_key = "red"
+// /obj/map_helper/airlock_linker/proximity
+// 	var/const/link_range = 7
+// 	var/link_key
 
-/obj/map_helper/airlock_linker/proximity/green
-	icon_state = "linker-green"
-	link_key = "green"
+// /obj/map_helper/airlock_linker/proximity/red
+// 	icon_state = "linker-red"
+// 	link_key = "red"
 
-/obj/map_helper/airlock_linker/proximity/blue
-	icon_state = "linker-blue"
-	link_key = "blue"
+// /obj/map_helper/airlock_linker/proximity/green
+// 	icon_state = "linker-green"
+// 	link_key = "green"
 
-
-#warn impl
+// /obj/map_helper/airlock_linker/proximity/blue
+// 	icon_state = "linker-blue"
+// 	link_key = "blue"
