@@ -1,4 +1,4 @@
-/datum/lore/character_background/religion/specieskrisitik/ruinist
+/datum/lore/character_background/religion/species/krisitik/ruinist
 	name = "Ruinism"
 	id = "religion_krisitik_ruin"
 	category = "Krisitik"

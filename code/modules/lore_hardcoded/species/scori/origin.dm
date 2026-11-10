@@ -3,7 +3,7 @@
 	id = "origin_scori_ondosida"
 	category = "Surt"
 	innate_languages = list(LANGUAGE_ID_SIGN)
-	desc = "A tribe of scorians located most closely to where NanoTrasen set up exploratory mining operations on the planet Surt. \
+	desc = "A tribe of scorians located most closely to where Nanotrasen set up exploratory mining operations on the planet Surt. \
     As a consequence, when the scorians were first driven from the depths by the shifting tectonic cycles of the planet, they were the first to make contact. \
     As talks with the greater empire to which the Ondo-Sida pay tribute, they were eventually given the task of dealing with the outlanders, \
     a role that has proven controversial to the tribe over the years even as relations slowly improved. These scorians are the most likely to \
