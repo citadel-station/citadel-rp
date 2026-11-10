@@ -90,7 +90,7 @@
 		/datum/crafting_recipe/alchemy_bandolier, /datum/crafting_recipe/saddle_stormdrifter, /datum/crafting_recipe/ashlander_sandals, /datum/crafting_recipe/ashlander_wraps,
 		/datum/crafting_recipe/musket_ashlander, /datum/crafting_recipe/flintlock_ashlander, /datum/crafting_recipe/drying_kiln, /datum/crafting_recipe/primitive_press, /datum/crafting_recipe/advanced_alchemy_station,
 		/datum/crafting_recipe/charcoal_stick, /datum/crafting_recipe/brick_press, /datum/crafting_recipe/primitivesoap, /datum/crafting_recipe/condensedphlogiston, /datum/crafting_recipe/bitterash,
-		/datum/crafting_recipe/ritual_chalk, /datum/crafting_recipe/shimash_food_basket
+		/datum/crafting_recipe/ritual_chalk,/datum/crafting_recipe/shimash_food_basket
 		)
 
 /datum/ghostrole_instantiator/human/player_static/ashlander/GetOutfit(client/C, mob/M, list/params)
@@ -116,7 +116,8 @@
 	. = ..()
 	created.set_iff_factions(MOB_IFF_FACTION_BIND_TO_MAP)
 	created.mind.teach_crafting_recipe(ashlander_crafting)
-	created.remove_language(/datum/prototype/language/common)
+	if(Configuration.check_language_whitelist(/datum/prototype/language/common::id, created.ckey))
+		created.add_language(/datum/prototype/language/common)
 
 /obj/structure/ghost_role_spawner/ashlander
 	name = "ashlander yurt"
