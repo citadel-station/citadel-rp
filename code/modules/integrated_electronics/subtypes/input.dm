@@ -1928,7 +1928,7 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 				activate_pin(4)
 				return
 			activate_pin(5)
-
+	push_data()
 
 
 

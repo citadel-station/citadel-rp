@@ -189,5 +189,10 @@
 	LoadSavefile(C, H)
 	return H
 
+/datum/ghostrole_instantiator/human/player_static/Equip(client/C, mob/M, list/params)
+	if(equip_loadout)
+		C.prefs.equip_loadout(M, PREF_COPY_TO_FOR_GHOSTROLE)
+	. = ..()
+
 /datum/ghostrole_instantiator/human/player_static/proc/LoadSavefile(client/C, mob/living/carbon/human/H)
 	C.prefs.copy_to(H)
