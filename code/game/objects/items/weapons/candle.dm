@@ -104,6 +104,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	wax = 1600
 
+/obj/item/flame/candle/candelabra
 	name = "candelabra"
 	desc = "a small gold candelabra. The cups that hold the candles save some of the wax from dripping off, allowing the candles to burn longer."
 	icon = 'icons/obj/candle.dmi'
