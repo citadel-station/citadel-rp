@@ -72,7 +72,7 @@
 	to_chat(created, flavour_text)
 
 /datum/ghostrole_instantiator/human/player_static/ashlander
-	equip_loadout = FALSE
+	equip_loadout = TRUE
 	equip_traits = FALSE
 	species_required = /datum/species/scori
 	var/list/ashlander_crafting = list(/datum/crafting_recipe/bonetalisman, /datum/crafting_recipe/bonecodpiece, /datum/crafting_recipe/bracers, /datum/crafting_recipe/goliathcloak,
