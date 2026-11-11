@@ -95,7 +95,15 @@
 	icon_type = "blackcandle"
 	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/flame/candle/candelabra
+/obj/item/flame/candle/tallow
+	name = "tallow candle"
+	desc = "a primitive candle formed out of tallow with some kind of plant fiber wick. It smells horrible."
+	icon = 'icons/obj/candle.dmi'
+	icon_state = "whitecandle"
+	icon_type = "whitecandle"
+	w_class = WEIGHT_CLASS_SMALL
+	wax = 1600
+
 	name = "candelabra"
 	desc = "a small gold candelabra. The cups that hold the candles save some of the wax from dripping off, allowing the candles to burn longer."
 	icon = 'icons/obj/candle.dmi'
