@@ -368,6 +368,9 @@
 /obj/structure/table/steel,
 /obj/item/storage/toolbox/mechanical,
 /obj/item/multitool,
+/obj/item/storage/box/hami,
+/obj/item/paper/lavaland/hamikit,
+/obj/item/storage/box/hami,
 /turf/simulated/floor/tiled,
 /area/sector/surt/mining_base/common)
 "lX" = (
@@ -502,6 +505,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
+/area/sector/surt/mining_base/common)
+"ph" = (
+/obj/machinery/doorbell_chime{
+	name = "mining outpost doorbell chime";
+	id_tag = "miningoutpost";
+	desc = "A small, wall-mounted chime used to notify of someone outside the Surt mining outpost."
+	},
+/turf/simulated/wall/r_wall,
 /area/sector/surt/mining_base/common)
 "pi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1322,6 +1333,16 @@
 	},
 /turf/simulated/lava,
 /area/sector/surt/central/explored)
+"Dt" = (
+/obj/machinery/button/doorbell{
+	pixel_x = 5;
+	pixel_y = -5;
+	name = "mining outpost doorbell";
+	id = "miningoutpost";
+	desc = "A small doorbell used to notify others of your presence."
+	},
+/turf/simulated/wall/r_wall,
+/area/sector/surt/mining_base/common)
 "Du" = (
 /obj/structure/table/marble,
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -1865,6 +1886,9 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/sector/surt/mining_base/common)
+"Rq" = (
+/turf/simulated/floor/outdoors/dirt/indoors,
+/area/sector/surt/central/explored)
 "Ru" = (
 /obj/machinery/door/airlock{
 	id_tag = "mine_orange";
@@ -12291,7 +12315,7 @@ HA
 Mw
 ew
 lT
-AO
+ph
 AO
 AO
 sV
@@ -13454,7 +13478,7 @@ AO
 AO
 RE
 RE
-AO
+Dt
 AO
 AO
 AO
@@ -37654,7 +37678,7 @@ RL
 ZK
 ZK
 ZK
-ZK
+gy
 gy
 gy
 ZK
@@ -38039,7 +38063,7 @@ ZK
 RL
 RL
 ZK
-ZK
+gy
 gy
 gy
 gy
@@ -38232,9 +38256,9 @@ RL
 ZK
 ZK
 ZK
-ZK
-ZK
-ZK
+gy
+gy
+gy
 gy
 ZK
 ZK
@@ -38425,9 +38449,9 @@ ZK
 ZK
 RL
 ZK
-ZK
 gy
-ZK
+gy
+gy
 gy
 gy
 ZK
@@ -38618,7 +38642,7 @@ RX
 ZK
 RL
 ZK
-ZK
+gy
 gy
 gy
 gy
@@ -38811,7 +38835,7 @@ RX
 ZK
 ZK
 ZK
-ZK
+gy
 gy
 gy
 gy
@@ -39004,11 +39028,11 @@ RX
 ZK
 ZK
 ZK
-ZK
 gy
 gy
 gy
-ZK
+gy
+gy
 ZK
 ZK
 ZK
@@ -39197,12 +39221,12 @@ ZK
 ZK
 ZK
 ZK
-ZK
-ZK
-ZK
-ZK
-gy
-ZK
+Wq
+Rq
+Rq
+Rq
+Rq
+Wq
 ZK
 ZK
 ZK
@@ -39391,12 +39415,12 @@ ZK
 ZK
 RL
 ZK
-ZK
-ZK
-ZK
-ZK
-ZK
-ZK
+Wq
+Rq
+Rq
+Rq
+Rq
+Wq
 ZK
 ZK
 ZK
@@ -39585,12 +39609,12 @@ ZK
 ZK
 ZK
 ZK
-ZK
-ZK
-ZK
-ZK
-ZK
-ZK
+Wq
+Rq
+Rq
+Rq
+Rq
+Wq
 ZK
 ZK
 ZK

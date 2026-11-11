@@ -1,13 +1,13 @@
 //Overmap
 
 /obj/overmap/entity/visitable/sector/skyplanet
-	name = "Lythios 43a"	// Name of the location on the overmap.
+	name = "Motov'maal"	// Name of the location on the overmap.
 	desc = "A planet with harsh conditions and acid lakes and rain on the ground, but with condition in the sky that makes it livable."
-	scanner_desc =  @{"[i]Stellar Body[/i]: Lythios 43a - Sky planet
+	scanner_desc =  @{"[i]Stellar Body[/i]: Motov'maal (Lythios 43a)"
 [i]Class[/i]: P-Class Planet, with breathable air over cloud level.
 [i]Habitability[/i]: Weak : Ground level impossible. Settlements in high atltitude, on Sky-Rigs
-[i]Population[/i]: 500
-[i]Controlling Goverment[/i]: Previously : Various small defunct corporations. Now : SDF (limited), haddi's folley goverment (Limited)
+[i]Population[/i]: [NO CENSUS DATA AVAILABLE]
+[i]Controlling Goverment[/i]: Hadii's Folly Confederation of Freeholds
 [b]Relationship with NT[/b]: Nanotrasen Client Government, NT asset was authorised to land, Tajaran SDF outpost given to NT.
 [b]Relevant Contracts[/b]: Dangerous Wildlife Control, System Self Defence Assistance."}
 	icon_state = "globe"

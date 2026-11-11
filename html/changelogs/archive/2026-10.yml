@@ -1,0 +1,67 @@
+2026-10-01:
+  AlphaM01:
+  - rscadd: Added Shibari Rope suits.
+  washikarasu:
+  - tweak: bar stools
+2026-10-02:
+  CharlesWedge:
+  - rscadd: Note to describe how HAMI kits should be used and expectations for crew
+      bringing Scori on station/
+  - tweak: Lavaland now has a clear shot between Station and Scori with bridges and
+      a tunnel.
+  its-helvi:
+  - rscadd: Siishma-Shimash exists again.
+  - bugfix: A recent experiment by a non 7-EX-39 crew in which a scientist injected
+      Cersut sauce into their bloodstream was found to have had falsified results.
+      Please do not attempt to replicate its findings.
+2026-10-04:
+  TheLordME:
+  - tweak: tweaked admin verb "Manual Play Internet Sound" to make it possible to
+      edit the title
+2026-10-05:
+  Shadowtail117:
+  - bugfix: Coughing and sneezing now make sounds again.
+  - bugfix: Emotes with sounds will no longer also play runechat sfx when used.
+  - bugfix: You can no longer telekinetically flip gun safeties.
+2026-10-06:
+  Athena148:
+  - bugfix: darkspace abduction now loads its zlevel
+2026-10-09:
+  Shadowtail117:
+  - bugfix: In-game links now point to citadel-station.dev instead of citadel-station.net.
+  - bugfix: Cyborgs can now properly use their material holders again.
+  - bugfix: The RUST engine will now properly have side effects if instability gets
+      too high.
+2026-10-17:
+  Shadowtail117:
+  - rscdel: Removed asbestos.
+2026-10-18:
+  timothyteakettle:
+  - bugfix: fixes toy sword, xenoarch guns and battery rack missing icons
+2026-10-20:
+  AlphaM01:
+  - tweak: simplemob mech movespeed reduced
+  - tweak: tweaked a handful of mob movespeed variables
+  - bugfix: fixed movespeed for a few mobs that were incorrectly set
+  anon841-afk:
+  - rscadd: Seed extractor ic chip now functions.
+2026-10-27:
+  Shadowtail117:
+  - bugfix: The Atlas' supermatter chamber is now surrounded on all sides by reinforced
+      borosilicate glass.
+2026-10-29:
+  CharlesWedge:
+  - rscadd: The Tajaran double barrel for some over-under flavor.
+  - rscadd: Two new variants of Tajaran Insurgent.
+  - rscadd: Two new Miaphus POIs
+  - rscdel: The Miaphus Research Station POI
+  - tweak: Miaphus can now only spawn one sniper nest/
+  - tweak: All of Sky Planet AKA Lythios 43A now Motov'maal
+  - balance: The Icelance pump laser rifle now only shoots 3 shots.
+2026-10-31:
+  Shadowtail117:
+  - rscadd: Added a doorbell to the mining outpost, and corresponding chimes on the
+      station.
+  its-helvi:
+  - rscadd: Added a reskinned food bag for Scorians and a related crafting recipe
+      for it.

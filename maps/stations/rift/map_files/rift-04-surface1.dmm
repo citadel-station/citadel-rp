@@ -16596,6 +16596,14 @@
 /obj/machinery/camera/network/medbay,
 /turf/simulated/floor/carpet/sblucarpet,
 /area/crew_quarters/medbreak)
+"kvP" = (
+/obj/machinery/doorbell_chime{
+	name = "mining outpost doorbell chime";
+	id_tag = "miningoutpost";
+	desc = "A small, wall-mounted chime used to notify of someone outside the Surt mining outpost."
+	},
+/turf/simulated/wall/prepainted/cargo,
+/area/quartermaster/office)
 "kwn" = (
 /obj/machinery/door/firedoor/glass{
 	dir = 8
@@ -19460,6 +19468,10 @@
 	},
 /obj/item/toy/figure/clown,
 /obj/item/reagent_containers/food/snacks/clownstears,
+/obj/machinery/light/small{
+	dir = 1;
+	pixel_x = 34
+	},
 /turf/simulated/floor/lino,
 /area/tether/surfacebase/entertainment/backstage)
 "mhK" = (
@@ -20721,6 +20733,10 @@
 /obj/structure/table/rack/shelf,
 /obj/machinery/holoposter{
 	pixel_y = 32
+	},
+/obj/machinery/light/small{
+	dir = 1;
+	pixel_x = 20
 	},
 /turf/simulated/floor/lino,
 /area/tether/surfacebase/entertainment/backstage)
@@ -38703,10 +38719,6 @@
 	dir = 1;
 	pixel_x = 12
 	},
-/obj/machinery/light/small{
-	dir = 1;
-	pixel_x = 2
-	},
 /turf/simulated/floor/lino,
 /area/tether/surfacebase/entertainment/backstage)
 "xaw" = (
@@ -38778,10 +38790,6 @@
 	pixel_y = -4
 	},
 /obj/item/lipstick/white,
-/obj/machinery/light/small{
-	dir = 1;
-	pixel_x = -12
-	},
 /obj/machinery/light/small{
 	dir = 1;
 	pixel_x = -2
@@ -55812,7 +55820,7 @@ eBp
 dQB
 gxR
 gal
-xTe
+kvP
 wBe
 bMH
 rUq

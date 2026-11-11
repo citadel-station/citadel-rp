@@ -11707,10 +11707,6 @@
 	},
 /turf/simulated/floor/tiled/monodark,
 /area/sector/nebula_tradeport/comroom)
-"aSo" = (
-/obj/structure/lattice,
-/turf/simulated/floor/airless,
-/area/space)
 "aSp" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
@@ -14218,11 +14214,6 @@
 	},
 /turf/simulated/floor/carpet/patterened/blue,
 /area/sector/nebula_tradeport/motel/room8)
-"dhy" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/pda_multicaster,
-/turf/simulated/floor/tiled/techmaint,
-/area/tradeport/engineering)
 "dhG" = (
 /obj/structure/cryofeed,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -27078,7 +27069,7 @@ aRT
 aRT
 aRT
 aIj
-aSo
+aIj
 aRT
 acd
 aRT
@@ -45279,7 +45270,7 @@ aun
 aiu
 aeu
 peH
-dhy
+aci
 aci
 aGB
 awT
