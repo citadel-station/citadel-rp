@@ -1890,9 +1890,9 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 		"target hit"       = IC_PINTYPE_REF
 	)
 	activators = list(
-		"shoot cords" = IC_PINTYPE_PULSE_IN,
+		"shoot coords" = IC_PINTYPE_PULSE_IN,
 		"shoot ref" = IC_PINTYPE_PULSE_IN,
-		"cords out" = IC_PINTYPE_PULSE_OUT,
+		"coords out" = IC_PINTYPE_PULSE_OUT,
 		"target hit" = IC_PINTYPE_PULSE_OUT,
 		"target missed" = IC_PINTYPE_PULSE_OUT
 		)
@@ -1916,6 +1916,7 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 			hit_things = trace_projectile.scanned_atoms
 			if(hit_things.len)
 				set_pin_data(IC_OUTPUT, 1, WEAKREF(hit_things[1]))
+				push_data()
 				activate_pin(3)
 		if(2)
 			var/atom/target = get_pin_data(IC_INPUT, 3)
@@ -1925,11 +1926,8 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 			trace_projectile.prepare_trace(target, TRUE)
 			trace_projectile.fire()
 			if(trace_projectile.could_hit_target)
+				push_data()
 				activate_pin(4)
 				return
+			push_data()
 			activate_pin(5)
-	push_data()
-
-
-
-
