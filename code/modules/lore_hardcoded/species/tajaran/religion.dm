@@ -1,10 +1,10 @@
-/datum/lore/character_background/religion/tajaran_srandarr
+/datum/lore/character_background/religion/species/tajaran/srandarr
 	name = "S'randarr"
 	id = "religion_tajaran_srandarr"
 	category = "Tajaran"
 	desc = "The oldest and most widespread religious sect on Ahdomai, the teachings of Tajr-kii S'randarr pervade almost every aspect of modern Tajaran culture, from sun motifs in paintings to turns of phrase referring to “the Light”. The Tajr-kii hold that S'randarr and Messa are locked in eternal battle over the fate of the dead. When someone dies, the soul travels to Messa's realm, known as The Bounty. The hope is that S'randarr's ever-watchful Eye can locate the soul before it is drained by Messa, and can be lifted from the Bounty to be safely stored within S'randarr Himself."
 
-/datum/lore/character_background/religion/tajaran_messa
+/datum/lore/character_background/religion/species/tajaran/messa
 	name = "Messa"
 	id = "religion_tajaran_messa"
 	category = "Tajaran"
