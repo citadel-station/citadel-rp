@@ -20,49 +20,6 @@
 /// aborted ; unknown abort
 #define SHUTTLE_TRANSIT_STATUS_FAILED 5
 
-//* transit stages *//
-
-/// not doing anything right now
-///
-/// * This MUST be 0, because things can use truthy checks against get_transit_stage()!
-#define SHUTTLE_TRANSIT_STAGE_IDLE 0
-/// undocking
-/// * Fires undocking / undocked event
-/// * Cancelling here goes to re-dock at the same dock.
-#define SHUTTLE_TRANSIT_STAGE_UNDOCK 1
-/// taking off
-/// * Fires takeoff / post-takeoff event
-/// * Cancelling here goes to re-dock at the same dock, firing post-landing.
-#define SHUTTLE_TRANSIT_STAGE_TAKEOFF 2
-/// in transit
-/// * Fires traversal events when the move happens.
-/// * Cancelling here invokes controller-specific behavior. This can return the shuttle, kick it to freeflight, etc.
-/// * If the original dock isn't dockable anymore, the shuttle is orphaned / in limbo.
-///   It is up to you to handle cancel behaviors on the controller to ensure this doesn't happen.
-#define SHUTTLE_TRANSIT_STAGE_FLIGHT 3
-/// landing
-/// * Fires landing / post-landing event
-/// * Cancelling here invokes controller-specific behavior. This can return the shuttle, kick it to freeflight, etc.
-/// * If the original dock isn't dockable anymore, the shuttle is orphaned / in limbo.
-///   It is up to you to handle cancel behaviors on the controller to ensure this doesn't happen.
-#define SHUTTLE_TRANSIT_STAGE_LANDING 4
-/// docking
-/// * Fires docking / docked event
-/// * Cancelling here simply doesn't dock the shuttle, as it's already landed and landing
-///   is separate from docking.
-#define SHUTTLE_TRANSIT_STAGE_DOCK 5
-
-DECLARE_ENUM(shuttle_transit_stages, list(
-	ENUM_NAMED("Idle", SHUTTLE_TRANSIT_STAGE_IDLE),
-	ENUM_NAMED("Undocking", SHUTTLE_TRANSIT_STAGE_UNDOCK),
-	ENUM_NAMED("Takeoff", SHUTTLE_TRANSIT_STAGE_TAKEOFF),
-	ENUM_NAMED("Transit", SHUTTLE_TRANSIT_STAGE_FLIGHT),
-	ENUM_NAMED("Landing", SHUTTLE_TRANSIT_STAGE_LANDING),
-	ENUM_NAMED("Docking", SHUTTLE_TRANSIT_STAGE_DOCK),
-))
-
-ASSIGN_ENUM(shuttle_transit_stages, /datum/shuttle_transit_cycle, stage)
-
 //* transit flags *//
 
 /// should not interrupt via normal means
@@ -140,8 +97,3 @@ DECLARE_BITFIELD(shuttle_traversal_flags, list(
 ))
 ASSIGN_BITFIELD(shuttle_traversal_flags, /datum/shuttle_transit_cycle, traversal_flags_source)
 ASSIGN_BITFIELD(shuttle_traversal_flags, /datum/shuttle_transit_cycle, traversal_flags_target)
-
-//* 'lazy' target resolution hints
-
-/// going to overmaps
-#define SHUTTLE_LAZY_TARGET_HINT_MOVE_TO_FREEFLIGHT "freeflight"

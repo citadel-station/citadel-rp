@@ -241,6 +241,22 @@
 	if(!target_resolved)
 		stack_trace("target_resolved wasn't set; did the target resolver properly call set_target()?")
 
+#warn above
+
+#warn impl all
+
+/**
+ * Creates and changes to a given stage.
+ */
+/datum/shuttle_transit_cycle/proc/change_stage(path, ...)
+
+/datum/shuttle_transit_cycle/proc/change_stage_impl(datum/shuttle_transit_stage/stage, ...)
+	PRIVATE_PROC(TRUE)
+
+/datum/shuttle_transit_cycle/proc/finish(hey_put_args_here)
+
+#warn below
+
 /**
  * immediate termination
  *
