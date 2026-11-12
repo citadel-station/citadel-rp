@@ -2,11 +2,24 @@
 //* Copyright (c) 2026 Citadel Station Developers           *//
 
 /**
- * Stores data about a transit stage like docking / undocking / takeoff / landing
+ * A transit stage is a specific phase of a shuttle's transit cycle.
+ * * These are the 'states' of the state machine; yes, the states are stateful.
+ *   That's not usually a good thing but whatever.
+ *
+ * ## Lifecycle
+ *
+ * Lifecycle is as follows.
+ * * `New(cycle)`
+ * * `setup()`
+ * * `tick()` until done
+ * * `cleanup()`
  */
+
 /datum/shuttle_transit_stage
 	/// owning cycle
 	var/datum/shuttle_transit_cycle/cycle
+
+	#warn below
 	/// stage enum
 	var/stage = SHUTTLE_TRANSIT_STAGE_IDLE
 	/**
@@ -25,6 +38,55 @@
 	var/timeout_at
 
 #warn impl all
+/datum/shuttle_transit_stage/New(datum/shuttle_transit_cycle/cycle)
+
+/datum/shuttle_transit_stage/proc/setup()
+	SHOULD_NOT_SLEEP(TRUE)
+
+/**
+ * @return Time until next poll, or 'null' to drop from polling.
+ */
+/datum/shuttle_transit_stage/proc/tick()
+	SHOULD_NOT_SLEEP(TRUE)
+
+	// By default, stages do not request further polling
+	// and will not tick.
+
+	return null
+
+/datum/shuttle_transit_stage/proc/cleanup()
+	SHOULD_NOT_SLEEP(TRUE)
+
+/**
+ * Supertype of all standard transit stages.
+ *
+ * * Standard stages are that which transits
+ *   a shuttle from one location to another; this should be
+ *   compatible with normal docks like ferries, web-maps,
+ *   escape pods, and overmap shuttles.
+ *
+ * ## Failure Handling
+ *
+ * This has standard handling for 'easy' abort situations,
+ * like a target dock breaking. You may set an abort handler
+ * to do this, so that overmaps shuttles can return to the overmap.
+ */
+/datum/shuttle_transit_stage/standard
+	abstract_type = /datum/shuttle_transit_stage/standard
+
+/datum/shuttle_transit_stage/standard/undock_from_origin
+
+/datum/shuttle_transit_stage/standard/takeoff_from_origin
+
+/datum/shuttle_transit_stage/standard/transiting_towards_destination
+
+/datum/shuttle_transit_stage/standard/land_at_destination
+
+/datum/shuttle_transit_stage/standard/dock_at_destination
+
+
+#warn impl
+
 
 /**
  * implies [force()]

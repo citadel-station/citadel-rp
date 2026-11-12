@@ -3,10 +3,18 @@
 
 /**
  * Represents an ongoing shuttle transit operation.
+ *
+ * ## General
+ *
  * * A transit cycle starts from [dock or null].
  * * A transit cycle may involve multiple translations (takeoff/landings, potentially at docks).
  * * A transit cycle may generally only allow for one undocking on departure,
  *   and docking on arrival.
+ *
+ * ## State Handling / Stages
+ *
+ * Transit is handled by handling stages (which may be ticked or event driven)
+ * until a stage chooses to exit.
  */
 /datum/shuttle_transit_cycle
 	//* Dock Advisory Locking *//
@@ -14,6 +22,8 @@
 	 * Tracks docks that we successfully locked on.
 	 */
 	var/list/obj/shuttle_dock/dock_locks
+
+	#warn below
 
 	//* state / processing *//
 	/// current transit stage, if any
