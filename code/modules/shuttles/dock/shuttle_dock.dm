@@ -187,6 +187,14 @@
 
 	#warn hook
 
+	//* Shuttle - Transit Lock *//
+	/**
+	 * Transit advisory lock.
+	 * * A shuttle_transit_cycle can lock one or more shuttle docks for itself
+	 *   using this.
+	 */
+	var/datum/shuttle_transit_cycle/locked_by_transit
+
 	//* Web Nodes *//
 	// TODO: web shuttles
 	/// Shuttle web node to initialize on, if applicable; this must be a typepath.
@@ -299,15 +307,7 @@
 	dock_initialized = TRUE
 
 /obj/shuttle_dock/Destroy()
-	// if inbound, and it has a controller,
-	if(inbound?.controller)
-		// tell it to get out
-		inbound.controller.asynchronously_abort_transit()
-		// still going?
-		if(inbound)
-			inbound.controller.terminate_transit()
-	// alright bye
-	inbound = null
+	drop_transit_lock()
 
 	// obliterate hooks
 	for(var/datum/shuttle_hook/hook in dock_hooks)

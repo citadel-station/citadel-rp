@@ -29,8 +29,6 @@
 /datum/shuttle/proc/shuttle_turfs_at(turf/anchor, direction)
 	return SSgrids.filter_ordered_turfs_via_area(areas, aabb_ordered_turfs_at(anchor, direction))
 
-#warn consider rethinking how dock alignment works
-
 /**
  * check bounding boxes
  *
@@ -63,8 +61,6 @@
 
 	return check_bounding(to_loc, to_dir, abort_on_fault, bounds_checking_flags, use_ordered_turfs, bad_turfs_out, dock)
 
-#warn we're going to need a way to allow crashing into things liek trees..
-
 /**
  * direct bounding box check
  *
@@ -87,7 +83,6 @@
 	list/bad_turfs_out,
 	obj/shuttle_dock/dock_going_to
 )
-#warn below
 	if(isnull(use_ordered_turfs))
 		use_ordered_turfs = anchor.aabb_ordered_turfs_at_and_clip_check(location, direction)
 		SSgrids.filter_ordered_turfs_via_area(areas, use_ordered_turfs)
@@ -95,12 +90,12 @@
 		return SHUTTLE_BOUNDING_HARD_FAULT
 	if(hard_checks_only)
 		return SHUTTLE_BOUNDING_CLEAR
-	for(var/obj/shuttle_dock/enemy_dock in SSshuttle.docks_by_level[location.z])
+	for(var/obj/shuttle_dock/enemy_dock as anything in SSshuttle.docks_by_level[location.z])
 		if(enemy_dock == docking_at)
 			continue
 		if(!enemy_dock.should_protect_bounding_box())
 			continue
-		if(!anchor.intersects_dock(enemy_dock))
+		if(!anchor.intersects_dock(enemy_dock, location, direction))
 			continue
 		// we do intersect
 		return SHUTTLE_BOUNDING_SOFT_FAULT
@@ -161,6 +156,9 @@
  * @return FALSE if trampling sometihng we don't want to trample
  */
 /datum/shuttle/proc/check_bounding_trample_turf(turf/T)
+	// TODO: You may notice we don't check for crashing into trees
+	//       Too Bad!
+
 	// 1. are we space?
 	if(istype(T, /turf/space))
 		// we're fine

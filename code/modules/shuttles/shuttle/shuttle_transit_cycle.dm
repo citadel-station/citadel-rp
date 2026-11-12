@@ -2,10 +2,19 @@
 //* Copyright (c) 2026 Citadel Station Developers           *//
 
 /**
- * Stores data about the current transit cycle
- * * Transit cycles are event-driven.
+ * Represents an ongoing shuttle transit operation.
+ * * A transit cycle starts from [dock or null].
+ * * A transit cycle may involve multiple translations (takeoff/landings, potentially at docks).
+ * * A transit cycle may generally only allow for one undocking on departure,
+ *   and docking on arrival.
  */
 /datum/shuttle_transit_cycle
+	//* Dock Advisory Locking *//
+	/**
+	 * Tracks docks that we successfully locked on.
+	 */
+	var/list/obj/shuttle_dock/dock_locks
+
 	//* state / processing *//
 	/// current transit stage, if any
 	var/datum/shuttle_transit_stage/stage
@@ -252,6 +261,7 @@
  */
 /datum/shuttle_transit_cycle/proc/cleanup()
 	cleanup_warning_visuals()
+	remove_dock_locks()
 
 /**
  * graceful abort, tries to kick the shuttle to elsewhere
