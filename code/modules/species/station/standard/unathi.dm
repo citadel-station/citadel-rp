@@ -106,6 +106,7 @@
 	has_organ = list(
 		O_HEART     = /obj/item/organ/internal/heart/unathi,
 		O_LUNGS     = /obj/item/organ/internal/lungs/unathi,
+		O_VOICE		= /obj/item/organ/internal/voicebox,
 		O_LIVER     = /obj/item/organ/internal/liver/unathi,
 		O_BRAIN     = /obj/item/organ/internal/brain/unathi,
 		O_EYES      = /obj/item/organ/internal/eyes,
