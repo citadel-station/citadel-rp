@@ -296,12 +296,10 @@
 		)
 	activators = list(
 		"on insert" = IC_PINTYPE_PULSE_OUT,
-		"on remove" = IC_PINTYPE_PULSE_OUT,
-		"ref updated" = IC_PINTYPE_PULSE_OUT
+		"on remove" = IC_PINTYPE_PULSE_OUT
 		)
 
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-	can_be_asked_input = TRUE
 
 	var/obj/item/reagent_containers/glass/beaker/current_beaker
 
@@ -337,7 +335,6 @@
 	set_pin_data(IC_OUTPUT, 2, WEAKREF(current_beaker))
 	push_data()
 	activate_pin(1)
-	activate_pin(3)
 
 /obj/item/integrated_circuit/input/beaker_connector/attack_self(mob/user, datum/event_args/actor/actor)
 	. = ..()
@@ -357,7 +354,6 @@
 	set_pin_data(IC_OUTPUT, 2, null)
 	push_data()
 	activate_pin(2)
-	activate_pin(3)
 
 
 /obj/item/integrated_circuit/input/beaker_connector/proc/push_vol()
