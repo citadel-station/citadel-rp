@@ -21,6 +21,13 @@
 	/// current status
 	var/status = SHUTTLE_OPERATION_STATUS_RUNNING
 
+	#warn impl
+	/// timeout set on us
+	/// * this isn't actually enforced on our side; it's enforced on the shuttle controller's side.
+	var/timeout_duration
+	/// world.time we will time out on
+	var/timeout_at
+
 /datum/shuttle_operation/New(datum/shuttle_controller/controller)
 	src.controller = controller
 

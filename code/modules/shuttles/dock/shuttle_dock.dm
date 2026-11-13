@@ -203,6 +203,12 @@
 	/// The shuttle web node we belong to, if any
 	// var/datum/shuttle_web_node/web_node
 
+	//* Debug *//
+
+#ifdef CF_SHUTTLE_VISUALIZE_BOUNDING_BOXES
+	var/list/atom/movable/render/debug_bounding_box_renderers = list()
+#endif
+
 /obj/shuttle_dock/preloading_from_mapload(datum/dmm_context/context)
 	. = ..()
 	dock_id = SSmapping.mangled_persistent_id(dock_id, context.mangling_id)
@@ -294,7 +300,11 @@
 		)
 		qdel(src)
 		return
-	#warn CF_SHUTTLE_VISUALIZE_BOUNDING_BOXES
+
+	#ifdef CF_SHUTTLE_VISUALIZE_BOUNDING_BOXES
+	debug_bounding_box_update()
+	#endif
+
 	// enable bounding box protection
 	set_bounding_box_protection(protect_bounding_box, protect_bounding_box_extra_radius)
 	var/datum/shuttle/loaded
@@ -333,6 +343,10 @@
 		// as doMove() hook prevents movement if we're making areas.
 		create_bounding_box_area = FALSE
 
+	#ifdef CF_SHUTTLE_VISUALIZE_BOUNDING_BOXES
+	debug_bounding_box_cleanup()
+	#endif
+
 	return ..()
 
 /obj/shuttle_dock/proc/register_dock()
@@ -348,12 +362,18 @@
 	if(create_bounding_box_area)
 		CRASH("we cannot move a shuttle dock if it creates its own area.")
 	unregister_dock()
+
 	. = ..()
+
 	if(!check_bounds())
 		if(QDELING(src))
 			stack_trace("shuttle dock got moved somewhere where its bounds fail checks.")
 		return
 	register_dock()
+
+	#ifdef CF_SHUTTLE_VISUALIZE_BOUNDING_BOXES
+	addtimer(CALLBACK(src, PROC_REF(debug_bounding_box_update)), 2 SECONDS, TIMER_UNIQUE)
+	#endif
 
 #warn below 4 hooks don't make too much sense, audit
 /**
