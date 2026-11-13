@@ -141,10 +141,13 @@
 	/// Color on minimaps, if it's null (which is default) it makes one at random.
 	var/minimap_color
 
-	///Typepath to limit the areas (subtypes included) that atoms in this area can smooth with. Used for shuttles.
-	var/area/area_limited_icon_smoothing
-
 	var/tmp/is_outside = OUTSIDE_NO
+
+	//* Icon Smoothing *//
+	/// Limits areas this area may smooth with.
+	/// * This may be null, for 'smooth with all' behavior
+	/// * This may be a string ID, which requires an exact match.
+	var/area_icon_smoothing_restrict
 
 /**
  * Called when an area loads
@@ -230,39 +233,6 @@
 
 	STOP_PROCESSING(SSobj, src)
 	return ..()
-
-/**
- * Changes the area of T to A. Do not do this manually.
- * Area is expected to be a non-null instance.
- */
-/proc/ChangeArea(turf/T, area/A)
-	if(!istype(A))
-		CRASH("Area change attempt failed: invalid area supplied.")
-	var/area/old_area = get_area(T)
-	if(old_area == A)
-		return
-	// NOTE: BayStation calles area.Exited/Entered for the TURF T.  So far we don't do that.s
-	// NOTE: There probably won't be any atoms in these turfs, but just in case we should call these procs.
-	A.contents.Add(T)
-	if(old_area)
-		// Handle dynamic lighting update if
-		if(SSlighting.initialized)
-			if(T.dynamic_lighting && old_area.dynamic_lighting != A.dynamic_lighting)
-				if(A.dynamic_lighting)
-					T.lighting_build_overlay()
-				else
-					T.lighting_clear_overlay()
-		for(var/atom/movable/AM in T)
-			old_area.Exited(AM, A)
-
-	for(var/atom/movable/AM in T)
-		A.Entered(AM, old_area)
-
-	for(var/obj/machinery/M in T)
-		M.power_change()
-
-	// if(T.is_outside == OUTSIDE_AREA && T.is_outside() != old_outside)
-	// 	T.update_weather()
 
 // compatibility wrapper, remove posthaste by making sure nothing checks area has_gravity.
 /area/has_gravity()
@@ -774,36 +744,11 @@ var/list/ghostteleportlocs = list()
  * take turfs into ourselves
  */
 /area/proc/take_turfs(list/turf/turfs)
-	for(var/turf/T in turfs)
-		if(T.loc == src)
-			continue
-		ChangeArea(T, src)
+	__area_change(turfs, src)
 
 /**
  * take turfs into ourselves
  */
 /area/proc/take_turfs_checking_tick(list/turf/turfs)
-	for(var/turf/T in turfs)
-		if(T.loc == src)
-			continue
-		ChangeArea(T, src)
-		CHECK_TICK
-
-/**
- * give turfs to other area
- */
-/area/proc/give_turfs(list/turf/turfs, area/give_to)
-	for(var/turf/T in turfs)
-		if(T.loc != src)
-			stack_trace("give_turfs found a turf not in source area.")
-		ChangeArea(T, give_to)
-
-/**
- * give turfs to other area
- */
-/area/proc/give_turfs_checking_tick(list/turf/turfs, area/give_to)
-	for(var/turf/T in turfs)
-		if(T.loc != src)
-			stack_trace("give_turfs found a turf not in source area.")
-		ChangeArea(T, give_to)
-		CHECK_TICK
+	// TODO: check tick
+	__area_change(turfs, src)
