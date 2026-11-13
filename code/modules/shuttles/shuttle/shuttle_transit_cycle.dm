@@ -17,6 +17,14 @@
  * until a stage chooses to exit.
  */
 /datum/shuttle_transit_cycle
+	/// our shuttle
+	var/datum/shuttle/shuttle
+
+	/// current transit stage, if any
+	var/datum/shuttle_transit_stage/stage
+	/// stage mutex; enforces non-reentrancy of stage setup/cleanup
+	var/stage_lifecycle_mutex = FALSE
+
 	//* Dock Advisory Locking *//
 	/**
 	 * Tracks docks that we successfully locked on.
@@ -24,14 +32,9 @@
 	var/list/obj/shuttle_dock/dock_locks
 
 	#warn below
-
 	//* state / processing *//
-	/// current transit stage, if any
-	var/datum/shuttle_transit_stage/stage
 	/// behavior flags
 	var/transit_flags = NONE
-	/// our shuttle
-	var/datum/shuttle/shuttle
 	/// running?
 	var/running = FALSE
 	/// aborting?
@@ -247,13 +250,36 @@
 
 /**
  * Creates and changes to a given stage.
+ *
+ * ## Call Safety
+ *
+ * This is safe to call from
+ * * shuttle_transit_stage/tick()
+ * * shuttle_operation callbacks (they're generally not polled
+ *   from shuttle_transit_stage/setup and shuttle_transit_stage/cleanup)
+ *
+ * This is not safe to call from
+ * * shuttle_transit_stage/setup()
+ * * shuttle_transit_stage/cleanup()
  */
 /datum/shuttle_transit_cycle/proc/change_stage(path, ...)
+	if(stage_lifecycle_mutex)
+		CRASH("attempted to change stage while another stage is in setup/cleanup")
+	stage_lifecycle_mutex = TRUE
+
+	var/datum/shuttle_transit_stage/new_stage = new path(arglist(args.Copy(2)))
+	change_stage_impl(new_stage, ...)
+
+	stage_lifecycle_mutex = FALSE
+	return TRUE
 
 /datum/shuttle_transit_cycle/proc/change_stage_impl(datum/shuttle_transit_stage/stage, ...)
 	PRIVATE_PROC(TRUE)
 
+	#warn inmpl
+
 /datum/shuttle_transit_cycle/proc/finish(hey_put_args_here)
+	#warn inmpl
 
 #warn below
 

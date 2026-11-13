@@ -14,28 +14,12 @@
  * * `tick()` until done
  * * `cleanup()`
  */
-
 /datum/shuttle_transit_stage
-	/// owning cycle
+	/// Owning Cycle
 	var/datum/shuttle_transit_cycle/cycle
+	/// Current operation we're waiting for, if any; value or null
+	var/active_operation_id = null
 
-	#warn below
-	/// stage enum
-	var/stage = SHUTTLE_TRANSIT_STAGE_IDLE
-	/**
-	 * List of blockers
-	 */
-	var/list/datum/shuttle_operation_blocker/blockers
-	/// attempt to ignore blockers
-	var/forcing = FALSE
-	/// attempt to ignore blockers that could be dangerous to ignore (hanger doors, point defense, etc)
-	var/dangerously_forcing = FALSE
-
-	/// timeout set on us
-	/// * this isn't actually enforced on our side; it's enforced on the shuttle controller's side.
-	var/timeout_duration
-	/// world.time we will time out on
-	var/timeout_at
 
 #warn impl all
 /datum/shuttle_transit_stage/New(datum/shuttle_transit_cycle/cycle)

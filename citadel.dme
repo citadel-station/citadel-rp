@@ -5490,6 +5490,8 @@
 #include "code\modules\shuttles\shuttle\shuttle_docking_cycle.dm"
 #include "code\modules\shuttles\shuttle\shuttle_operation.dm"
 #include "code\modules\shuttles\shuttle\shuttle_operation_blocker.dm"
+#include "code\modules\shuttles\shuttle\operations\dock.dm"
+#include "code\modules\shuttles\shuttle\operations\undock.dm"
 #include "code\modules\shuttles\shuttle\shuttle_template.dm"
 #include "code\modules\shuttles\shuttle\shuttle_transit_cycle-dock_locks.dm"
 #include "code\modules\shuttles\shuttle\shuttle_transit_cycle.dm"
