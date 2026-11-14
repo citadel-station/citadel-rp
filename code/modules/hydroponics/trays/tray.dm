@@ -60,7 +60,7 @@
 		"plantbgone" =      3,
 		"cryoxadone" =     -3,
 		"radium" =          2,
-		"uranium" =         3
+		"uranium" =         3,
 		)
 	var/global/list/nutrient_reagents = list(
 		"milk" =            0.1,
