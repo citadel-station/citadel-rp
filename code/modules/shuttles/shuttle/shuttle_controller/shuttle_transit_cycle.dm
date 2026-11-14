@@ -268,7 +268,7 @@
 	stage_lifecycle_mutex = TRUE
 
 	var/datum/shuttle_transit_stage/new_stage = new path(arglist(args.Copy(2)))
-	change_stage_impl(new_stage, ...)
+	change_stage_impl(arglist(list(new_stage) + args.Copy(2)))
 
 	stage_lifecycle_mutex = FALSE
 	return TRUE

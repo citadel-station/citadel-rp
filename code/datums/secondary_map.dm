@@ -108,7 +108,7 @@
 	var/use_radius = radius
 
 	. =  RANGE_TURFS(use_radius, entity_turf)
-	. = list(use_radius, use_radius, 0, 0 relevant_turfs)
+	. = list(use_radius, use_radius, 0, 0, relevant_turfs)
 
 /datum/secondary_map/follow_entity_with_radius/proc/on_entity_moved()
 	if(move_queued)
