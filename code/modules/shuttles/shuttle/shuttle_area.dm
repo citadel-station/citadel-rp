@@ -13,12 +13,34 @@
 	area_flags = AREA_RAD_SHIELDED | AREA_FLAG_ERODING
 	sound_env = SMALL_ENCLOSED
 	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
-	/// will be assigned the shuttle's ref post-init
+	/**
+	 * Set to the shuttle post-init.
+	 * * Do not rely on this being non-null.
+	 *   Shuttles can and will orphan their areas when they're
+	 *   deleted, because shuttles getting deleted is currently
+	 *   *not supported for game simulation.*
+	 */
 	var/datum/shuttle/shuttle
 
 /area/shuttle/proc/before_bounds_initializing(datum/shuttle/from_shuttle, datum/map_reservation/from_reservation, datum/shuttle_template/from_template)
-	shuttle = from_shuttle
+	attach_shuttle(from_shuttle)
 	area_icon_smoothing_restrict = AREA_ICON_SMOOTHING_RESTRICT_SHUTTLE(from_shuttle.id)
+
+/area/shuttle/proc/attach_shuttle(datum/shuttle/shuttle)
+	if(src.shuttle)
+		if(src.shuttle == shuttle)
+			CRASH("Area already has this shuttle attached")
+		CRASH("Area already has a shuttle attached")
+	src.shuttle = shuttle
+
+/area/shuttle/proc/detach_shuttle(datum/shuttle/expected)
+	if(!src.shuttle)
+		CRASH("Area has no shuttle attached")
+	if(!expected)
+		CRASH("Expected shuttle not provided")
+	if(src.shuttle != expected)
+		CRASH("Area has a different shuttle attached than expected")
+	src.shuttle = null
 
 /**
  * autodetecting area

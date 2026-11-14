@@ -161,8 +161,11 @@
 	QDEL_LIST(ports)
 	QDEL_NULL(anchor)
 
-	// de-link all areas and revert to level default if needed
-	#warn areas
+	// de-link all areas
+	for(var/area/shuttle/our_area in areas)
+		if(our_area.shuttle != src)
+			return
+		our_area.detach_shuttle(src)
 
 	// de-link all registered hooks
 	for(var/datum/shuttle_hook/hook in registered_hooks)
