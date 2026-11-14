@@ -198,7 +198,7 @@ SUBSYSTEM_DEF(emergencyshuttle)
 	var/eta
 	if(GLOB.global_ferry_escape_shuttle_controller.get_transit_stage())
 		//we are in transition and can get an accurate ETA
-		eta = GLOB.global_ferry_escape_shuttle_controller.transit_time_left()
+		eta = GLOB.global_ferry_escape_shuttle_controller.get_transit_time_left()
 	else
 		//otherwise we need to estimate the arrival time using the scheduled launch time
 		eta = launch_time + GLOB.global_ferry_escape_shuttle_controller.default_takeoff_time() + GLOB.global_ferry_escape_shuttle_controller.default_transit_time()

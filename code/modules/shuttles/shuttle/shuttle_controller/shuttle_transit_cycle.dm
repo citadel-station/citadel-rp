@@ -276,6 +276,11 @@
 /datum/shuttle_transit_cycle/proc/change_stage_impl(datum/shuttle_transit_stage/stage, ...)
 	PRIVATE_PROC(TRUE)
 
+	if(stage.cycle)
+		CRASH("attempted to change to a stage that is already part of another cycle")
+
+	stage.Initialize(src)
+
 	#warn inmpl
 
 /datum/shuttle_transit_cycle/proc/finish(hey_put_args_here)

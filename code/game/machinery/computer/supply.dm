@@ -63,7 +63,7 @@
 		if(!controller.get_transit_stage())
 			shuttle_status["location"] = "In transit"
 			shuttle_status["mode"] = SUP_SHUTTLE_TRANSIT
-			shuttle_status["time"] = floor(controller.transit_time_left() / (1 MINUTES))
+			shuttle_status["time"] = floor(controller.get_transit_time_left() / (1 MINUTES))
 		else
 			shuttle_status["time"] = 0
 			if(controller.is_at_away())

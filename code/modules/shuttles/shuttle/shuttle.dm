@@ -280,7 +280,16 @@
 	return
 
 /**
- * bind a controller to us
+ * Creates and binds a controller to this shuttle.
+ */
+/datum/shuttle/proc/init_controller(path, ...)
+	ASSERT(!controller)
+	ASSERT(ispath(path, /datum/shuttle_controller))
+	var/datum/shuttle_controller/controller = new path(arglist(args.Copy(2)))
+	bind_controller(controller)
+
+/**
+ * Binds a controller to this shuttle.
  */
 /datum/shuttle/proc/bind_controller(datum/shuttle_controller/binding)
 	. = FALSE
@@ -426,7 +435,7 @@
 
 	// fire premove hook
 	var/datum/event_args/shuttle/translation/pre_move/pre_move_event = new(src, old_anchor_location, new_anchor_location)
-	dispatch_event_to_hooks(pre_move_event)
+	src.dispatch_event(pre_move_event)
 
 	// move ports and anchors
 	anchor.abstract_move(locate(new_anchor_location[1], new_anchor_location[2], new_anchor_location[3]))
@@ -539,51 +548,9 @@
 
 	// fire postmove hook
 	var/datum/event_args/shuttle/translation/post_move/post_move_event = new(src, old_anchor_location, new_anchor_location)
-	dispatch_event_to_hooks(post_move_event)
+	src.dispatch_event(post_move_event)
 
 	// -- Finished -- //
-
-//* Hooks *//
-
-/datum/shuttle/proc/register_hook(datum/shuttle_hook/hook)
-	if(hook in hooks)
-		. = FALSE
-		CRASH("attempted to re-register a registered hook")
-
-	hook.registered_shuttles += src
-	hooks += hook
-	. = TRUE
-
-/datum/shuttle/proc/unregister_hook(datum/shuttle_hook/hook)
-	if(!(hook in hooks))
-		. = FALSE
-		CRASH("attempted to unregister a hook that wasn't registered")
-
-	// we don't clear blockers because you can actually ephemerally block
-	// multiple shuttles with a hook and keep the current blockers around
-	//
-	// it's YOUR job to figure out how to unblock on unregister.
-	hook.registered_shuttles -= src
-	hooks -= hook
-	. = TRUE
-
-/**
- * Fires an event off to all hooks
- * * Does not fire events off to our dock or ports!
- */
-#warn call this
-/datum/shuttle/proc/dispatch_event_to_hooks(datum/event_args/shuttle/event)
-	SHOULD_NOT_SLEEP(TRUE)
-	for(var/datum/shuttle_hook/hook as anything in hooks)
-		hook.on_shuttle_event(event, src)
-
-#warn call this
-/datum/shuttle/proc/dispatch_event_to_port_hooks(datum/event_args/shuttle/event, obj/shuttle_aligner/port/port)
-	port.dispatch_event_to_port_hooks(event)
-
-#warn call this
-/datum/shuttle/proc/dispatch_event_to_dock_hooks(datum/event_args/shuttle/event, obj/shuttle_dock/dock)
-	dock.dispatch_event_to_dock_hooks(event)
 
 //* Location *//
 

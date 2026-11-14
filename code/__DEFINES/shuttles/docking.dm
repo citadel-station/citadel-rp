@@ -1,23 +1,7 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2026 Citadel Station Developers           *//
 
-//*                   Docking completion callback status            *//
-//* Docking callbacks are fired by the controller, not the shuttle. *//
-
-/// succeeded
-#define SHUTTLE_DOCKING_STATUS_SUCCESS 1
-/// cancelled; starting the opposite docking cycle counts as this.
-#define SHUTTLE_DOCKING_STATUS_ABORTED 2
-/// failed
-#define SHUTTLE_DOCKING_STATUS_FAILED 3
-/// timed out
-#define SHUTTLE_DOCKING_STATUS_TIMEOUT 4
-/// the op has already passed!
-#define SHUTTLE_DOCKING_STATUS_EXPIRED 5
-/// we're not at somewhere that we can dock to
-#define SHUTTLE_DOCKING_STATUS_INVALID 6
-
-//*                Current docking state (dock)                         *//
+//*                Current docking state                                *//
 //* Docking state is stored on the shuttle controller, not the shuttle. *//
 
 /// Set if an unknown error happened.

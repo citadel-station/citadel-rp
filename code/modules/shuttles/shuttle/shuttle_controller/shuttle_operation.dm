@@ -5,8 +5,11 @@
  * stateful operations for shuttle controllers
  */
 /datum/shuttle_operation
-	/// the controller we're executing on
+	/// the controller we're executing on. set on init.
 	var/datum/shuttle_controller/controller
+	/// unique operation ID. set by the controller on init.
+	var/id
+
 	/// blockers currently active, if any
 	var/list/datum/shuttle_operation_blocker/blockers = list()
 
@@ -14,6 +17,11 @@
 	var/forcing = FALSE
 	/// is dangerously forcing, if forcing
 	var/dangerously_forcing = FALSE
+
+	/// disallow players from interrupting
+	/// * this is best understood as a 'strong suggestion'.
+	///   there's a million ways to bypass this, unfortunately.
+	var/disallow_interrupt = FALSE
 
 	/// callbacks to be called with (src, status)
 	/// * these will not be called if we are deleted.
@@ -28,7 +36,7 @@
 	/// world.time we will time out on
 	var/timeout_at
 
-/datum/shuttle_operation/New(datum/shuttle_controller/controller)
+/datum/shuttle_operation/proc/Initialize(datum/shuttle_controller/controller)
 	src.controller = controller
 
 /datum/shuttle_operation/Destroy()

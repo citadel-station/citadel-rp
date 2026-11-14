@@ -25,3 +25,12 @@
  * no longer active.
  */
 #define SHUTTLE_OPERATION_STATUS_EXPIRED 4
+/**
+ * Timed out
+ */
+#define SHUTTLE_OPERATION_STATUS_TIMEOUT 5
+/**
+ * Got deleted
+ * * This is a fail-state, because generally anything cancelling shouldn't cancel with this status.
+ */
+#define SHUTTLE_OPERATION_STATUS_DELETED 6

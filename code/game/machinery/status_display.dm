@@ -217,7 +217,7 @@
 	if(!controller)
 		return "Error"
 
-	var/timeleft = controller.transit_time_left()
+	var/timeleft = controller.get_transit_time_left()
 	if(timeleft)
 		timeleft = round(timeleft/ 10,1)
 		if(timeleft < 0)

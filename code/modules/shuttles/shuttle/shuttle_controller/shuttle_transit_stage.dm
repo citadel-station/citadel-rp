@@ -17,12 +17,9 @@
 /datum/shuttle_transit_stage
 	/// Owning Cycle
 	var/datum/shuttle_transit_cycle/cycle
-	/// Current operation we're waiting for, if any; value or null
-	var/active_operation_id = null
-
 
 #warn impl all
-/datum/shuttle_transit_stage/New(datum/shuttle_transit_cycle/cycle)
+/datum/shuttle_transit_stage/proc/Initialize(datum/shuttle_transit_cycle/cycle)
 
 /datum/shuttle_transit_stage/proc/setup()
 	SHOULD_NOT_SLEEP(TRUE)
@@ -59,15 +56,30 @@
 	abstract_type = /datum/shuttle_transit_stage/standard
 
 /datum/shuttle_transit_stage/standard/undock_from_origin
+	var/begin_delay = 0 SECONDS
+	var/undock_operation_id
+	var/end_delay = 0 SECONDS
 
 /datum/shuttle_transit_stage/standard/takeoff_from_origin
+	/**
+	 * * Includes the 'engine spool-up' sound.
+	 */
+	var/begin_delay = 5 SECONDS
+	var/takeoff_operation_id
+	var/end_delay = 0 SECONDS
 
 /datum/shuttle_transit_stage/standard/transiting_towards_destination
+	var/duration = 0 SECONDS
 
 /datum/shuttle_transit_stage/standard/land_at_destination
+	var/begin_delay = 0 SECONDS
+	var/landing_operation_id
+	var/end_delay = 0 SECONDS
 
 /datum/shuttle_transit_stage/standard/dock_at_destination
-
+	var/begin_delay = 0 SECONDS
+	var/dock_operation_id
+	var/end_delay = 0 SECONDS
 
 #warn impl
 

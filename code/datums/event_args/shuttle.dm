@@ -10,9 +10,21 @@
 	/// shuttle ref
 	/// * Required
 	var/datum/shuttle/shuttle
+	/// Was dispatched already?
+	/// * Shuttle events are not to be reused.
+	var/dispatched = FALSE
 
 /datum/event_args/shuttle/New(datum/shuttle/shuttle)
 	src.shuttle = shuttle
+
+/**
+ * Performs standard dispatch, sending it to relevant things.
+ */
+/datum/event_args/shuttle/proc/standard_dispatch()
+	if(dispatched)
+		STACK_TRACE("Double-dispatch of a shuttle event. Something might explode.")
+	dispatched = TRUE
+	shuttle.dispatch_event_to_hooks(src)
 
 /**
  * Hints if the event can be blocked.
@@ -31,6 +43,7 @@
  *
  * * Fired by shuttle controllers. This is not a low-level hook. Do not rely on them always firing.
  * * This will be fired on both the shuttle and dock sides.
+ * * Ports will have this fired on it if a port is specified.
  * * Direct shuttle translation calls will not call this.
  * * For things that reference each other / connect to a shuttle, please hook translation hooks to ensure disconnection.
  *   While these events *usually* have well-defined correlation to each other, nothing is promised
@@ -68,6 +81,12 @@
 	port = null
 	stage = null
 	return ..()
+
+/datum/event_args/shuttle/dock/standard_dispatch()
+	..()
+	shuttle.dispatch_event_to_dock_hooks(src, dock)
+	if(port)
+		shuttle.dispatch_event_to_port_hooks(src, port)
 
 /**
  * Fired when a shuttle is attempting to perform traversal into the dock.
@@ -154,6 +173,10 @@
 	controller = null
 	stage = null
 	return ..()
+
+/datum/event_args/shuttle/traversal/standard_dispatch()
+	..()
+	#warn dock?
 
 // TODO: web shuttles
 // /datum/event_args/shuttle/traversal/web

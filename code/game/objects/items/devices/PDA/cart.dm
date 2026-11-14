@@ -430,7 +430,7 @@ var/list/civilian_cartridges = list(
 		var/datum/shuttle_controller/ferry/round_global/supply_shuttle/controller = GLOB.global_ferry_supply_shuttle_controller
 		if (controller)
 			supplyData["shuttle_moving"] = !!controller.get_transit_stage()
-			supplyData["shuttle_eta"] = floor(controller.transit_time_left() / (1 MINUTES))
+			supplyData["shuttle_eta"] = floor(controller.get_transit_time_left() / (1 MINUTES))
 			supplyData["shuttle_loc"] = controller.is_at_away() ? "Station" : "Dock"
 		var/supplyOrderCount = 0
 		var/supplyOrderData[0]
