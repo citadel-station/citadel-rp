@@ -145,6 +145,7 @@
 	desc = "A heavy ballistic steel shield with a narrow polymer viewport. A few markings on the corner indicate it belongs to Nanotrasen's Exploration Department."
 	icon = 'icons/items/shields/basic.dmi'
 	icon_state = "explo"
+	item_state = "explo"
 	materials_base = list(MAT_GLASS = 1500, MAT_STEEL = 5000)
 	attack_verb = list("shoved", "bashed")
 	worth_intrinsic = 500
