@@ -106,3 +106,6 @@
 		if(!detected_entity.location)
 			return
 		. |= detected_entity.location.get_z_indices()
+
+/datum/shuttle_controller/overmap/manual_landing_allowed()
+	return TRUE

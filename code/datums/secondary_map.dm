@@ -9,7 +9,6 @@
 /datum/secondary_map
 	var/map_id
 
-	#warn impl both
 	/**
 	 * From map_popups.dm in rendering/legacy.
 	 */
@@ -34,6 +33,8 @@
 	src.planes = new(src.map_id)
 
 /datum/secondary_map/Destroy()
+	cleanup_view()
+
 	for(var/client/C in clients)
 		revoke_from_client(C)
 
@@ -42,6 +43,11 @@
 	QDEL_NULL(planes)
 	return ..()
 
+/**
+ * Updates the secondary map's view.
+ * * Called once when a client is added when there are no clients.
+ *   Otherwise, must be manually called.
+ */
 /datum/secondary_map/proc/update_view()
 	var/list/data = get_relevant_turfs()
 	var/width = data[1]
@@ -53,7 +59,10 @@
 	map_background.screen_loc = "[map_id]:1,1 to [width],[height]"
 	map_holder.screen_loc = "[map_id]:[1 + align_x],[1 + align_y]"
 
-	#warn impl
+	map_holder.vis_contents = turfs
+
+/datum/secondary_map/proc/cleanup_view()
+	map_holder.vis_contents.Cut()
 
 /**
  * * Must return a strucutred list for perf reasons.
@@ -65,6 +74,10 @@
 /datum/secondary_map/proc/grant_to_client(client/granting)
 	if(granting in clients)
 		CRASH("Client already has this secondary map.")
+
+	if(!length(clients))
+		update_view()
+
 	LAZYADD(clients, granting)
 	LAZYADD(granting.secondary_maps, src)
 
@@ -77,10 +90,13 @@
 	LAZYREMOVE(clients, revoking)
 	LAZYREMOVE(revoking.secondary_maps, src)
 
-	granting.screen -= map_holder
-	granting.screen -= map_background
+	revoking.screen -= map_holder
+	revoking.screen -= map_background
 
 	planes.remove(revoking)
+
+	if(!LAZYLEN(clients))
+		cleanup_view()
 
 /**
  * A secondary map that follows an atom around, showing everything around it in a radius.
@@ -171,9 +187,34 @@
 	return ..()
 
 /datum/secondary_map/render_entire_shuttle/get_relevant_turfs()
-	if(!target)
+	if(!target?.anchor)
 		return list(0, 0, 0, 0, list())
-	#warn impl
+
+	var/z = target.anchor.z
+	var/list/corners = target.anchor.absolute_llx_lly_urx_ury_coords_here()
+
+	var/real_llx = max(corners[1] - src.border_radius, 1)
+	var/real_lly = max(corners[2] - src.border_radius, 1)
+	var/real_urx = min(corners[3] + src.border_radius, world.maxx)
+	var/real_ury = min(corners[4] + src.border_radius, world.maxy)
+
+	var/list/turfs = block(
+		locate(
+			real_llx,
+			real_lly,
+			z,
+		),
+		locate(
+			real_urx,
+			real_ury,
+			z,
+		),
+	)
+
+	var/real_width = real_urx - real_llx
+	var/real_height = real_ury - real_lly
+
+	return list(real_width, real_height, 0, 0, turfs)
 
 /datum/secondary_map/render_entire_shuttle/proc/on_target_anchor_moved()
 	queue_update()

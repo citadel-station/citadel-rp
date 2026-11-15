@@ -22,23 +22,42 @@
 	/// used perspective
 	var/datum/perspective/used_perspective
 
-	/// call with proposed position and ourselves when the user tries to designate a location
-	/// call pattern: (turf/lower_left, dir, mob/user, datum/shuttle_docker/docker)
-	/// return FALSE to forbid docking.
+	/**
+	 * Called when the user attempts to designate a location for docking.
+	 *
+	 * * Called with (turf/anchor_location, dir, datum/event_args/actor/actor, datum/shuttle_docker/docker)
+	 *
+	 * Return FALSE to forbid landing.
+	 */
+	#warn call
 	var/datum/callback/on_target
+
+	/**
+	 * Called to get jump points for manual landing.
+	 *
+	 * * Called with (datum/event_args/actor/actor, datum/shuttle_docker/docker)
+	 *
+	 * Return a list("name" = turf) of valid jump points.
+	 */
+	#warn call
+	var/datum/callback/on_jump_query
 
 	var/datum/action/shuttle_docker/designate/action_for_designate
 	var/datum/action/shuttle_docker/exit/action_for_exit
+	#warn this
+	var/datum/action/shuttle_docker/jump/action_for_jump
 
 	var/designate_in_progress = FALSE
 	var/designate_time = 5 SECONDS
 
 	var/image/current_manual_position_render
 
-/datum/shuttle_docker/New(datum/shuttle/shuttle, datum/host, mob/user, datum/callback/on_target)
+/datum/shuttle_docker/New(datum/shuttle/shuttle, datum/host, mob/user, datum/callback/on_target, datum/callback/on_jump_query)
 	src.shuttle = shuttle
 	src.host = host
 	src.on_target = on_target
+	src.on_jump_query = on_jump_query
+
 	create_eye()
 	used_perspective = new
 	setup_perspective()
@@ -77,8 +96,6 @@
 /datum/shuttle_docker/proc/release_user()
 	#warn impl
 
-	#warn /datum/remote_control..?
-
 /datum/shuttle_docker/proc/set_position(turf/position, dir = eye.dir)
 	eye.forceMove(position)
 	if(dir != eye.dir)
@@ -104,27 +121,6 @@
 	used_perspective.see_in_dark = 14
 	used_perspective.update_see_in_dark()
 
-/**
- * Returns a list of name-to-turf of valid jump points
- */
-/datum/shuttle_docker/proc/docking_beacons(zlevel)
-	RETURN_TYPE(/list)
-	. = list()
-	.["-- Level Center --"] = locate(floor(world.maxx * 0.5), floor(world.maxy * 0.5), zlevel)
-	for(var/obj/shuttle_dock/dock as anything in SSshuttle.docks_by_level[zlevel])
-		var/i = 0
-		if(!dock.manual_docking_beacon)
-			continue
-		if(.[dock.display_name])
-			while(.["[dock.display_name] [++i]"])
-				continue
-			.["[dock.display_name] [++i]"] = dock
-		else
-			.[dock.display_name] = get_turf(dock)
-	var/datum/shuttle_controller/controller = shuttle.controller
-	if(istype(controller))
-		. += controller.manual_landing_beacons(zlevel)
-
 /datum/shuttle_docker/proc/attempt_designate(turf/target, dir, datum/event_args/actor/actor)
 	#warn impl
 
@@ -135,6 +131,9 @@
 	return ..()
 
 /datum/action/shuttle_docker/designate
+	name = "Designate"
+	desc = "Attempt to designate the current location as the manual docking beacon"
+	#warn icon
 
 /datum/action/shuttle_docker/designate/invoke_target(datum/shuttle_docker/target, datum/event_args/actor/actor)
 	. = ..()
@@ -147,10 +146,27 @@
 	return target.attempt_designate(target, dir, actor)
 
 /datum/action/shuttle_docker/exit
+	name = "Exit"
+	desc = "Exit manual docking interface."
+	#warn icon
 
 /datum/action/shuttle_docker/exit/invoke_target(datum/shuttle_docker/target, datum/event_args/actor/actor)
 	. = ..()
 	if(.)
 		return TRUE
 	qdel(target)
+	return TRUE
+
+/datum/action/shuttle_docker/jump
+	name = "Jump To Beacon"
+	desc = "Jump to a designated beacon on a given level"
+	#warn icon
+
+/datum/action/shuttle_docker/jump/invoke_target(datum/shuttle_docker/target, datum/event_args/actor/actor)
+	. = ..()
+	if(.)
+		return TRUE
+
+	#warn impl
+
 	return TRUE

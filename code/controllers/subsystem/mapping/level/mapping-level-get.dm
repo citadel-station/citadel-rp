@@ -114,6 +114,14 @@
 /datum/controller/subsystem/mapping/proc/level_get_fluff_name(z)
 	return ordered_levels[z]?.display_name
 
+//* Name *//
+
+/**
+ * returns the real name of a level
+ */
+/datum/controller/subsystem/mapping/proc/level_get_name(z)
+	return ordered_levels[z]?.name
+
 //* Stack *//
 
 /**

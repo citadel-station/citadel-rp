@@ -58,6 +58,7 @@
 	var/high_y = low_y + width - 1
 
 	leader_dock = create_shuttle_dock(
+		/obj/shuttle_dock/freeflight,
 		locate(low_x, low_y, z_index),
 		with_dir = dir,
 		lx_ly_hx_hy = list(

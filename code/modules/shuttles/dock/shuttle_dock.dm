@@ -4,8 +4,9 @@
 /**
  * lets us use named arguments.
  */
-/proc/create_shuttle_dock(turf/loc, with_id, with_dir, list/sx_sy_ox_oy, list/lx_ly_hx_hy)
-	return new /obj/shuttle_dock(loc, with_id, with_dir, sx_sy_ox_oy, lx_ly_hx_hy)
+/proc/create_shuttle_dock(path, turf/loc, with_id, with_dir, list/sx_sy_ox_oy, list/lx_ly_hx_hy)
+	ASSERT(ispath(path, /obj/shuttle_dock))
+	return new path(loc, with_id, with_dir, sx_sy_ox_oy, lx_ly_hx_hy)
 
 /**
  * Shuttle dock objects.
@@ -425,8 +426,6 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	for(var/datum/shuttle_hook/hook as anything in dock_hooks)
 		hook.on_dock_event(event, src)
-
-#warn hook above 4
 
 //* docking - authorization *//
 

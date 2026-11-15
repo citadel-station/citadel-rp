@@ -595,6 +595,9 @@
 		real_ury,
 	)
 
+/obj/shuttle_aligner/master/proc/absolute_llx_lly_urx_ury_coords_here()
+	return absolute_llx_lly_urx_ury_coords_at(src.loc, src.dir)
+
 /**
  * @params
  * * location - a turf, or a tuple of list(x, y, z)
