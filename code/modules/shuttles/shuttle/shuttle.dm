@@ -190,9 +190,8 @@
 
 	return ..()
 
-//* Initialization *//
+//* Init - Bounds *//
 
-#warn how are we going to do buildable shuttles?
 /**
  * Called after all areas are made and all turfs are there,
  * but before atoms initialization.
@@ -282,6 +281,8 @@
 /datum/shuttle/proc/after_bounds_init(datum/map_reservation/from_reservation, datum/shuttle_template/from_template)
 	return
 
+//* Init - Controller *//
+
 /**
  * Creates and binds a controller to this shuttle.
  */
@@ -302,6 +303,14 @@
 		controller = null
 		CRASH("controller refused to init")
 	return TRUE
+
+//* Lifecycle *//
+
+/**
+ * Immediately annihilates the shuttle.
+ */
+/datum/shuttle/proc/dangerously_annihilate_this_shuttle()
+	#warn impl
 
 //* Docking - Control *//
 
