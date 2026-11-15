@@ -153,7 +153,7 @@
 	if(istype(attack_source, /obj/projectile))
 		var/obj/projectile/proj = attack_source
 		// todo: rework
-		if((proj.damage_tier >= 4 || istype(proj, /obj/projectile/beam)) && prob(30)) // Lower prob than riot for laser since this is an opaque piece of metal.
+		if((proj.damage_tier >= 4.5 || istype(proj, /obj/projectile/beam)) && prob(20))
 			defending.visible_message("<span class='danger'>\The [defending]'s [src.name] is pierced by [proj]!</span>")
 			proj.dampen_on_pierce_experimental(src, 20, 4)
 			playsound(src, /datum/soundbyte/grouped/block_metal_with_metal, 65, TRUE)
