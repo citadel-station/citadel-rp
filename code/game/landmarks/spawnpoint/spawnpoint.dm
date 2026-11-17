@@ -154,10 +154,10 @@
 
 /obj/landmark/spawnpoint/job/vv_edit_var(var_name, var_value, massedit)
 	if(var_name == NAMEOF(src, job_path))
-		Register()
+		Unregister()
 	. = ..()
 	if(var_name == NAMEOF(src, job_path))
-		Unregister()
+		Register()
 
 /**
  * Used when there's no job specific latejoin spawnpoints

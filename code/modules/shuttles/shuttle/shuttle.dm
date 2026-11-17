@@ -117,6 +117,10 @@
 	//  todo: vv hook this
 	var/ceiling_type = /turf/simulated/shuttle_ceiling
 
+	//* Spawnpoints *//
+	/// Registered 'auto shuttle start' spawnpoints
+	var/list/obj/landmark/spawnpoint/auto_shuttle_start/auto_spawnpoints
+
 	//* Transit *//
 
 	//? This is in shuttle, not controller, because                    ?//
@@ -154,6 +158,12 @@
 	if(!force)
 		stack_trace("something tried to delete a shuttle")
 		return QDEL_HINT_LETMELIVE
+
+	// unlink spawnpoints
+	for(var/obj/landmark/spawnpoint/auto_shuttle_start/auto_spawnpoint in auto_spawnpoints)
+		if(auto_spawnpoint.bound == src)
+			auto_spawnpoint.bound = null
+	auto_spawnpoints = null
 
 	// unregister from SSshuttle
 	SSshuttle.unregister_shuttle(src)
