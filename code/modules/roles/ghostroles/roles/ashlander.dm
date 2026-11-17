@@ -118,7 +118,8 @@
 	created.mind.teach_crafting_recipe(ashlander_crafting)
 	if(Configuration.check_language_whitelist(/datum/prototype/language/common::id, created.ckey))
 		created.add_language(/datum/prototype/language/common)
-	created.get_equipped_items_in_slots(list(SLOT_ID_UNIFORM))[1].has_sensors = UNIFORM_HAS_NO_SENSORS
+	var/obj/item/clothing/under/suit = created.get_equipped_items_in_slots(list(SLOT_ID_UNIFORM))[1]
+	suit.has_sensors = UNIFORM_HAS_NO_SENSORS
 
 /obj/structure/ghost_role_spawner/ashlander
 	name = "ashlander yurt"
