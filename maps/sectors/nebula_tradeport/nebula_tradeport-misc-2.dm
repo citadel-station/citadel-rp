@@ -5,7 +5,7 @@
 	scanner_desc = @{"[i]Information[/i]: A trade post and fuel depot. Possible life signs detected."}
 	in_space = 1
 	known = TRUE
-	icon_state = "fueldepot"
+	icon_state = "fuel_depot"
 	color = "#8F6E4C"
 
 /datum/spawnpoint/trade
