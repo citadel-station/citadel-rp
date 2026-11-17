@@ -134,7 +134,12 @@ SUBSYSTEM_DEF(shuttle)
 	ASSERT(istext(shuttle.id))
 	ASSERT(isnull(shuttle_registry[shuttle.id]))
 	shuttle_registry[shuttle.id] = shuttle
-	#warn impl; how to unregister / delete
+	return TRUE
+
+/datum/controller/subsystem/shuttle/proc/unregister_shuttle(datum/shuttle/shuttle)
+	ASSERT(shuttle_registry[shuttle.id] == shuttle)
+	shuttle_registry -= shuttle.id
+	return TRUE
 
 /datum/controller/subsystem/shuttle/proc/generate_shuttle_id()
 	var/static/notch = 0

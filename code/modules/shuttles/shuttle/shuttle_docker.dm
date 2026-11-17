@@ -122,7 +122,19 @@
 	used_perspective.update_see_in_dark()
 
 /datum/shuttle_docker/proc/attempt_designate(turf/target, dir, datum/event_args/actor/actor)
-	#warn impl
+	var/success = TRUE
+
+	designate_in_progress = TRUE
+
+	if(!do_self(actor.initiator, designate_time, DO_AFTER_IGNORE_ACTIVE_ITEM | DO_AFTER_IGNORE_MOVEMENT, NONE, progress_anchor = target))
+		success = FALSE
+
+	designate_in_progress = FALSE
+
+	if(!success)
+		return
+
+	on_target(target, dir, actor, src)
 
 /datum/action/shuttle_docker
 	target_type = /datum/shuttle_docker
@@ -139,11 +151,11 @@
 	. = ..()
 	if(.)
 		return TRUE
-	var/turf/target = get_turf(target.eye)
-	if(!target)
+	var/turf/target_turf = get_turf(target.eye)
+	if(!target_turf)
 		return TRUE
 	var/dir = target.eye.dir
-	return target.attempt_designate(target, dir, actor)
+	return target.attempt_designate(target_turf, dir, actor)
 
 /datum/action/shuttle_docker/exit
 	name = "Exit"

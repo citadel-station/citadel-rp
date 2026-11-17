@@ -39,7 +39,7 @@
 	return ..()
 
 /**
- * Shuttle docking event
+ * Shuttle dock event
  *
  * * Fired by shuttle controllers. This is not a low-level hook. Do not rely on them always firing.
  * * This will be fired on both the shuttle and dock sides.
@@ -56,9 +56,6 @@
 	/// operation
 	/// * Nullable
 	var/datum/shuttle_operation/operation
-	/// transit stage
-	/// * Nullable
-	var/datum/shuttle_transit_stage/stage
 	/// the dock in question
 	/// * Required
 	var/obj/shuttle_dock/dock
@@ -66,13 +63,12 @@
 	/// * Nullable
 	var/obj/shuttle_aligner/port/port
 
-/datum/event_args/shuttle/dock/New(datum/shuttle/shuttle, datum/shuttle_operation/operation, datum/shuttle_transit_stage/stage, obj/shuttle_dock/dock, obj/shuttle_aligner/port/port)
+/datum/event_args/shuttle/dock/New(datum/shuttle/shuttle, datum/shuttle_operation/operation, obj/shuttle_dock/dock, obj/shuttle_aligner/port/port)
 	..()
 	src.controller = shuttle.controller
 	src.operation = operation
 	src.dock = dock
 	src.port = port
-	src.stage = stage
 
 /datum/event_args/shuttle/dock/Destroy()
 	controller = null

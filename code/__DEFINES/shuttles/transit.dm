@@ -1,10 +1,12 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2026 Citadel Station Developers           *//
 
-#warn below
+//* Transit Completion Status *//
 
-//* transit callback status *//
-
+/**
+ * Still running
+ */
+#define SHUTTLE_TRANSIT_STATUS_RUNNING 0
 /// at destination
 ///
 /// * this is purely a 'we are at destination'. we do not need a successful docking
@@ -19,6 +21,8 @@
 #define SHUTTLE_TRANSIT_STATUS_REDIRECTED 4
 /// aborted ; unknown abort
 #define SHUTTLE_TRANSIT_STATUS_FAILED 5
+
+#warn below
 
 //* transit flags *//
 

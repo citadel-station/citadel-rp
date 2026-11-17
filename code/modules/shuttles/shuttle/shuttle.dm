@@ -155,6 +155,9 @@
 		stack_trace("something tried to delete a shuttle")
 		return QDEL_HINT_LETMELIVE
 
+	// unregister from SSshuttle
+	SSshuttle.unregister_shuttle(src)
+
 	// obliterate all components
 	QDEL_NULL(descriptor)
 	QDEL_NULL(controller)
@@ -310,7 +313,8 @@
  * Immediately annihilates the shuttle.
  */
 /datum/shuttle/proc/dangerously_annihilate_this_shuttle()
-	#warn impl
+	immediately_jump_to_transit()
+	qdel(src, force = TRUE)
 
 //* Docking - Control *//
 
@@ -353,7 +357,13 @@
 		return FALSE
 	if(dock.docked)
 		return FALSE
-	#warn impl
+
+	#warn impl dock
+
+	// successful
+	docked = dock
+	docked_via_port = align_with_port
+	return TRUE
 
 /**
  * Performs an immediate translation, aligning either our anchor or a port with a given turf and direction.

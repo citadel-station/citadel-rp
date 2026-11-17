@@ -18,12 +18,12 @@
 	/// * If this is set, controller must dangerously force to ignore us by default
 	var/forceable_require_dangerous = FALSE
 
-	var/desc = "Unknown Blocker"
+	var/name = "Unknown Blocker"
 
-/datum/shuttle_operation_blocker/New(datum/shuttle_hook/hook, datum/shuttle_operation/operation, desc)
+/datum/shuttle_operation_blocker/New(datum/shuttle_hook/hook, datum/shuttle_operation/operation, name)
 	. = ..()
 	src.operation = operation
-	src.desc = desc
+	src.name = name
 	LAZYADD(operation.blockers, src)
 	if(hook)
 		src.hook = hook
@@ -38,10 +38,14 @@
 	return ..()
 
 /**
- * @return string
+ * @return list(
+ *   "name" = "Blocker Name",
+ * )
  */
-/datum/shuttle_operation_blocker/proc/ui_why()
-	return desc
+/datum/shuttle_operation_blocker/proc/ui_serialize()
+	return list(
+		"name" = name,
+	)
 
 /datum/shuttle_operation_blocker/mandatory
 	forceable = FALSE

@@ -1,6 +1,9 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2026 Citadel Station Developers           *//
 
+/datum/shuttle_controller/proc/set_docking_state(new_state)
+	src.docking_state = new_state
+
 //* Docking - Validity *//
 
 /**

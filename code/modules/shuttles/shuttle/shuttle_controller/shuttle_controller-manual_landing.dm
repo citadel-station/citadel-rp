@@ -13,8 +13,16 @@
 		CALLBACK(src, PROC_REF(on_manual_landing_query)),
 	)
 
-/datum/shuttle_controller/proc/user_set_manual_landing(turf/where, dir, mob/user, datum/shuttle_docker/docker)
-	#warn handle
+/datum/shuttle_controller/proc/user_set_manual_landing(turf/where, dir, datum/event_args/actor/actor, datum/shuttle_docker/docker)
+	if(!check_manual_landing(where, dir))
+		return FALSE
+
+	log_game("[actor.actor_log_string()] set manual landing at [AREACOORD(where)] with direction [dir] for shuttle '[shuttle.name]' ([shuttle.id])")
+
+	return set_manual_landing(where, dir)
+
+/datum/shuttle_controller/proc/check_manual_landing(turf/anchor_target_location, anchor_target_orientation)
+	#warn impl
 
 /**
  * call to designate a manual landing position
@@ -36,6 +44,8 @@
 	)
 
 	src.manual_dock = dock
+
+	#warn update dockers
 
 	return TRUE
 
@@ -82,7 +92,7 @@
 			if(!dock.manual_docking_beacon)
 				continue
 			if(.[dock.display_name])
-				while(.["[level_name] - [dock.display_name] [++i]"])J
+				while(.["[level_name] - [dock.display_name] [++i]"])
 					continue
 				.["[level_name] - [dock.display_name] [++i]"] = dock
 			else

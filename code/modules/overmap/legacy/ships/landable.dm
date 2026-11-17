@@ -9,6 +9,7 @@
 	bound_y = 10
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
+
 	/// our shuttle
 	var/datum/shuttle/shuttle
 	/// our shuttle controller
@@ -32,7 +33,7 @@
 	return flight_status
 
 /obj/overmap/entity/visitable/ship/landable/proc/set_flight_status(status)
-	status = OVERMAP_FLIGHT_STATUS_TRANSITING
+	flight_status = status
 
 /**
  * called when our shuttle starts a transit cycle

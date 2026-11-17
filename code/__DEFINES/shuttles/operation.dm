@@ -1,7 +1,7 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2026 Citadel Station Developers           *//
 
-//* - Returned via callback - *//
+//* Operation Completion Status *//
 
 /**
  * Still running.
