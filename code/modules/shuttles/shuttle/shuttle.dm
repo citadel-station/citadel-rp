@@ -162,7 +162,7 @@
 	// unlink spawnpoints
 	for(var/obj/landmark/spawnpoint/auto_shuttle_start/auto_spawnpoint in auto_spawnpoints)
 		if(auto_spawnpoint.bound == src)
-			auto_spawnpoint.bound = null
+			auto_spawnpoint.Unregister()
 	auto_spawnpoints = null
 
 	// unregister from SSshuttle
