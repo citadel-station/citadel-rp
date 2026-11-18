@@ -2,17 +2,21 @@
 
 /* Solidification */
 /datum/chemical_reaction/solidification
-	name = "Solid Iron"
-	id = "solidiron"
-	required_reagents = list("frostoil" = 5, MAT_IRON = REAGENTS_PER_SHEET)
+	abstract_type = /datum/chemical_reaction/solidification
 	require_whole_numbers = TRUE
 	important_for_logging = TRUE
-	inhibitors = list("carbon" = 1)
-	var/sheet_to_give = /obj/item/stack/material/iron
+	var/sheet_to_give
 
 /datum/chemical_reaction/solidification/on_reaction_instant(datum/reagent_holder/holder, multiplier)
 	. = ..()
 	new sheet_to_give(get_turf(holder.my_atom), multiplier)
+
+/datum/chemical_reaction/solidification/iron
+	name = "Solid Iron"
+	id = "solidiron"
+	required_reagents = list("frostoil" = 5, MAT_IRON = REAGENTS_PER_SHEET)
+	inhibitors = list("carbon" = 1)
+	sheet_to_give = /obj/item/stack/material/iron
 
 /datum/chemical_reaction/solidification/phoron
 	name = "Solid Phoron"
