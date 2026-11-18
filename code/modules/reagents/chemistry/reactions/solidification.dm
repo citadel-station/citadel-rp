@@ -7,6 +7,7 @@
 	required_reagents = list("frostoil" = 5, MAT_IRON = REAGENTS_PER_SHEET)
 	require_whole_numbers = TRUE
 	important_for_logging = TRUE
+	inhibitors = list("carbon" = 1)
 	var/sheet_to_give = /obj/item/stack/material/iron
 
 /datum/chemical_reaction/solidification/on_reaction_instant(datum/reagent_holder/holder, multiplier)
@@ -37,6 +38,7 @@
 /datum/chemical_reaction/solidification/platinum
 	name = "Solid Platinum"
 	id = "solidplatinum"
+	inhibitors = list("carbon" = 1)
 	required_reagents = list("frostoil" = 5, MAT_PLATINUM = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/platinum
 
@@ -59,6 +61,7 @@
 /datum/chemical_reaction/solidification/steel
 	name = "Solid Steel"
 	id = "solidsteel"
+	inhibitors = list("platinum" = 1)
 	required_reagents = list("frostoil" = 5, "iron" = 10, "carbon" = 10)
 	sheet_to_give = /obj/item/stack/material/steel
 
