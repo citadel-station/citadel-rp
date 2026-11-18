@@ -59,12 +59,12 @@
 /datum/chemical_reaction/solidification/steel
 	name = "Solid Steel"
 	id = "solidsteel"
-	required_reagents = list("frostoil" = 5, MAT_STEEL = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, "iron" = 10, "carbon" = 10)
 	sheet_to_give = /obj/item/stack/material/steel
 
 
 /datum/chemical_reaction/solidification/plasteel
 	name = "Solid Plasteel"
 	id = "solidplasteel"
-	required_reagents = list("frostoil" = 10, MAT_PLASTEEL = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 10, "iron" = 8, "carbon" = 8, "platinum" = 4)
 	sheet_to_give = /obj/item/stack/material/plasteel
