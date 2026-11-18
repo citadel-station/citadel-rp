@@ -263,7 +263,9 @@
 	. = ..()
 	src.air_contents.adjust_gas_temp(GAS_ID_NITROGEN, (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*TN60C), TN60C)
 
-//co2
+/*
+ * co2
+ */
 /obj/item/tank/carbon_dioxide
 	name = "carbon dioxide tank"
 	desc = "Contains co2. Do not inhale. Plants only."
@@ -291,6 +293,13 @@
 	src.air_contents.adjust_gas(GAS_ID_CARBON_DIOXIDE, (10*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /obj/item/tank/emergency/carbon_dioxide/examine(mob/user, dist)
+	. = ..()
 	if(air_contents.gas[GAS_ID_CARBON_DIOXIDE] < 0.2 && loc==user)
 		. += "<span class='danger'>The meter on the [src.name] indicates you are almost out of air!</span>"
 	//	user.playsound('sound/effects/alert.ogg')
+
+/obj/item/tank/emergency/carbon_dioxide/double
+	name = "double emergency CO2 tank"
+	icon_state = "emergency_double_co2"
+	gauge_icon = "indicator_emergency_double"
+	volume = 10

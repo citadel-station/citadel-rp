@@ -5,6 +5,6 @@
 #define IC_SPAWN_RESEARCH 			2
 
 #define NON_STANDARD_CIRCUIT_LIST list(/obj/item/implant/integrated_circuit, /obj/item/clothing/under/circuitry,\
-		/obj/item/clothing/gloves/circuitry, /obj/item/clothing/gloves/ewatch, /obj/item/clothing/glasses/circuitry,\
+		/obj/item/clothing/gloves/circuitry, /obj/item/clothing/gloves/ewatch/circuitry, /obj/item/clothing/glasses/circuitry,\
 		/obj/item/clothing/shoes/circuitry, /obj/item/clothing/head/circuitry, /obj/item/clothing/ears/circuitry,\
 		/obj/item/clothing/suit/circuitry)

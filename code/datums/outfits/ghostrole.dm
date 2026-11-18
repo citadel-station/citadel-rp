@@ -128,9 +128,9 @@
 	r_hand = /obj/item/clipboard
 	l_hand = /obj/item/pda/librarian
 
-//Slavager
+//Salvager
 /datum/outfit/salvager
-	name = "Slavager"
+	name = "Salvager"
 	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/storage/hazardvest
 	head = /obj/item/clothing/head/hardhat/orange

@@ -750,7 +750,7 @@
 	starts_with = list(
 		/obj/item/card/id/external/id_tribal,
 		/obj/item/clothing/mask/breath,
-		/obj/item/tank/emergency/carbon_dioxide,
+		/obj/item/tank/emergency/carbon_dioxide/double,
 		/obj/item/reagent_containers/hypospray/autoinjector/vaccine,
 		/obj/item/reagent_containers/hypospray/autoinjector/vaccine
 	)
