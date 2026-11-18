@@ -1,0 +1,18 @@
+author: "its-helvi"
+delete-after: True
+changes:
+  - code_imp: "Disabled intelligent lighting updates to try to stop lights from lagging out."
+  - bugfix: "Fixed electronic wristwear entry in circuit printers."
+  - bugfix: "A recent Nanotrasen experiment on new triage strategies has been deemed a resounding failure after several incidents of autopsies being requested on perfectly healthy, fully conscious personnel being reported as deceased by body scanners."
+  - bugfix: "Pulse oximeters in Nanotrasen health monitoring devices should no longer malfunction."
+  - bugfix: "Radiocarbon spectrometers have been upgraded across all Nanotrasen installations due to glitches caused by running an NTOS version six years out of date."
+  - bugfix: "Nanotrasen has standardized their cable coil gauges. The imperial versus metric debate still rages on."
+  - bugfix: "A recent marker beacon redesign will hopefully prevent beacons from being buried by Surt's ash storms."
+  - balance: "HAMI kits now come with higher-capacity carbon dioxide tanks. Aether Atmospherics reassures that the additional CO2 \"was not sourced from delaminating supermatter crystals\"."
+  - bugfix: "Aether Atmospherics has issued new safety standards for working near supermatter crystals in a series of completely unrelated incidents."
+  - tweak: "Various integrated circuit wording tweaks and fixes."
+  - bugfix: "Fission reactors can now be controlled from a safe distance. What this means for the \"safety control rod axe man\" job market remains unknown."
+  - bugfix: "Addressed a firmware bug in grid checkers that would cause cascading failures across SMESes and APCs upon hard resets mid check, originating from the number \"4\" being used in a critical authentication subroutine."
+  - rscadd: "Various frontier organizations are following Nanotrasen's lead in implementing more relaxed dress codes."
+  - bugfix: "Roboticists have updated standard EAL implant designs in light of an incident involving an \"Unathi baddie\" \"clamping down on it\" and \"doing death rolls\". Please don't."
+  - bugfix: "Bibles should no longer sporadically contain bluespace pockets."
