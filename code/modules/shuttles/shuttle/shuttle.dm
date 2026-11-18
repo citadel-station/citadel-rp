@@ -30,6 +30,9 @@
 	/// to our controller, as well as things like overmaps.
 	/// * This should be owned by the shuttle datum. Clone it if you need to assign one.
 	var/datum/shuttle_descriptor/descriptor
+	/// Movement Mutex
+	/// * Ensures that only one movement operation can occur at a time.
+	var/movement_mutex = FALSE
 
 	//* Composition *//
 	/// our shuttle controller
@@ -323,7 +326,12 @@
  * Immediately annihilates the shuttle.
  */
 /datum/shuttle/proc/dangerously_annihilate_this_shuttle()
+	log_game("Beginning annihilation on [src] ([id])")
+
+	// TODO: log how many mobs were deleted, including those with minds / that
+	//       were players.
 	immediately_jump_to_transit()
+
 	qdel(src, force = TRUE)
 
 //* Docking - Control *//
@@ -341,7 +349,7 @@
 
 #warn AAAAAAAAAAAAAAAAAAAAAAAAA
 
-//* Docking - Backend; Don't mess with these. *//
+//* Docking - Backend; Do not add random crap to these. *//
 
 /**
  * immediate shuttle move, undocking from any docked ports in the process and docking with the destination port
@@ -363,12 +371,20 @@
  * @return TRUE / FALSE on success / failure
  */
 /datum/shuttle/proc/dock(obj/shuttle_dock/dock, obj/shuttle_aligner/port/align_with_port, centered, direction, list/use_before_turfs, list/use_after_turfs)
+	UNTIL(!movement_mutex)
+	movement_mutex = TRUE
+	. = dock_impl(arglist(args))
+	movement_mutex = FALSE
+
+/datum/shuttle/proc/dock_impl(obj/shuttle_dock/dock, obj/shuttle_aligner/port/align_with_port, centered, direction, list/use_before_turfs, list/use_after_turfs)
+	PRIVATE_PROC(TRUE)
+
 	if(dock.inbound && dock.inbound != src)
 		return FALSE
 	if(dock.docked)
 		return FALSE
 
-	#warn impl dock
+	#warn impl dock; use aligned_translation_impl
 
 	// successful
 	docked = dock
@@ -389,6 +405,14 @@
  * @return TRUE / FALSE on success / failure
  */
 /datum/shuttle/proc/aligned_translation(turf/move_to, direction, obj/shuttle_aligner/port/align_with_port, list/use_before_turfs, list/use_after_turfs)
+	UNTIL(!movement_mutex)
+	movement_mutex = TRUE
+	. = aligned_translation_impl(arglist(args))
+	movement_mutex = FALSE
+
+/datum/shuttle/proc/aligned_translation_impl(turf/move_to, direction, obj/shuttle_aligner/port/align_with_port, list/use_before_turfs, list/use_after_turfs)
+	PRIVATE_PROC(TRUE)
+
 	#warn unbind from dock
 
 	// get ordered turfs
@@ -399,7 +423,7 @@
 		if(isnull(use_after_turfs))
 			return FALSE
 
-	. = unsafe_aligned_translation(move_to, direction, align_with_port, use_before_turfs, use_after_turfs)
+	. = unsafe_aligned_translation_impl(move_to, direction, align_with_port, use_before_turfs, use_after_turfs)
 	if(!.)
 		return
 
@@ -420,6 +444,12 @@
  * ports should generally be centered.
  */
 /datum/shuttle/proc/unsafe_aligned_translation(turf/move_to, direction, obj/shuttle_aligner/port/align_with_port, list/use_before_turfs, list/use_after_turfs)
+	UNTIL(!movement_mutex)
+	movement_mutex = TRUE
+	. = unsafe_aligned_translation_impl(arglist(args))
+	movement_mutex = FALSE
+
+/datum/shuttle/proc/unsafe_aligned_translation_impl(turf/move_to, direction, obj/shuttle_aligner/port/align_with_port, list/use_before_turfs, list/use_after_turfs)
 	PRIVATE_PROC(TRUE)
 	// cache old data
 	var/turf/move_from = get_turf(anchor)

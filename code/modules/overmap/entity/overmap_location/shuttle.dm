@@ -45,3 +45,11 @@
 	if(!their_area)
 		return FALSE
 	return shuttle.areas[their_area]
+
+/datum/overmap_location/shuttle/get_jump_target()
+	if(!length(shuttle?.areas))
+		return
+	var/area/area = pick(shuttle.areas)
+	if(!length(area.contents))
+		return
+	return get_turf(pick(area.contents))

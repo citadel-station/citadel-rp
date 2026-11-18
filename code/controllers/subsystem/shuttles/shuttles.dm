@@ -133,11 +133,13 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/register_shuttle(datum/shuttle/shuttle)
 	ASSERT(istext(shuttle.id))
 	ASSERT(isnull(shuttle_registry[shuttle.id]))
+	subsystem_log("Registering shuttle [shuttle.id]")
 	shuttle_registry[shuttle.id] = shuttle
 	return TRUE
 
 /datum/controller/subsystem/shuttle/proc/unregister_shuttle(datum/shuttle/shuttle)
 	ASSERT(shuttle_registry[shuttle.id] == shuttle)
+	subsystem_log("Unregistering shuttle [shuttle.id]")
 	shuttle_registry -= shuttle.id
 	return TRUE
 

@@ -6,6 +6,10 @@
 	var/obj/overmap/entity/target
 	var/datum/secondary_map/target_renderer
 
+/datum/admin_modal/overmap_controller/Preload(obj/overmap/entity/target)
+	modal_registered_key = "overmap_controller-[REF(target)]"
+	..()
+
 /datum/admin_modal/overmap_controller/Initialize(obj/overmap/entity/target)
 	if(!istype(target))
 		return FALSE
@@ -84,7 +88,14 @@
 			target.set_velocity(set_x * OVERMAP_DISTANCE_PIXEL, set_y * OVERMAP_DISTANCE_PIXEL)
 			return TRUE
 		if("jumpTo")
-			#warn impl; adminjump?
+			var/turf/jump_to = target.location?.get_jump_target()
+			if(!jump_to)
+				actor.chat_feedback(SPAN_WARNING("[target] has no valid jump target, somehow."))
+				return TRUE
+			if(!admin_holder.observe_target(jump_to))
+				actor.chat_feedback(SPAN_WARNING("Failed to jump to [AREACOORD(jump_to)] for [target]."))
+				return TRUE
+			actor.chat_feedback(SPAN_NOTICE("Jumping to [AREACOORD(jump_to)] for [target]."))
 			return TRUE
 		if("yankToHere")
 			var/mob/their_mob = admin_holder.owner?.mob

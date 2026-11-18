@@ -12,6 +12,9 @@ VV_PROTECT_READONLY(/datum/admin_modal)
 	var/name = "Unknown Modal"
 	/// The admin datum that opened us
 	var/datum/admins/owner
+	/// Key to register under.
+	/// * Should never be changed after initialization. Doing so will cause a memory leak.
+	var/modal_registered_key
 	/// TGUI ID; this will always be loaded from `tgui/interfaces/admin_modal` if possible.
 	var/tgui_interface
 	/// Do we autoupdate?
@@ -25,6 +28,11 @@ VV_PROTECT_READONLY(/datum/admin_modal)
 
 /datum/admin_modal/Destroy()
 	LAZYREMOVE(owner.admin_modals, src)
+
+	if(modal_registered_key)
+		// added by open_admin_modal().
+		LAZYREMOVE(owner.admin_modals_by_key, modal_registered_key)
+
 	return ..()
 
 /datum/admin_modal/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
@@ -57,6 +65,13 @@ VV_PROTECT_READONLY(/datum/admin_modal)
  */
 /datum/admin_modal/proc/Initialize(...)
 	initialized = TRUE
+	return TRUE
+
+/**
+ * Called with args to open_admin_modal().
+ * * Should generate our [modal_registered_key] if any
+ */
+/datum/admin_modal/proc/Preload()
 	return TRUE
 
 /**

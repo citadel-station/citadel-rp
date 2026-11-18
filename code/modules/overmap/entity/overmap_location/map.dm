@@ -37,3 +37,13 @@
 	if(!z)
 		return FALSE
 	return SSmapping.ordered_levels[z].parent_map == map
+
+/datum/overmap_location/map/get_jump_target()
+	if(!map?.loaded || !length(map.levels))
+		return null
+	var/datum/map_level/level = pick(map.levels)
+	return locate(
+		floor(world.maxx / 2),
+		floor(world.maxy / 2),
+		level.z_index,
+	)

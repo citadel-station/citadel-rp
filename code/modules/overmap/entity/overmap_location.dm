@@ -149,6 +149,16 @@
 		return FALSE
 	return is_physically_level_impl(z)
 
+/**
+ * Gets something to jump to.
+ *
+ * Usually used for observers and admins.
+ *
+ * @return turf or null
+ */
+/datum/overmap_location/proc/get_jump_target()
+	return null
+
 //* Instantiation *//
 
 /**
