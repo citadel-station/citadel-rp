@@ -3121,6 +3121,9 @@
 /obj/effect/floor_decal/corner/mauve/border{
 	dir = 9
 	},
+/obj/structure/table/steel,
+/obj/machinery/recharger,
+/obj/item/shield/riot/tower/explo,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exploration/explorer_prep)
 "akd" = (

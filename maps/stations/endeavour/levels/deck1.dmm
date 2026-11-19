@@ -12000,6 +12000,7 @@
 	},
 /obj/structure/table/standard,
 /obj/machinery/recharger,
+/obj/item/shield/riot/tower/explo,
 /turf/simulated/floor/tiled,
 /area/exploration/explorer_prep)
 "iPi" = (

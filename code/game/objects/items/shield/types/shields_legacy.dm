@@ -140,6 +140,27 @@
 /obj/item/shield/riot/tower/swat
 	name = "swat shield"
 
+/obj/item/shield/riot/tower/explo
+	name = "ballistic shield"
+	desc = "A heavy ballistic steel shield with a narrow polymer viewport. A few markings on the corner indicate it belongs to Nanotrasen's Exploration Department."
+	icon = 'icons/items/shields/basic.dmi'
+	icon_state = "explo"
+	item_state = "explo"
+	materials_base = list(MAT_GLASS = 1500, MAT_STEEL = 5000)
+	attack_verb = list("shoved", "bashed")
+	worth_intrinsic = 500
+
+/obj/item/shield/riot/tower/explo/passive_parry_intercept(mob/defending, attack_type, datum/attack_source, datum/passive_parry/parry_data)
+	if(istype(attack_source, /obj/projectile))
+		var/obj/projectile/proj = attack_source
+		// todo: rework
+		if((proj.damage_tier >= 4.5 || istype(proj, /obj/projectile/beam)) && prob(20))
+			defending.visible_message("<span class='danger'>\The [defending]'s [src.name] is pierced by [proj]!</span>")
+			proj.dampen_on_pierce_experimental(src, 20, 4)
+			playsound(src, /datum/soundbyte/grouped/block_metal_with_metal, 65, TRUE)
+			return null
+	return ..()
+
 /obj/item/shield/riot/energy_proof
 	name = "energy resistant shield"
 	desc = "An ablative shield designed to absorb and disperse energy attacks. This comes at significant cost to its ability to withstand ballistics and kinetics, breaking apart easily."
