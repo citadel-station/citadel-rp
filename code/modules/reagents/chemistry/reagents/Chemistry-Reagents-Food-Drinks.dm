@@ -920,7 +920,7 @@
 		M.nutrition += removed * 3
 	M.heal_organ_damage(0.5 * removed, 0)
 	metabolism.legacy_current_holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
-	if(contains_lactose == TRUE && alien == IS_NARAMADI) //Species-wide lactose intolerance, also funny that cheeses can't drink milk.
+	if(contains_lactose == TRUE && (alien == IS_NARAMADI || alien == IS_SCORI)) //Species-wide lactose intolerance, also funny that cheeses can't drink milk.
 		if(prob(5))
 			to_chat(M, SPAN_WARNING("You feel nauseous!"))
 			return
@@ -1522,7 +1522,7 @@
 		else
 			M.afflict_sleeping(20 * 20)
 			M.drowsyness = max(M.drowsyness, 60)
-	if(contains_lactose == TRUE && alien == IS_NARAMADI)
+	if(contains_lactose == TRUE && (alien == IS_NARAMADI || alien == IS_SCORI))
 		if(prob(5))
 			to_chat(M, SPAN_WARNING("You feel nauseous!"))
 			return

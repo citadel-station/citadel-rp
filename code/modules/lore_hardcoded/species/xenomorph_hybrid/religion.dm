@@ -1,10 +1,10 @@
-/datum/lore/character_background/religion/xenomorph_hybrid
+/datum/lore/character_background/religion/species/xenomorph_hybrid/voice
 	name = "The Great Voice"
 	id = "religion_xenomorph_hybrid_great_voice"
 	category = "Xenomorph Hybrid"
 	desc = "You have all heard it you have all been obedient to it, listen to it and you shall find salvation in it's orders."
 
-/datum/lore/character_background/religion/xenomorph_hybrid/conversion
+/datum/lore/character_background/religion/species/xenomorph_hybrid/conversion
 	name = "The Gift of Conversion"
 	id = "religion_xenomorph_hybrid_conversion"
 	category = "Xenomorph Hybrid"
