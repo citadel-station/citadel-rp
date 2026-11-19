@@ -31,6 +31,7 @@
 /turf/simulated/wall/proc/update_underlay(mode = TRUE)
 	if(!mode)
 		underlays.Cut()
+		return
 
 	var/mutable_appearance/under_ma
 	under_ma = new()
