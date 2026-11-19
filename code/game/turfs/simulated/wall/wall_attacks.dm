@@ -34,7 +34,9 @@
 		return
 
 	var/mutable_appearance/under_ma
-	under_ma = new()
+	under_ma = new
+	under_ma.layer = FLOAT_LAYER
+	under_ma.plane = FLOAT_PLANE
 	under_ma.icon = 'icons/turf/flooring/plating.dmi'
 	under_ma.icon_state = "plating"
 
