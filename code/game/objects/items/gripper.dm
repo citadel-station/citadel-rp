@@ -340,6 +340,7 @@
 		/obj/item/clothing/suit/circuitry,
 		/obj/item/implant/integrated_circuit,
 		/obj/item/integrated_circuit,
+		/obj/item/integrated_electronics,
 	)
 
 /obj/item/gripper/service //Used to handle food, drinks, and seeds.

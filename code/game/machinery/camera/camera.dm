@@ -7,6 +7,7 @@ CREATE_WALL_MOUNTING_TYPES(/obj/machinery/camera)
 	use_power = USE_POWER_ACTIVE
 	idle_power_usage = 5
 	active_power_usage = 10
+	atom_flags = ATOM_HEAR
 	depth_projected = FALSE
 	plane = MOB_PLANE
 	layer = BELOW_MOB_LAYER
@@ -45,6 +46,7 @@ CREATE_WALL_MOUNTING_TYPES(/obj/machinery/camera)
 	if (dir == NORTH)
 		layer = ABOVE_MOB_LAYER
 	wires = new(src)
+	listening_objects += src
 	assembly = new(src)
 	assembly.state = 4
 	client_huds |= GLOB.global_hud.whitense
@@ -71,6 +73,7 @@ CREATE_WALL_MOUNTING_TYPES(/obj/machinery/camera)
 
 /obj/machinery/camera/Destroy()
 	deactivate(null, 0) //kick anyone viewing out
+	listening_objects -= src
 	if(assembly)
 		qdel(assembly)
 		assembly = null
