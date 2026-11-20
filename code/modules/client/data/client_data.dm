@@ -143,6 +143,7 @@ GLOBAL_LIST_EMPTY(client_data)
 	query.Execute()
 	while(query.NextRow())
 		playtime[query.item[1]] = text2num(query.item[2])
+	qdel(query)
 	playtime_loaded = TRUE
 	playtime_mutex = FALSE
 
