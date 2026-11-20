@@ -42,3 +42,12 @@
       involving an "Unathi baddie" "clamping down on it" and "doing death rolls".
       Please don't.
   - bugfix: Bibles should no longer sporadically contain bluespace pockets.
+2026-11-20:
+  AlphaM01:
+  - rscadd: Added a ballistic shield to exploration
+  its-helvi:
+  - bugfix: Nanotrasen's diligent xenobotanists have formulated new weedkillers in
+      response to a particularly resistant strain of nettles.
+  - rscadd: Uranium and catalyst are now mutagenic. Uranium is toxic to plants, catalyst
+      heals plants.
+  - tweak: Ash now heals plants as well as increasing yield.

@@ -1,6 +1,0 @@
-author: "its-helvi"
-delete-after: True
-changes:
-  - bugfix: "Nanotrasen's diligent xenobotanists have formulated new weedkillers in response to a particularly resistant strain of nettles."
-  - rscadd: "Uranium and catalyst are now mutagenic. Uranium is toxic to plants, catalyst heals plants."
-  - tweak: "Ash now heals plants as well as increasing yield."
