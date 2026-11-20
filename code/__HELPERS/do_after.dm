@@ -205,12 +205,19 @@
  * * flags - do_after flags as specified in [code/__DEFINES/procs/do_after.dm]
  * * mobility_flags - required mobility flags
  * * additional_checks - a callback that allows for custom checks. this is invoked with our args directly, allowing us to modify delay.
+ * * progress_anchor - override progressbar anchor location
+ * * progress_instance - override progressbar instance; this progressbar instance will be **deleted** when we are finished,
+ *                       and should have a goal number equal to the delay.
+ * * status_indicator - /datum/status_indicator type
  */
-/proc/do_self(mob/user, delay, flags, mobility_flags = MOBILITY_CAN_USE, datum/callback/additional_checks)
+/proc/do_self(mob/user, delay, flags, mobility_flags = MOBILITY_CAN_USE, datum/callback/additional_checks, atom/progress_anchor, datum/progressbar/progress_instance, status_indicator)
 	return do_after(
 		user,
 		delay,
 		flags = flags,
 		mobility_flags = mobility_flags,
 		additional_checks = additional_checks,
+		progress_anchor = progress_anchor,
+		progress_instance = progress_instance,
+		status_indicator = status_indicator,
 	)

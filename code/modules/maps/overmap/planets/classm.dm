@@ -10,5 +10,5 @@ Lifesigns: Large variety of peaceful animal life will help you feel at home!
 Ownership: Station is owned by the Happy Trails Resort Corporation.
 Warning: Vandalism and Criminal Acts will be prosecuted to the fullest extent of the law (and beyond)."}
 	in_space = 1
-	icon_state = "fueldepot"
+	icon_state = "fuel_depot"
 	color = "#33BB33"

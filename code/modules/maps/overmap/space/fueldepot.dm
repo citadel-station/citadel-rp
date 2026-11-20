@@ -5,7 +5,7 @@
 [i]Class[/i]: Installation (Space)
 [i]Transponder[/i]: Transmitting (CIV), V-E.S.A.
 [b]Notice[/b]: This facility classified for public use for the purpose of refueling and recharging starships"}
-	icon_state = "fueldepot"
+	icon_state = "fuel_depot"
 	color = "#33FF33"
 	initial_generic_waypoints = list("fueldepot_east","fueldepot_west","fueldepot_north","fueldepot_south")
 
@@ -17,16 +17,12 @@
 
 /obj/effect/shuttle_landmark/premade/fueldepot/east
 	name = "Fuel Depot - East Dock"
-	landmark_tag = "fueldepot_east"
 
 /obj/effect/shuttle_landmark/premade/fueldepot/west
 	name = "Fuel Depot - West Dock"
-	landmark_tag = "fueldepot_west"
 
 /obj/effect/shuttle_landmark/premade/fueldepot/north
 	name = "Fuel Depot - North Dock"
-	landmark_tag = "fueldepot_north"
 
 /obj/effect/shuttle_landmark/premade/fueldepot/south
 	name = "Fuel Depot - South Dock"
-	landmark_tag = "fueldepot_south"

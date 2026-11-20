@@ -13,7 +13,7 @@ Ownership: The station is currently without a owner (Corporation went Bankrupt),
 Warning: While there is no regulation regarding visiting and scavenging operation on this station, the wildlife is presenting low-levels of hostility. However, the secuirty system of the vault and maintenance system is still active. Pirate and other smugglers may also use this station."}
 	color = "#ff8c00" //orange ! :D
 	in_space = 1
-	icon_state = "fueldepot"
+	icon_state = "fuel_depot"
 	known = FALSE
 
 	initial_generic_waypoints = list(

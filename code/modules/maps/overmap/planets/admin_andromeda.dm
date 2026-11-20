@@ -5,7 +5,7 @@
 [b][i]Class[/i][/b]: Orbital Habitat
 [b][i]Transponder[/i][/b]: Independent IFF
 [b][i]Notice[/i][/b]: Contact traffic control to organize landing and resupply."}
-	icon_state = "fueldepot"
+	icon_state = "fuel_depot"
 	color = "#7a401e"
 	known = FALSE
 	in_space = 0
