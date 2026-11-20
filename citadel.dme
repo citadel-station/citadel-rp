@@ -766,6 +766,7 @@
 #include "code\datums\ability.dm"
 #include "code\datums\ability_handler.dm"
 #include "code\datums\access.dm"
+#include "code\datums\access_defaults.dm"
 #include "code\datums\beam.dm"
 #include "code\datums\beam_legacy.dm"
 #include "code\datums\bound_proc.dm"

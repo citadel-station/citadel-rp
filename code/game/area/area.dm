@@ -675,6 +675,17 @@ var/list/ghostteleportlocs = list()
 
 	return 1
 
+//* Access *//
+
+/**
+ * Get the default access for the given lookup key.
+ * @param lookup_key The key to look up the default access for.
+ * @return /datum/access_defaults or null
+ */
+/area/proc/get_access_defaults(lookup_key)
+	// TODO: lookup on map
+	return null
+
 //* Atmospherics *//
 
 /area/proc/register_scrubber(obj/machinery/atmospherics/component/unary/vent_scrubber/instance)

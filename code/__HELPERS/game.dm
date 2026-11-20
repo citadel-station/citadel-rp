@@ -14,7 +14,7 @@
 		max_z = max(z, max_z)
 	return max_z
 
-/proc/get_area(atom/A)
+/proc/get_area(atom/A) as /area
 	RETURN_TYPE(/area)
 	if (isarea(A))
 		return A

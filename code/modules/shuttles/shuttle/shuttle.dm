@@ -614,6 +614,13 @@
 
 	// -- Finished -- //
 
+//* Misc *//
+
+/datum/shuttle/proc/get_access_defaults(lookup_key)
+	if(!descriptor)
+		return null
+	return descriptor.access_defaults_by_key?[lookup_key] || descriptor.access_defaults
+
 //* Location *//
 
 /**

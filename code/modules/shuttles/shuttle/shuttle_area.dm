@@ -13,6 +13,7 @@
 	area_flags = AREA_RAD_SHIELDED | AREA_FLAG_ERODING
 	sound_env = SMALL_ENCLOSED
 	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
+
 	/**
 	 * Set to the shuttle post-init.
 	 * * Do not rely on this being non-null.
@@ -41,6 +42,11 @@
 	if(src.shuttle != expected)
 		CRASH("Area has a different shuttle attached than expected")
 	src.shuttle = null
+
+/area/shuttle/get_access_defaults(lookup_key)
+	if(src.shuttle)
+		return src.shuttle.get_access_defaults(lookup_key)
+	return ..()
 
 /**
  * autodetecting area

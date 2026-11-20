@@ -13,6 +13,16 @@
 	/// * Defaults to shuttle display name if unset.
 	var/display_name
 
+	//* Access *//
+	/**
+	 * Default access holder, if any
+	 */
+	var/datum/access_defaults/access_defaults
+	/**
+	 * Access defaults for specific lookup keys
+	 */
+	var/list/access_defaults_by_key
+
 	//* Flight (overmaps / web) *//
 	/// mass in tons
 	//  todo: in-game mass calculations? only really relevant for drone tbh
@@ -63,6 +73,9 @@
 
 	clone.display_name = src.display_name
 
+	clone.access_defaults_by_key = deep_clone_list(src.access_defaults_by_key)
+	clone.default_access = src.default_access?.clone()
+
 	clone.mass = src.mass
 	clone.allow_atmospheric_landing = src.allow_atmospheric_landing
 	clone.preferred_orientation = src.preferred_orientation
@@ -87,6 +100,11 @@
 /datum/shuttle_descriptor/proc/merge_from(datum/shuttle_descriptor/other)
 	if(!isnull(other.display_name))
 		src.display_name = other.display_name
+
+	if(!isnull(other.access_defaults_by_key))
+		src.access_defaults_by_key = deep_clone_list(other.access_defaults_by_key)
+	if(!isnull(other.default_access))
+		src.default_access = other.default_access?.clone()
 
 	if(!isnull(other.mass))
 		src.mass = other.mass

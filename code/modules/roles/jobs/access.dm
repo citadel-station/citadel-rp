@@ -1,4 +1,3 @@
-
 /// Returns 1 if this mob has sufficient access to use this object
 /obj/proc/allowed(mob/M)
 	if(IsAdminGhost(M))
