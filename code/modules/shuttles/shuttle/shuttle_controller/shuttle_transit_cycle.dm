@@ -504,3 +504,8 @@
 
 /datum/shuttle_transit_cycle/proc/cleanup_warning_visuals()
 	QDEL_LIST(warning_visuals)
+
+#warn above
+
+#warn below? how do we design different cycles?
+

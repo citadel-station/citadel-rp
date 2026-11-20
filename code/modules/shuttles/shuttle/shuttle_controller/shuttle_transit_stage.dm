@@ -76,6 +76,8 @@
 	var/landing_operation_id
 	var/end_delay = 0 SECONDS
 
+	var/datum/shuttle_transit_resolver/destination_resolver
+
 /datum/shuttle_transit_stage/standard/dock_at_destination
 	var/begin_delay = 0 SECONDS
 	var/dock_operation_id
