@@ -179,7 +179,11 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/fire_alarm/alarms_hidden, 21)
 	spawn(rand(0,15))
 		update_icon()
 
-/obj/machinery/fire_alarm/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/fire_alarm/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	if(user.stat || machine_stat & (NOPOWER | BROKEN))
 		return
 

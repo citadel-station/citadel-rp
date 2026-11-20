@@ -309,6 +309,7 @@
 /obj/machinery/attack_ai(mob/user)
 	if(!(interaction_flags_machine & INTERACT_MACHINE_ALLOW_SILICON) && !isAdminGhostAI(user))
 		return FALSE
+
 	if(isrobot(user))// For some reason attack_robot doesn't work
 		// This is to stop robots from using cameras to remotely control machines.
 		if(user.client && user.client.eye == user)
@@ -403,6 +404,9 @@
 
 	if(issilicon(user)) // If we are a silicon, make sure the machine allows silicons to interact with it
 		if(!(interaction_flags_machine & INTERACT_MACHINE_ALLOW_SILICON))
+			return FALSE
+
+		if((interaction_flags_machine & INTERACT_MACHINE_REQUIRES_ADJACENT_SILICON) && !user.Adjacent(src))
 			return FALSE
 
 		if(panel_open && !(interaction_flags_machine & INTERACT_MACHINE_OPEN) && !(interaction_flags_machine & INTERACT_MACHINE_OPEN_SILICON))

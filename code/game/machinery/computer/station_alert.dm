@@ -19,20 +19,6 @@
 	QDEL_NULL(alarm_monitor)
 	return ..()
 
-/obj/machinery/computer/station_alert/attack_ai(mob/user)
-	add_fingerprint(user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-	return
-
-/obj/machinery/computer/station_alert/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-	return
-
 /obj/machinery/computer/station_alert/ui_interact(mob/user)
 	alarm_monitor.ui_interact(user)
 

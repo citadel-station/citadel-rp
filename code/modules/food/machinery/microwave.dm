@@ -162,10 +162,6 @@
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
 		attack_hand(user)
 
-/obj/machinery/microwave/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	user.set_machine(src)
-	interact(user)
-
 /*******************
 *   Microwave Menu
 ********************/

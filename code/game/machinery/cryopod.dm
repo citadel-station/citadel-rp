@@ -99,10 +99,13 @@
 /obj/machinery/computer/cryopod/attack_ai()
 	attack_hand()
 
-/obj/machinery/computer/cryopod/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/computer/cryopod/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	if(machine_stat & (NOPOWER|BROKEN))
 		return
-	..()
 
 	user.set_machine(src)
 

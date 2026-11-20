@@ -64,10 +64,12 @@
 /obj/machinery/computer/am_engine/attack_paw(var/mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/computer/am_engine/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
+/obj/machinery/computer/am_engine/interact(mob/user)
+	. = ..()
+	if(.)
 		return
-	user.machine = src
+
+	user.set_machine(src)
 	var/dat = "<head><title>Engine Computer</title></head><body>"
 	switch(src.state)
 		if(STATE_DEFAULT)

@@ -108,10 +108,6 @@
 			return
 	..()
 
-/obj/machinery/bomb_tester/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	ui_interact(user)
-
 /obj/machinery/bomb_tester/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

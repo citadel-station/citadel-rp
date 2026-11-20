@@ -87,20 +87,6 @@
 
 	src.updateDialog()
 
-
-/obj/machinery/power/generator_type2/attack_ai(mob/user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
-
-
-/obj/machinery/power/generator_type2/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
-
-
 /obj/machinery/power/generator_type2/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) && (!istype(user, /mob/living/silicon/ai)))
 		user.unset_machine()

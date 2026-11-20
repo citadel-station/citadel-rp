@@ -87,12 +87,6 @@
 		radio_controller.remove_object(src, frequency)
 	..()
 
-/obj/machinery/computer/general_air_control/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..(user))
-		return
-
-	ui_interact(user)
-
 /obj/machinery/computer/general_air_control/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption)
 		return

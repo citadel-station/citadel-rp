@@ -53,10 +53,6 @@
 		return
 	..()
 
-/obj/machinery/power/thermoregulator/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	interact(user)
-
 /obj/machinery/power/thermoregulator/interact(mob/user)
 	if(!anchored)
 		return

@@ -55,9 +55,6 @@
 	else
 		..()
 
-/obj/machinery/space_heater/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	interact(user)
-
 /obj/machinery/space_heater/interact(mob/user as mob)
 	if(panel_open)
 

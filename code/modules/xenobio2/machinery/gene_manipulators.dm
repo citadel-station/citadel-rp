@@ -56,12 +56,6 @@
 	var/failed_task = 0
 	var/disk_needs_genes = 0
 
-/obj/machinery/xenobio/attack_ai(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/xenobio/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	nano_ui_interact(user)
-
 /obj/machinery/xenobio/attackby(obj/item/W as obj, mob/user as mob)
 	if(default_deconstruction_screwdriver(user, W))
 		return

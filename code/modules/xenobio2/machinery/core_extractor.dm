@@ -144,11 +144,6 @@
 	eject_core()
 	eject_slime()
 
-//Here lies the UI
-/obj/machinery/slime/extractor/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	user.set_machine(src)
-	interact(user)
-
 /obj/machinery/slime/extractor/interact(mob/user as mob)
 	var/dat = ""
 	if(!inuse)

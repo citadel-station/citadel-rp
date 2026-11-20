@@ -44,14 +44,6 @@
 		icon_screen = "power_monitor"
 	..()
 
-// On user click opens the UI of this computer.
-/obj/machinery/computer/power_monitor/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-
 // Uses dark magic to operate the TGUI of this computer.
 /obj/machinery/computer/power_monitor/ui_interact(mob/user, var/datum/tgui/ui = null)
 	power_monitor.ui_interact(user, ui)
