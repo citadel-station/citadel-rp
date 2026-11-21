@@ -43,5 +43,15 @@
 		//there is at least one unique catalyst for the short reaction, so there is no conflict
 		return FALSE
 
+	if(short_req.moderators.len > 0)
+		var/list/short_inhibitors
+		for(var/i in 1 to length(short_req.moderators))
+			if (short_req.moderators[short_req.moderators[i]] == INFINITY)
+				short_inhibitors += short_req.moderators[i]
+		var/list/inhibition = (long_req.required_reagents || list()) & (short_inhibitors || list())
+		if(inhibition.len > 0)
+		//there is at least one inhibitor in the shorter reaction that is required for the longer one
+			return FALSE
+
 	//if we got this far, the longer reaction will be impossible to create if the shorter one is earlier in GLOB.chemical_reactions_list, and will require the reagents to be added in a particular order otherwise
 	return TRUE

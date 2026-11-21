@@ -2,16 +2,21 @@
 
 /* Solidification */
 /datum/chemical_reaction/solidification
-	name = "Solid Iron"
-	id = "solidiron"
-	required_reagents = list("frostoil" = 5, MAT_IRON = REAGENTS_PER_SHEET)
+	abstract_type = /datum/chemical_reaction/solidification
 	require_whole_numbers = TRUE
 	important_for_logging = TRUE
-	var/sheet_to_give = /obj/item/stack/material/iron
+	var/sheet_to_give
 
 /datum/chemical_reaction/solidification/on_reaction_instant(datum/reagent_holder/holder, multiplier)
 	. = ..()
 	new sheet_to_give(get_turf(holder.my_atom), multiplier)
+
+/datum/chemical_reaction/solidification/iron
+	name = "Solid Iron"
+	id = "solidiron"
+	required_reagents = list("frostoil" = 5, MAT_IRON = REAGENTS_PER_SHEET)
+	inhibitors = list("carbon" = 1)
+	sheet_to_give = /obj/item/stack/material/iron
 
 /datum/chemical_reaction/solidification/phoron
 	name = "Solid Phoron"
@@ -37,6 +42,7 @@
 /datum/chemical_reaction/solidification/platinum
 	name = "Solid Platinum"
 	id = "solidplatinum"
+	inhibitors = list("carbon" = 1)
 	required_reagents = list("frostoil" = 5, MAT_PLATINUM = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/platinum
 
@@ -59,12 +65,13 @@
 /datum/chemical_reaction/solidification/steel
 	name = "Solid Steel"
 	id = "solidsteel"
-	required_reagents = list("frostoil" = 5, MAT_STEEL = REAGENTS_PER_SHEET)
+	inhibitors = list("platinum" = 1)
+	required_reagents = list("frostoil" = 5, "iron" = 10, "carbon" = 10)
 	sheet_to_give = /obj/item/stack/material/steel
 
 
 /datum/chemical_reaction/solidification/plasteel
 	name = "Solid Plasteel"
 	id = "solidplasteel"
-	required_reagents = list("frostoil" = 10, MAT_PLASTEEL = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 10, "iron" = 8, "carbon" = 8, "platinum" = 4)
 	sheet_to_give = /obj/item/stack/material/plasteel
