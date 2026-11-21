@@ -59,7 +59,8 @@
 		"pacid" =           3,
 		"plantbgone" =      3,
 		"cryoxadone" =     -3,
-		"radium" =          2
+		"radium" =          2,
+		"uranium" =         3,
 		)
 	var/global/list/nutrient_reagents = list(
 		"milk" =            0.1,
@@ -124,13 +125,16 @@
 		"adminordrazine" = list(  1,    1,   1  ),
 		"robustharvest" =  list(  0,    0.2, 0  ),
 		"left4zed" =       list(  0,    0,   0.2),
-		"ash" =		       list(  0,    0.2, 0)
+		"ash" =		       list(  0.5,  0.2, 0  ),
+		"catalyst" =       list(  0.5,  0,   0.2)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
+		"catalyst" = 6,
 		"radium" =  8,
+		"uranium" = 12,
 		"mutagen" = 15
 		)
 
@@ -254,7 +258,7 @@
 			if(toxic_reagents[R.id])
 				toxins += toxic_reagents[R.id]         * reagent_total
 			if(weedkiller_reagents[R.id])
-				weedlevel -= weedkiller_reagents[R.id] * reagent_total
+				weedlevel += weedkiller_reagents[R.id] * reagent_total
 			if(pestkiller_reagents[R.id])
 				pestlevel += pestkiller_reagents[R.id] * reagent_total
 

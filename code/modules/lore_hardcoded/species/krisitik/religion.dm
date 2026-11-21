@@ -1,4 +1,4 @@
-/datum/lore/character_background/religion/krisitik_ruinist
+/datum/lore/character_background/religion/species/krisitik/ruinist
 	name = "Ruinism"
 	id = "religion_krisitik_ruin"
 	category = "Krisitik"
@@ -8,7 +8,7 @@
 	ensure the sruvival of said species. Though only about a quarter of Krisitik are Ruinists their communities are found throughout their space, often times further \
 	beyond what is officially considered Krisitik space."
 
-/datum/lore/character_background/religion/krisitik_precursor
+/datum/lore/character_background/religion/species/krisitik/precursor
 	name = "Precursor Cults"
 	id = "religion_krisitik_precursor"
 	category = "Krisitik"
@@ -18,7 +18,7 @@
 	or taking a journey to the Dionae home cluster 'An Organism Teeming With Storied and Harmonious Life'. Through these expeditions the Precursor Cults are said to possess secret \
 	knowledge about precursor civilizations that may protect the Krisitik race when faced with destruction."
 
-/datum/lore/character_background/religion/krisitik_fission
+/datum/lore/character_background/religion/species/krisitik/fission
 	name = "Fission Cults"
 	id = "religion_krisitik_fission"
 	category = "Krisitik"
