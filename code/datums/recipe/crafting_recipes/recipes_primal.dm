@@ -838,3 +838,11 @@
 	reqs = list(/datum/reagent/nutriment/triglyceride/oil/tallow = 1, /datum/reagent/alchemybase = 1, /datum/reagent/calcium = 1)
 	category = CAT_ALCHEMY
 	always_available = FALSE
+
+/datum/crafting_recipe/candle
+	name = "Candle"
+	result = /obj/item/flame/candle/tallow
+	time = 10
+	reqs = list(/datum/reagent/nutriment/triglyceride/oil/tallow = 5, /datum/reagent/shimashpulp = 3)
+	category = CAT_ALCHEMY
+	always_available = FALSE

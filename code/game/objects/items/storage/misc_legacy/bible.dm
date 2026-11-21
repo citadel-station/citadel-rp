@@ -5,6 +5,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = WEIGHT_CLASS_NORMAL
+	max_single_weight_class = WEIGHT_CLASS_SMALL
+	max_items = 1
 	var/deity_name = "Christ"
 
 /obj/item/storage/bible/booze

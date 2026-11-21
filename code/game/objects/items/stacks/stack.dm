@@ -234,7 +234,7 @@
 		return FALSE
 	if((strict_color_stacking || other.strict_color_stacking) && (color != other.color))
 		return FALSE
-	return can_merge_into_type(other.type)
+	return can_merge_into_type(other.stack_type)
 
 // todo: deprecated
 /obj/item/stack/proc/can_use(used)

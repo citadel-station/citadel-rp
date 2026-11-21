@@ -244,6 +244,9 @@
 	/// Used to avoid infinite cleaving.
 	var/cleaving = FALSE
 
+	/// Were we spawned as part of a xenoarch digsite?
+	var/xenoarch_spawned = FALSE
+
 /obj/item/Initialize(mapload)
 	. = ..()
 	loc?.on_contents_item_new(src)

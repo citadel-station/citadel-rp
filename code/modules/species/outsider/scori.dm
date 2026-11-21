@@ -13,7 +13,7 @@
 	survivors. Dwelling deep underground in caves, or travelling across the planet's surface in nomadic caravans, sightings \
 	of Scori tribesmen were historically treated as hoaxes. Nanotrasen pathfinding teams operating in the wake of the expedition \
 	to Kristen's Harmony have since confirmed the presence of a nearby Scori tribe."
-	wikilink = "https://citadel-station.dev/wikiRP/index.php?title=Race:_Scori"
+	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Scori"
 	catalogue_data = list(/datum/category_item/catalogue/fauna/ashlander)
 
 	icobase = 'icons/mob/species/human/body_greyscale.dmi'
@@ -30,7 +30,7 @@
 
 	galactic_language = FALSE
 	default_language = LANGUAGE_ID_SCORI
-	intrinsic_languages = list(LANGUAGE_ID_SCORI,LANGUAGE_ID_SIGN)
+	intrinsic_languages = list(LANGUAGE_ID_SCORI)
 	max_additional_languages = 0
 
 	species_flags = NO_MINOR_CUT
@@ -55,7 +55,7 @@
 	breath_type = GAS_ID_CARBON_DIOXIDE
 	exhale_type = GAS_ID_OXYGEN
 
-	heat_discomfort_level = T0C+20
+	heat_discomfort_level = T0C+80
 
 	warning_low_pressure = 10
 	safe_pressure = 18

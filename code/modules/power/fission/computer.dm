@@ -52,7 +52,7 @@
 	if(isnull(linked) || !linked.anchored)
 		data["not_connected"] = 1
 	else
-		data = linked.ui_data(TRUE)
+		data = linked.nuke_ui_data(TRUE)
 		data["not_connected"] = 0
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)

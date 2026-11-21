@@ -29,7 +29,7 @@ var/list/marker_beacon_colors = list(
 	skip_legacy_icon_update = TRUE
 	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 	belt_storage_class = BELT_CLASS_SMALL
-	var/picked_color = "random"
+	var/picked_color = "Random"
 
 /obj/item/stack/marker_beacon/ten
 	amount = 10
@@ -98,7 +98,7 @@ var/list/marker_beacon_colors = list(
 	. = ..()
 	picked_color = set_color
 	if(!picked_color || !marker_beacon_colors[picked_color])
-		picked_color = pick(marker_beacon_colors)
+		picked_color = pick(marker_beacon_colors - "Random")
 	update_icon()
 
 /obj/structure/marker_beacon/examine(mob/user, dist)
