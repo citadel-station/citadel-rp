@@ -1,0 +1,5 @@
+author: "its-helvi"
+delete-after: True
+changes:
+  - bugfix: "Falsewalls should now have their wall sprites back when closed."
+  - bugfix: "Falsewalls have closing animations again and should no longer draw over people."
