@@ -51,3 +51,8 @@
   - rscadd: Uranium and catalyst are now mutagenic. Uranium is toxic to plants, catalyst
       heals plants.
   - tweak: Ash now heals plants as well as increasing yield.
+2026-11-24:
+  its-helvi:
+  - bugfix: Frost oil can solidify steel and plasteel sheets now.
+  - code_imp: Unit tests for recipe collisions now consider inhibitors.
+  - code_imp: Solidification recipes now have a proper abstract type.

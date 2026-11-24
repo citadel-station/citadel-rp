@@ -1,6 +1,0 @@
-author: "its-helvi"
-delete-after: True
-changes:
-  - bugfix: "Frost oil can solidify steel and plasteel sheets now."
-  - code_imp: "Unit tests for recipe collisions now consider inhibitors."
-  - code_imp: "Solidification recipes now have a proper abstract type."
