@@ -221,6 +221,7 @@
 	name = "ashen sandals"
 	desc = "Hardy leather sandles capable of withstanding harsh conditions."
 	icon_state = "roman"
+	can_hold_knife = TRUE
 
 /obj/item/clothing/shoes/boots/bsing
 	name = "blue performer's boots"
