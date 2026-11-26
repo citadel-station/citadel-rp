@@ -1,0 +1,5 @@
+author: "its-helvi"
+delete-after: True
+changes:
+  - bugfix: "Fixes sand sifter on-head sprites."
+  - rscadd: "Ashlander sandals can hold knives for real this time"
