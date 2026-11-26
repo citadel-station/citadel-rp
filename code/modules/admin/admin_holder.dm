@@ -6,6 +6,9 @@
 	///
 	/// todo: re-open these on reconnect.
 	var/list/datum/admin_modal/admin_modals
+	/// lazy list of active admin modals by key
+	/// * used for deduping
+	var/list/admin_modals_by_key
 	/// admin panels by type
 	/// * admin panels are stateful, unlike modals, and aren't deleted
 	///   when they are closed.
@@ -74,6 +77,13 @@
 /datum/admins/proc/open_admin_modal(path, ...) as /datum/admin_modal
 	ASSERT(ispath(path, /datum/admin_modal))
 	var/datum/admin_modal/modal = new path(src)
+	modal.Preload(arglist(args.Copy(2)))
+
+	if(admin_modals_by_key[modal.modal_registered_key])
+		qdel(modal)
+		return null
+	admin_modals_by_key[modal.modal_registered_key] = modal
+
 	if(!modal.Initialize(arglist(args.Copy(2))))
 		qdel(modal)
 		message_admins("Failed to initialize an admin modal. Check runtimes for more details.")

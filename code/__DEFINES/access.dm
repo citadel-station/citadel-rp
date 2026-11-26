@@ -66,6 +66,13 @@ GLOBAL_LIST_INIT(access_type_names, list(
 	"[ACCESS_TYPE_PRIVATE]" = "Unknown",
 ))
 
+//* Default Access Lookup Keys *//
+
+#define ACCESS_DEFAULTS_LOOKUP_KEY_STAFF "staff"
+#define ACCESS_DEFAULTS_LOOKUP_KEY_MAINTENANCE "maintenance"
+#define ACCESS_DEFAULTS_LOOKUP_KEY_PUBLIC "public"
+#define ACCESS_DEFAULTS_LOOKUP_KEY_COMMAND "command"
+
 //? Access Values - constants & datums                ?//
 //! DEFINE NUMBERS MUST NEVER CHANGE                  !//
 //* Otherwise all maps break.                         *//

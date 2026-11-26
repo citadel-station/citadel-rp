@@ -14,11 +14,20 @@
 	/// object flags, see __DEFINES/_flags/obj_flags.dm
 	var/obj_flags = OBJ_MELEE_TARGETABLE | OBJ_RANGE_TARGETABLE
 
-	//? Access - see [modules/jobs/access.dm]
-	/// If set, all of these accesses are needed to access this object.
+	//* Access - see [modules/roles/jobs/access.dm] *//
+
+	/**
+	 * If set, all of these accesses are needed to access this object.
+	 * * When modifying this, please copy a new list if
+	 *   it happens to be a list. It's very likely shared with other objects.
+	 */
 	//  todo: getter / setter, enforced cached & deduped lists
 	var/list/req_access
-	/// If set, at least one of these accesses are needed to access this object.
+	/**
+	 * If set, at least one of these accesses are needed to access this object.
+	 * * If modifying this, please copy a new list if it happens to be a list.
+	 *   It's very likely shared with other objects.
+	 */
 	//  todo: getter / setter, enforced cached & deduped lists
 	var/list/req_one_access
 

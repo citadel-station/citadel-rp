@@ -91,6 +91,7 @@
 /datum/controller/subsystem/mapping/proc/level_get_baseturf(z)
 	var/datum/map_level/L = ordered_levels[z]
 	return L.base_turf
+
 /**
  * Gets basearea type of a zlevel
  * * Returns null if the zlevel doesn't care about its base area. You should fall back on [BLANK_AREA_TYPE].
@@ -112,6 +113,14 @@
  */
 /datum/controller/subsystem/mapping/proc/level_get_fluff_name(z)
 	return ordered_levels[z]?.display_name
+
+//* Name *//
+
+/**
+ * returns the real name of a level
+ */
+/datum/controller/subsystem/mapping/proc/level_get_name(z)
+	return ordered_levels[z]?.name
 
 //* Stack *//
 

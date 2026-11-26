@@ -391,6 +391,10 @@
 
 	holder?.disassociate()
 
+	//* Cleanup secondary maps *//
+	for(var/datum/secondary_map/secondary_map in secondary_maps)
+		secondary_map.revoke_from_client(src)
+
 	//* Cleanup rendering *//
 	if(using_perspective)
 		set_perspective(null)

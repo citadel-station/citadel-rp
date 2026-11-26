@@ -258,8 +258,7 @@
 		if(!locked)
 			open()
 		else
-			req_access = list()
-			req_access += pick(get_all_station_access())
+			req_access = list(pick(get_all_station_access()))
 	..()
 
 /obj/structure/closet/crate/secure/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)

@@ -160,6 +160,19 @@
 /turf/space/sector_always_visible_from_high_altitude()
 	return TRUE
 
+//* Special Variants *//
+
+/**
+ * TODO: This is boring, have transit fuck people up.
+ */
+/turf/space/transit_border
+	name = "transit border"
+	desc = "You're not sure how you're still kept inside the vessel undergoing translation \
+	if you're close enough to see this (and likely outside of the vessel in question), but you \
+	probably shouldn't complain."
+
+//* Special Variants - Old; These should be replaced with static icons and parallax. *//
+
 //// Special variants used in various maps ////
 
 // Bluespace jump turf!
@@ -182,3 +195,4 @@
 /turf/space/sandyscroll/Initialize(mapload)
 	. = ..()
 	icon_state = "desert_ns"
+

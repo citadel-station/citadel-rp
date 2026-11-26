@@ -57,6 +57,12 @@
 	CRASH("unimplemented proc called")
 
 /**
+ * Checks if we own an atom.
+ */
+/datum/overmap_location/proc/contains_atom(atom/A)
+	CRASH("unimplemented proc called")
+
+/**
  * get our z-level indices
  *
  * * entities that are on z's like shuttles instead of owning them use the z level they're on
@@ -142,6 +148,16 @@
 	if(!acquired_level_locks)
 		return FALSE
 	return is_physically_level_impl(z)
+
+/**
+ * Gets something to jump to.
+ *
+ * Usually used for observers and admins.
+ *
+ * @return turf or null
+ */
+/datum/overmap_location/proc/get_jump_target()
+	return null
 
 //* Instantiation *//
 
