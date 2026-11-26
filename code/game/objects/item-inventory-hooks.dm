@@ -7,7 +7,13 @@
 		// inventory handling
 		if(destination == worn_inside)
 			return ..()
-		var/mob/M = get_worn_mob()
+		//Because grippers effectively behave as hands without being hands, we need a special check to see if we are being handled by one.
+		var/mob/M
+		if(istype(loc, /obj/item/gripper))
+			var/obj/item/gripper/my_gripper = loc
+			M = my_gripper.get_worn_mob()
+		else
+			M = get_worn_mob()
 		if(!ismob(M))
 			worn_slot = null
 			worn_hook_suppressed = FALSE
