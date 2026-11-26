@@ -56,3 +56,8 @@
   - bugfix: Frost oil can solidify steel and plasteel sheets now.
   - code_imp: Unit tests for recipe collisions now consider inhibitors.
   - code_imp: Solidification recipes now have a proper abstract type.
+2026-11-25:
+  its-helvi:
+  - bugfix: Falsewalls should now have their wall sprites back when closed.
+  - bugfix: Falsewalls have closing animations again and should no longer draw over
+      people.
