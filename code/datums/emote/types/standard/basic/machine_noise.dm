@@ -109,3 +109,14 @@
 	feedback_default = "<b>%%USER%%</b> lets off some steam."
 	sfx = 'sound/machines/clockcult/steam_whoosh.ogg'
 	sfx_volume = 30
+
+/datum/emote/standard/basic/machine_noise/whirr
+	name = "Machine - Whirr"
+	desc = "Let your servos whirr."
+	bindings = list(
+		"whirr",
+		"cute-whirr",
+	)
+	feedback_default = "<b>%%USER%%</b> whirrs adorably."
+	feedback_default_targeted = "<b>%%USER%%</b> looks at %%TARGET%% and whirrs adorably."
+	sfx = 'sound/machines/cutewhirr.ogg'
