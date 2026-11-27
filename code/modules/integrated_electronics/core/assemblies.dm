@@ -543,6 +543,10 @@
 		return gained
 	return 0
 
+/obj/item/electronic_assembly/object_cell_slot_removed()
+	for(var/obj/item/integrated_circuit/IC in assembly_components)
+		IC.power_fail()
+
 /obj/item/electronic_assembly/on_loc_moved(oldloc)
 	. = ..()
 	for(var/obj/item/integrated_circuit/IC in assembly_components)

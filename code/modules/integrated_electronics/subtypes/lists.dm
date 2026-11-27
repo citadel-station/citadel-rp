@@ -163,6 +163,62 @@
 
 	output_list1 ~! input_list ? activate_pin(2) : activate_pin(3)
 
+/obj/item/integrated_circuit/lists/listconverter
+	name = "list converter circuit"
+	desc = "This circuit will convert the data in a list from one type to another."
+	extended_desc = "Data will be sent without conversion if not applicable, nulled if force is true.  Settings:\
+	0: text to number  1: number to text  2: reference to string  3: reference encoder  4: reference decoder  5: \
+	lowercase string converter  6: uppercase string converter  7: radians to degrees converter  8: degrees to radians converter"
+	inputs = list(
+		"list" = IC_PINTYPE_LIST,
+		"setting" = IC_PINTYPE_NUMBER,
+		"force" = IC_PINTYPE_BOOLEAN
+		)
+	outputs = list(
+		"list converted" = IC_PINTYPE_LIST
+		)
+	icon_state = "addition"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/lists/listconverter/do_work()
+	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	var/setting = get_pin_data(IC_INPUT, 2)
+	var/force = get_pin_data(IC_INPUT, 3)
+	var/working = null
+	var/list/output = list()
+	for(var/I in input_list)
+		switch(setting)
+			if(0)
+				working = isnum(I) ? num2text(I) : "0"		//set working to text, if possible, else 0
+			if(1)
+				working = istext(I) ? text2num(I) :  0		//set working to text, if possible, else 0
+			if(2)
+				var/datum/weakref/A = astype(I)				//astype will return null if not a weakref, safe
+				var/atom/B = A?.resolve()
+				working = B ? B.name : null
+			if(3)
+				working = isweakref(I) ? add_data_signature("\ref[I]") : null
+			if(4)
+				var/signature = null
+				var/dec = null
+				if(istext(I))
+					var/list/signature_and_data = splittext(I, ":")
+					signature = signature_and_data[1]
+					dec = signature_and_data[2]
+				working = check_data_signature(signature, dec) ? WEAKREF(locate(dec)) : null
+			if(5)
+				working = istext(I) ? lowertext(I) : null
+			if(6)
+				working = istext(I) ? uppertext(I) : null
+			if(7)
+				working = isnum(I) ? TODEGREES(I) :  0
+			if(8)
+				working = isnum(I) ? TORADIANS(I) :  0
+		output += working ? working : force ? working : I	//if working is text, or we force, set output to working, else set same data.
+	set_pin_data(IC_OUTPUT, 1, output)
+	push_data()
+	activate_pin(2)
+
 /obj/item/integrated_circuit/lists/listset
 	name = "list set circuit"
 	desc = "This circuit will remove any duplicate entries from a list."
