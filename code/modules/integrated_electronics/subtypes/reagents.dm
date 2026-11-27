@@ -608,7 +608,7 @@
 		"list of reagents" = IC_PINTYPE_LIST
 		)
 	inputs_default = list(
-		"3" = 5
+		"3" = 10
 		)
 	outputs = list()
 	activators = list(
@@ -647,7 +647,7 @@
 	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)
 		return
 	source.reagents.transfer_to_holder(
-		target,
+		target.reagents,
 		direc ? source.reagents.reagent_volumes - demand : demand,
 		transfer_amount,
 	)

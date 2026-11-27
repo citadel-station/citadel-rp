@@ -24,14 +24,12 @@
 
 /obj/item/integrated_circuit/filter/ref/do_work()
 	var/A = get_pin_data(IC_INPUT, 1)
-	get_pin_data(IC_INPUT, 1)
 	set_pin_data(IC_OUTPUT, 1, may_pass(A) ? TRUE : FALSE)
-
+	..()
 	if(get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
-	..()
 
 /obj/item/integrated_circuit/filter/ref/mob
 	name = "life filter"
@@ -105,49 +103,37 @@
 
 /obj/item/integrated_circuit/filter/ref/custom
 	name = "custom filter"
-	desc = "Allows custom filtering.  It will match type against a stored reference; it will also take a type string."
+	desc = "Allows custom filtering.  It will match type against a stored reference."
 	icon_state = "filter_custom"
-	inputs = list( "input" = IC_PINTYPE_REF, "expected type" = IC_PINTYPE_ANY)
+	inputs = list("input" = IC_PINTYPE_REF, "expected type" = IC_PINTYPE_REF)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-
-/obj/item/integrated_circuit/filter/ref/custom/may_pass(var/datum/data, var/datum/typedata)
-	if(!istype(typedata) && !istext(typedata)) return FALSE
-	return (data && typedata && (istype(data, typedata)))
 
 /obj/item/integrated_circuit/filter/ref/custom/do_work()
 	var/A = get_pin_data(IC_INPUT, 1)
-	var/T = get_pin_data(IC_INPUT, 2)
-	set_pin_data(IC_OUTPUT, 1, may_pass(A, T) ? TRUE : FALSE)
-
+	filter_type = get_pin_data(IC_INPUT, 2)
+	set_pin_data(IC_OUTPUT, 1, may_pass(A) ? TRUE : FALSE)
+	push_data()
 	if(get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
-	push_data()
 
-/obj/item/integrated_circuit/filter/string
+/obj/item/integrated_circuit/filter/ref/string
 	name = "string filter"
-	desc = "Allows string filtering.  It will match a string against a stored string."
-	extended_desc = "Matches incoming data against its filtering parameters and occasionally produces both false positives and negatives."
-	icon_state = "filter_string"
-	complexity = 2
+	desc = "Allows custom filtering.  It will match type against a given type string."
 	inputs = list(
-		"input" = IC_PINTYPE_STRING,
+		"input" = IC_PINTYPE_REF,
 		"expected string" = IC_PINTYPE_STRING
 		)
-	outputs = list("result" = IC_PINTYPE_BOOLEAN)
+	icon_state = "filter_string"
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
-/obj/item/integrated_circuit/filter/string/may_pass(var/datum/integrated_io/A, var/datum/integrated_io/B)
-	return A == B
-
-/obj/item/integrated_circuit/filter/string/do_work()
+/obj/item/integrated_circuit/filter/ref/string/do_work()
 	var/A = get_pin_data(IC_INPUT, 1)
-	var/B = get_pin_data(IC_INPUT, 2)
-	set_pin_data(IC_OUTPUT, 1, may_pass(A, B) ? TRUE : FALSE)
-
+	filter_type = text2path(get_pin_data(IC_INPUT, 2))
+	set_pin_data(IC_OUTPUT, 1, may_pass(A) ? TRUE : FALSE)
+	push_data()
 	if(get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
-	push_data()
