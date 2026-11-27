@@ -61,3 +61,8 @@
   - bugfix: Falsewalls should now have their wall sprites back when closed.
   - bugfix: Falsewalls have closing animations again and should no longer draw over
       people.
+2026-11-27:
+  its-helvi:
+  - bugfix: Fixes sand sifter on-head sprites.
+  - rscadd: Ashlander sandals can hold knives for real this time
+  - soundadd: Added a new whirr emote for synthetics.
