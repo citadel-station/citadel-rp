@@ -95,6 +95,25 @@
 /obj/item/material/kitchen/utensil/spoon/plastic
 	material_parts = /datum/prototype/material/plastic
 
+/obj/item/material/kitchen/utensil/chopsticks
+	name = "chopsticks"
+	desc = "A set of chopsticks. Used extensively in some terran cultures. They take a bit of practice."
+	icon_state = "chopsticks"
+	attack_verb = list("attacked", "poked")
+	material_significance = MATERIAL_SIGNIFICANCE_SHARD
+	damage_mode = NONE
+
+/obj/item/material/kitchen/utensil/chopsticks/wood
+	material_parts = /datum/prototype/material/wood_plank
+
+/obj/item/material/kitchen/utensil/chopsticks/fancy
+	material_parts = /datum/prototype/material/wood_plank/hardwood
+	desc = "A set of chopsticks. Used extensively in some terran cultures. These are particularly fancy."
+
+/obj/item/material/kitchen/utensil/chopsticks/plastic
+	material_parts = /datum/prototype/material/plastic
+	desc = "A set of chopsticks. Used extensively in some terran cultures. These are made of cheap plastic."
+
 /*
  * Knives
  */
