@@ -151,6 +151,7 @@
 		/obj/item/material/kitchen/utensil/fork = 6,
 		/obj/item/material/knife/plastic = 6,
 		/obj/item/material/kitchen/utensil/spoon = 6,
+		/obj/item/material/kitchen/utensil/chopsticks/wood = 6,
 		/obj/item/material/knife = 3,
 		/obj/item/material/kitchen/rollingpin = 2,
 		/obj/item/reagent_containers/food/drinks/glass2/square = 8,

@@ -194,7 +194,7 @@
 		var/obj/item/material/kitchen/utensil/U = W
 		if(U.scoop_food)
 			if(!U.reagents)
-				U.create_reagents(5)
+				U.create_reagents(1)
 
 			if (U.reagents.total_volume > 0)
 				to_chat(user, "<font color='red'>You already have something on your [U].</font>")
@@ -212,9 +212,12 @@
 			I.color = filling_color
 			U.add_overlay(I)
 
-			reagents.trans_to_obj(U, min(reagents.total_volume,5))
+			reagents.trans_to_obj(U, min(reagents.total_volume,1))
 
 			if (reagents.total_volume <= 0)
+				if(trash)
+					var/obj/item/TrashItem = new trash(user)
+					TrashItem.forceMove(drop_location())
 				qdel(src)
 			return
 
