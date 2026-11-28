@@ -10,14 +10,6 @@
 	var/screen = 0
 	var/list/stored_data
 
-/obj/machinery/computer/mecha/attack_ai(mob/user)
-	return attack_hand(user)
-
-/obj/machinery/computer/mecha/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/mecha/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

@@ -31,7 +31,11 @@
 	var/category = "Any"
 	var/author
 
-/obj/machinery/librarypubliccomp/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/librarypubliccomp/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Library Visitor</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	switch(screenstate)
@@ -160,7 +164,11 @@
 			var/obj/item/book/M = new path(null)
 			all_books[M.title] = M
 
-/obj/machinery/librarycomp/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/librarycomp/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Book Inventory Management</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	switch(screenstate)
@@ -476,7 +484,11 @@
 		if(!user.attempt_insert_item_for_installation(I, src))
 			return
 
-/obj/machinery/libraryscanner/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/libraryscanner/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	if(cache)

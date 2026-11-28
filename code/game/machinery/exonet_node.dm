@@ -95,18 +95,6 @@ GLOBAL_LIST_EMPTY(exonet_nodes)
 	else
 		..()
 
-// Proc: attack_ai()
-// Parameters: 1 (user - the AI clicking on the machine)
-// Description: Redirects to attack_hand()
-/obj/machinery/exonet_node/attack_ai(mob/user)
-	attack_hand(user)
-
-// Proc: attack_hand()
-// Parameters: 1 (user - the person clicking on the machine)
-// Description: Opens the TGUI interface with ui_interact()
-/obj/machinery/exonet_node/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 // Proc: ui_interact()
 // Parameters: 2 (user - person interacting with the UI, ui - the UI itself, in a refresh)
 // Description: Handles opening the TGUI interface

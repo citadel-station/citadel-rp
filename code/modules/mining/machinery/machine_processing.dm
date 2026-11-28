@@ -30,11 +30,6 @@
 		inserted_id.forceMove(loc) //Prevents deconstructing from deleting whatever ID was inside it.
 	. = ..()
 
-/obj/machinery/mineral/processing_unit_console/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	interact(user)
-
 /obj/machinery/mineral/processing_unit_console/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/card/id))
 		if(!powered())

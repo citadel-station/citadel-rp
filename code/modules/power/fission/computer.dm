@@ -34,15 +34,6 @@
 		return
 	return ..()
 
-/obj/machinery/computer/fission_monitor/attack_ai(mob/user)
-	attack_hand(user)
-
-/obj/machinery/computer/fission_monitor/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	nano_ui_interact(user)
-
 /obj/machinery/computer/fission_monitor/nano_ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!src.powered())
 		return

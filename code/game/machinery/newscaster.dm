@@ -246,10 +246,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				isbroken=1
 			update_icon()
 
-/obj/machinery/newscaster/attack_ai(mob/user)
-	return attack_hand(user)
+/obj/machinery/newscaster/interact(mob/user)
+	. = ..()
+	if(.)
+		return
 
-/obj/machinery/newscaster/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	if(!ispowered || isbroken)
 		return
 
@@ -259,7 +260,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	if(!node || !node.on || !node.allow_external_newscasters)
 		to_chat(user, SPAN_DANGER("Error: Cannot connect to external content.  Please try again in a few minutes.  If this error persists, please \
 		contact the system administrator."))
-		return FALSE
+		return TRUE
 
 	if(!user.IsAdvancedToolUser())
 		return FALSE
@@ -502,6 +503,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		human_or_robot_user << browse(dat, "window=newscaster_main;size=400x600")
 		onclose(human_or_robot_user, "newscaster_main")
+	return TRUE
 
 /obj/machinery/newscaster/Topic(href, href_list)
 	if(..())

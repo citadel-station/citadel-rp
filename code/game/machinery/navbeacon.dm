@@ -89,16 +89,6 @@ var/global/list/navbeacons = list()	// no I don't like putting this in, but it w
 			to_chat(user, "You must open the cover first!")
 	return
 
-/obj/machinery/navbeacon/attack_ai(var/mob/user)
-	interact(user, 1)
-
-/obj/machinery/navbeacon/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-
-	if(!user.IsAdvancedToolUser())
-		return FALSE
-
-	interact(user, FALSE)
-
 /obj/machinery/navbeacon/interact(mob/user, ai = FALSE)
 	var/turf/T = loc
 	if(!T.is_plating())

@@ -6,6 +6,8 @@ var/bomb_set
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "nuclearbomb0"
 	density = TRUE
+	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_SET_MACHINE | INTERACT_MACHINE_REQUIRES_ADJACENT_SILICON
+
 	var/deployable = FALSE
 	var/extended = FALSE
 	var/lighthack = FALSE
@@ -162,7 +164,11 @@ var/bomb_set
 				return
 	..()
 
-/obj/machinery/nuclearbomb/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/machinery/nuclearbomb/interact(mob/user)
+	. = ..()
+	if(.)
+		return
+
 	if(extended)
 		if(!user.IsAdvancedToolUser())
 			to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")

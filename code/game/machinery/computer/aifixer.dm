@@ -48,11 +48,6 @@
 			to_chat(user, SPAN_NOTICE("There is no AI loaded onto this computer, and no AI loaded onto [I]. What exactly are you trying to do here?"))
 	return ..()
 
-/obj/machinery/computer/aifixer/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (NOPOWER|BROKEN))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/aifixer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

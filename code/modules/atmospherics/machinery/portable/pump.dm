@@ -95,17 +95,6 @@
 /obj/machinery/portable_atmospherics/powered/pump/return_air()
 	return air_contents
 
-/obj/machinery/portable_atmospherics/powered/pump/attack_ai(var/mob/user)
-	src.add_hiddenprint(user)
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_ghost(var/mob/user)
-	. = ..()
-	return src.attack_hand(user)
-
-/obj/machinery/portable_atmospherics/powered/pump/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 /obj/machinery/portable_atmospherics/powered/pump/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

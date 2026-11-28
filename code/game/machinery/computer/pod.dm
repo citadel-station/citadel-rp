@@ -43,11 +43,9 @@
 			return
 	return
 
-/obj/machinery/computer/pod/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/pod/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
+/obj/machinery/computer/pod/interact(mob/user)
+	. = ..()
+	if(.)
 		return
 
 	var/dat = "<HTML><BODY><TT><B>[title]</B>"

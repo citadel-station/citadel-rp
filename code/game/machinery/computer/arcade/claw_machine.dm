@@ -157,14 +157,6 @@
 
 /// End Payment
 
-/obj/machinery/computer/arcade/clawmachine/Initialize(mapload)
-	. = ..()
-
-/obj/machinery/computer/arcade/clawmachine/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
-	ui_interact(user)
-
 /// TGUI Stuff
 
 /obj/machinery/computer/arcade/clawmachine/ui_interact(mob/user, datum/tgui/ui)

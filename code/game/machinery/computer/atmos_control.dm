@@ -15,9 +15,6 @@
 	var/list/monitored_alarm_ids = null
 	var/datum/tgui_module_old/atmos_control/atmos_control
 
-/obj/machinery/computer/atmoscontrol/Initialize(mapload)
-	. = ..()
-
 /obj/machinery/computer/atmoscontrol/laptop //TODO: Change name to PCU and update mapdata to include replacement computers
 	name = "\improper Atmospherics PCU"
 	desc = "A personal computer unit. It seems to have only the Atmosphereics Control program installed."
@@ -29,14 +26,6 @@
 	depth_level = 0
 	depth_projected = FALSE
 	climb_allowed = FALSE
-
-/obj/machinery/computer/atmoscontrol/attack_ai(mob/user)
-	ui_interact(user)
-
-/obj/machinery/computer/atmoscontrol/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return TRUE
-	ui_interact(user)
 
 /obj/machinery/computer/atmoscontrol/emag_act(remaining_carges, mob/user)
 	if(!emagged)

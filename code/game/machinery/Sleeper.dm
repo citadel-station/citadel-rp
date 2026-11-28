@@ -32,7 +32,6 @@
 			sleepernew.console = src
 			break
 
-
 /obj/machinery/sleep_console/attack_ai(mob/user)
 	return attack_hand(user)
 

@@ -44,11 +44,10 @@
 	else
 		..()
 
-/obj/machinery/pda_multicaster/attack_ai(mob/user)
-	attack_hand(user)
-
-/obj/machinery/pda_multicaster/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	toggle_power(user)
+/obj/machinery/pda_multicaster/interact(mob/user)
+	. = ..()
+	if(.)
+		return
 
 /obj/machinery/pda_multicaster/proc/toggle_power(mob/user)
 	toggle = !toggle

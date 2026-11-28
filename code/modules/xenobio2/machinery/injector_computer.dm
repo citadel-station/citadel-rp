@@ -20,13 +20,8 @@
 	var/active
 
 /obj/machinery/computer/xenobio2/Destroy()
-	injector.computer = null
-	..()
-
-/obj/machinery/computer/xenobio2/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return 1
-	nano_ui_interact(user)
+	injector?.computer = null
+	return ..()
 
 /obj/machinery/computer/xenobio2/attackby(var/obj/item/W, var/mob/user)
 

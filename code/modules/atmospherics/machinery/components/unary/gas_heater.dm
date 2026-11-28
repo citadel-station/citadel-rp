@@ -68,12 +68,6 @@
 
 	update_icon()
 
-/obj/machinery/atmospherics/component/unary/heater/attack_ai(mob/user as mob)
-	ui_interact(user)
-
-/obj/machinery/atmospherics/component/unary/heater/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	ui_interact(user)
-
 /obj/machinery/atmospherics/component/unary/heater/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

@@ -241,14 +241,6 @@ GLOBAL_LIST_EMPTY(smeses)
 		return terminal.powernet.draw_power(amount)
 	return 0
 
-/obj/machinery/power/smes/attack_ai(mob/user)
-	add_hiddenprint(user)
-	ui_interact(user)
-
-/obj/machinery/power/smes/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	add_fingerprint(user)
-	ui_interact(user)
-
 /obj/machinery/power/smes/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(W.is_screwdriver())
 		if(!open_hatch)

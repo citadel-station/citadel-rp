@@ -62,11 +62,6 @@
 
 	return data
 
-/obj/machinery/computer/telecomms/server/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(machine_stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
-
 /obj/machinery/computer/telecomms/server/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
